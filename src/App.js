@@ -1,11 +1,13 @@
 import './App.css';
 import Header from './components/Header'
+import Form from './components/Form'
 
 function App() {
   return (
     <div>
-      hello 
+       
       <Header name="orion" age={17}/>
+      <Form/>
     </div>
 
   );
