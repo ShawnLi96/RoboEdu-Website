@@ -1,16 +1,13 @@
 import './App.css';
-import Header from './components/Header'
-import Form from './components/Form'
+import Landing from './components/Landing'
 
-function App() {
+export default function App() {
   return (
     <div>
        
-      <Header name="orion" age={17}/>
-      <Form/>
+      <Landing/>
     </div>
 
   );
 }
 
-export default App;
