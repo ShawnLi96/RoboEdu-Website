@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import styled from 'styled-components';
 import wechatLogo from '../images/wechatLogo.png'
+
 export default function Form(){
 
     const [ID, setID] = useState('');
@@ -9,7 +10,13 @@ export default function Form(){
     const [grade, setGrade] = useState('');
     const [parent, setParent] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
-
+    function DropdownItem(props){
+        return (
+            <li>
+                <a onClick = {(e) => setGender(e.target.value)}> {props.text} </a>
+            </li>
+        );
+    }
 
     return (
         <Container>
@@ -20,19 +27,17 @@ export default function Form(){
                 onChange={(e) => { setID(e.target.value); }} 
                 />
 
-            <div style={{display: "flex"}}>
-                <Label>学生姓名 Student First and Last Name </Label> <div style={{color: "red"}}> &nbsp;* </div>
-            </div>
+            <Label>学生姓名 Student First and Last Name <span style={{color: "red"}}> &nbsp;* </span> </Label> 
             <Subtitle>多子女家庭，每个孩子需要单独报名</Subtitle>
             <LongInput
                 value={name}
                 onChange={(e) => { setName(e.target.value); }} 
                 />
-
             
         </Container>
     );
 }
+
 
 const Label = styled.div`
     font-weight: bold;
@@ -63,5 +68,4 @@ const Container = styled.div`
     width: 40vw;
     margin-left: auto;
     margin-right: auto;
-    background-color: lightblue;
 `
