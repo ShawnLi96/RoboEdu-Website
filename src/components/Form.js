@@ -1,6 +1,8 @@
 import React, {useState} from 'react';
 import styled from 'styled-components';
 import wechatLogo from '../images/wechatLogo.png'
+import returnMessage from './test';
+import test from './test'
 
 export default function Form(){
 
@@ -23,7 +25,7 @@ export default function Form(){
             <Label>家长微信 WeChat ID</Label>
             <Icon />
             <LongInput
-                value={ID}
+                value={returnMessage}
                 onChange={(e) => { setID(e.target.value); }} 
                 />
 
