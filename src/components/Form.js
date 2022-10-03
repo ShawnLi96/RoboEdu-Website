@@ -1,6 +1,10 @@
 import React, {useState} from 'react';
 import styled from 'styled-components';
 import wechatLogo from '../images/wechatLogo.png'
+import {Dropdown, DropdownButton} from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+
 
 export default function Form(){
 
@@ -10,14 +14,18 @@ export default function Form(){
     const [grade, setGrade] = useState('');
     const [parent, setParent] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
-    function DropdownItem(props){
-        return (
-            <li>
-                <a onClick = {(e) => setGender(e.target.value)}> {props.text} </a>
-            </li>
-        );
-    }
 
+    console.log(gender);
+    console.log(grade);
+    function createGrades() {
+        let arr = [];
+        for (let i = 1; i < 13; i++){
+            arr[i - 1] = <Dropdown.Item value = {i} onClick = {(e) => setGrade({i})}> {i} </Dropdown.Item>;
+        }
+
+        console.log(arr);
+        return arr;
+    }
     return (
         <Container>
             <Label>家长微信 WeChat ID</Label>
@@ -33,11 +41,51 @@ export default function Form(){
                 value={name}
                 onChange={(e) => { setName(e.target.value); }} 
                 />
+            <DropdownContainer>
+                <Dropdown>
+                    <Dropdown.Toggle variant="success" id="dropdown-basic">
+                    {(gender === '') ? "Select Gender": gender}
+                        
+                    </Dropdown.Toggle>
+                    <Dropdown.Menu>
+                        <Dropdown.Item onClick = {(e) => {setGender("Male")}} value = "Male">Male</Dropdown.Item>
+                        <Dropdown.Item onClick = {(e) => {setGender("Female")}} value = "Female">Female</Dropdown.Item>
+                    </Dropdown.Menu>
+                </Dropdown>
+                <Dropdown>
+                    
+                    <Dropdown.Toggle variant="success" id="dropdown-basic">
+                    {(grade === '') ? "Select Grade": grade}
+                        
+                    </Dropdown.Toggle>
+                    <Dropdown.Menu>
+                        <Menu>
+                            {createGrades()}
+                        </Menu>
+                    </Dropdown.Menu>
+                </Dropdown>
+
+            </DropdownContainer>
+           
+                
             
         </Container>
     );
 }
 
+const DropdownContainer = styled.div`
+    display: flex;
+    justify-content: space-between;
+    width: 40vw;
+    margin-top: 3vw;
+    background-color: black;
+
+`
+
+const Menu = styled.div`
+    overflow-y: scroll;
+    height: 15vw;
+`
 
 const Label = styled.div`
     font-weight: bold;
