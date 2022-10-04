@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 import styled from 'styled-components';
-import wechatLogo from '../images/wechatLogo.png'
-import {Dropdown, DropdownButton} from 'react-bootstrap';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import Drop from './Drop';
+import wechatLogo from '../images/wechatLogo.png';
+
 
 
 
@@ -14,18 +14,11 @@ export default function Form(){
     const [grade, setGrade] = useState('');
     const [parent, setParent] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
+    const [email, setEmail] = useState('');
 
     console.log(gender);
     console.log(grade);
-    function createGrades() {
-        let arr = [];
-        for (let i = 1; i < 13; i++){
-            arr[i - 1] = <Dropdown.Item value = {i} onClick = {(e) => setGrade({i})}> {i} </Dropdown.Item>;
-        }
 
-        console.log(arr);
-        return arr;
-    }
     return (
         <Container>
             <Label>家长微信 WeChat ID</Label>
@@ -34,38 +27,38 @@ export default function Form(){
                 value={ID}
                 onChange={(e) => { setID(e.target.value); }} 
                 />
-
+            
             <Label>学生姓名 Student First and Last Name <span style={{color: "red"}}> &nbsp;* </span> </Label> 
             <Subtitle>多子女家庭，每个孩子需要单独报名</Subtitle>
             <LongInput
                 value={name}
                 onChange={(e) => { setName(e.target.value); }} 
                 />
-            <DropdownContainer>
-                <Dropdown>
-                    <Dropdown.Toggle variant="success" id="dropdown-basic">
-                    {(gender === '') ? "Select Gender": gender}
-                        
-                    </Dropdown.Toggle>
-                    <Dropdown.Menu>
-                        <Dropdown.Item onClick = {(e) => {setGender("Male")}} value = "Male">Male</Dropdown.Item>
-                        <Dropdown.Item onClick = {(e) => {setGender("Female")}} value = "Female">Female</Dropdown.Item>
-                    </Dropdown.Menu>
-                </Dropdown>
-                <Dropdown>
-                    
-                    <Dropdown.Toggle variant="success" id="dropdown-basic">
-                    {(grade === '') ? "Select Grade": grade}
-                        
-                    </Dropdown.Toggle>
-                    <Dropdown.Menu>
-                        <Menu>
-                            {createGrades()}
-                        </Menu>
-                    </Dropdown.Menu>
-                </Dropdown>
+            <Drop gender = {gender} grade = {grade} updateGender = {setGender} updateGrade = {setGrade}/>
+            <div style={{ display: "flex", justifyContent: "space-between" }}>
+                <div>
+                    <Label>家长姓名 Parent name <span style={{color: "red"}}> &nbsp;* </span> </Label>
+                    <ShortInput
+                        value={parent}
+                        onChange={(e) => { setParent(e.target.value); }} 
+                        />
+                </div>
+                <div>
+                    <Label>电话 Phone <span style={{color: "red"}}> &nbsp;* </span> </Label>
+                    <ShortInput
+                        value={phoneNumber}
+                        onChange={(e) => { setPhoneNumber(e.target.value); }} 
+                        />
+                </div>
+            </div>    
 
-            </DropdownContainer>
+            
+            
+            <Label> 邮件 Email <span style={{color: "red"}}> &nbsp;* </span> </Label> 
+            <LongInput
+                value={email}
+                onChange={(e) => { setEmail(e.target.value); }} 
+                />
            
                 
             
@@ -73,29 +66,17 @@ export default function Form(){
     );
 }
 
-const DropdownContainer = styled.div`
-    display: flex;
-    justify-content: space-between;
-    width: 40vw;
-    margin-top: 3vw;
-    background-color: black;
-
-`
-
-const Menu = styled.div`
-    overflow-y: scroll;
-    height: 15vw;
-`
 
 const Label = styled.div`
     font-weight: bold;
+    margin-top: 2vw;
+    font-size: 20px;
 `
 const Subtitle = styled.div`
     color: grey;
+    font-size: 15px;
 `
-const TextBox = styled.div`
-    display: flex;
-`
+
 const Icon = styled.div`
     background-repeat: no-repeat;
     background-size: 1.5vw;
@@ -105,11 +86,15 @@ const Icon = styled.div`
 const LongInput = styled.input`
     font-size: 1vw;
     width: 40vw;
-    height: 1.5vw;
+    height: 40px;
     type: "text"
     required
     autofocus
     margin-top: 
+`
+
+const ShortInput = styled(LongInput)`
+    width: 15vw;
 `
 
 const Container = styled.div`
