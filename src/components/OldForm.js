@@ -6,7 +6,7 @@ import wechatLogo from '../images/wechatLogo.png';
 
 
 
-export default function Form(){
+export default function OldForm(){
 
     const [ID, setID] = useState('');
     const [name, setName] = useState('');
@@ -22,16 +22,8 @@ export default function Form(){
     return (
         <Container>
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
-            <Label>家长微信 WeChat ID</Label>
-            <FlexContainer>
-                <Icon img = {wechatLogo}/>
-                <LongInput
-                    value={ID}
-                    onChange={(e) => { setID(e.target.value); }} 
-                    />
-            </FlexContainer>
+
             <Label>学生姓名 Student First and Last Name <span style={{color: "red"}}> &nbsp;* </span> </Label> 
-            <Subtitle>多子女家庭，每个孩子需要单独报名</Subtitle>
             <LongInput
                 value={name}
                 onChange={(e) => { setName(e.target.value); }} 
@@ -96,7 +88,8 @@ const Icon = styled.div`
 
 `
 const LongInput = styled.input`
-    font-size: 1vw;
+    font-size: 1.5vw;
+    font-weight: bold;
     width: 40vw;
     height: 40px;
     type: "text";
@@ -112,6 +105,7 @@ const ShortInput = styled(LongInput)`
 
 const Container = styled.div`
     width: 40vw;
+    height: 40vw;
     margin-left: auto;
     margin-right: auto;
 `
