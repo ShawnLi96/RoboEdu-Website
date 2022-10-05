@@ -21,13 +21,15 @@ export default function Form(){
 
     return (
         <Container>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
             <Label>家长微信 WeChat ID</Label>
-            <Icon />
-            <LongInput
-                value={ID}
-                onChange={(e) => { setID(e.target.value); }} 
-                />
-            
+            <FlexContainer>
+                <Icon img = {wechatLogo}/>
+                <LongInput
+                    value={ID}
+                    onChange={(e) => { setID(e.target.value); }} 
+                    />
+            </FlexContainer>
             <Label>学生姓名 Student First and Last Name <span style={{color: "red"}}> &nbsp;* </span> </Label> 
             <Subtitle>多子女家庭，每个孩子需要单独报名</Subtitle>
             <LongInput
@@ -35,7 +37,7 @@ export default function Form(){
                 onChange={(e) => { setName(e.target.value); }} 
                 />
             <Drop gender = {gender} grade = {grade} updateGender = {setGender} updateGrade = {setGrade}/>
-            <div style={{ display: "flex", justifyContent: "space-between" }}>
+            <FlexContainer>
                 <div>
                     <Label>家长姓名 Parent name <span style={{color: "red"}}> &nbsp;* </span> </Label>
                     <ShortInput
@@ -44,13 +46,13 @@ export default function Form(){
                         />
                 </div>
                 <div>
-                    <Label>电话 Phone <span style={{color: "red"}}> &nbsp;* </span> </Label>
+                    <Label> 联系电话 Phone <span style={{color: "red"}}> &nbsp;* </span> </Label>
                     <ShortInput
                         value={phoneNumber}
                         onChange={(e) => { setPhoneNumber(e.target.value); }} 
                         />
                 </div>
-            </div>    
+            </FlexContainer>    
 
             
             
@@ -66,6 +68,11 @@ export default function Form(){
     );
 }
 
+const FlexContainer = styled.div`
+    justify-content: space-between;
+    display: flex;
+    align-items: center;
+`
 
 const Label = styled.div`
     font-weight: bold;
@@ -78,19 +85,25 @@ const Subtitle = styled.div`
 `
 
 const Icon = styled.div`
+    width: 1.5vw;
+    height: 1.5vw;
+    margin-left: 0.5vw;
+    position: absolute;
+    align-items: center;
     background-repeat: no-repeat;
     background-size: 1.5vw;
-    background-image: url(${wechatLogo})
+    background-image: ${(props) => `url(${props.img})`};
 
 `
 const LongInput = styled.input`
     font-size: 1vw;
     width: 40vw;
     height: 40px;
-    type: "text"
+    type: "text";
     required
     autofocus
-    margin-top: 
+    align-items: center;
+
 `
 
 const ShortInput = styled(LongInput)`
