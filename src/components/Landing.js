@@ -8,8 +8,8 @@ export default function Landing() {
     <Container>
       <Header/>
       <FlexContainer>
-        <Button href='/NewUserForm'> New User </Button>
-        <Button href='/ExistingUserForm'> Sign in </Button>
+        <Button href='/#/ExistingUserForm'> Sign in </Button>
+        <Button href='/#/NewUserForm'> New User </Button>
       </FlexContainer>
     </Container>
 
@@ -31,8 +31,11 @@ const FlexContainer = styled.div`
 `
 
 
-const Button = styled.button`
-  height: 5vw;
+const Button = styled.a`
+  text-align: center;
+  border-style solid;
+  color: black;
+  height: 6vh;
   width: 20vw;
   border-radius: 25%;
   font-size: 2vw;
