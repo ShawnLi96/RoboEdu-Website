@@ -28,9 +28,10 @@ export default function NewUserForm(){
     
     return (
         <Container>
+            <link rel="stylesheet" href = "../../public/styles.css"/>
             <Title>Parent Sign up Sheet</Title>
             <Box>
-                <Label>First Name <span style={{color: "red"}}> &nbsp;* </span> </Label>
+                <Label class = "border-solid shadow-md">First Name <span style={{color: "red"}}> &nbsp;* </span> </Label>
                 <Input
                     value={firstName}
                     onChange={(e) => { setFirstName(e.target.value); }} 
@@ -74,9 +75,8 @@ const Container = styled.div`
 
 `
 const Submit = styled.a`
-    width: 15vw;
-    height: 3vw;
-    font-size: 2vw;
+    width: 250px;
+    font-size: 30px;
     border-style: solid;
     text-align: center;
     margin: auto;
@@ -96,34 +96,36 @@ const Box = styled.div`
 const Label = styled.div`
     font-weight: bold;
     margin-top: 2vw;
-    font-size: 1.25vw;
+    font-size: 20px;
+
 `
 const Title = styled.div`
-    font-size: 3vw;
+    font-size: 50px;
     font-weight: 900;
     text-align: center;
+
 `
-const LongInput = styled.input`
-    font-size: 1.25vw;
+
+
+const Input = styled.input`
+    width: 20vw;
+    min-width: 15vw;
+    font-size: 20px;
     font-weight: bold;
     width: 50vw;
     height: 4.5vh;
     type: "text";
     required
     autofocus
-
-`
-
-const Input = styled(LongInput)`
-    width: 20vw;
 `
 
 const Link = styled.a`
     position: relative;
     font-weight: bold;
-    font-size: 1vw;
+    font-size: 20px;
     bottom: 0;
     margin-left: auto;
+    margin-right: auto;
     color: blue;
-    
+    margin-top: 45px;
 `
