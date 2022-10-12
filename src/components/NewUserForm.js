@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import styled from 'styled-components';
+import { devices } from './devices';
 
 
 
@@ -28,16 +29,16 @@ export default function NewUserForm(){
     
     return (
         <Container>
-            <Title>Parent Sign up Sheet</Title>
+            <Title>Parent Sign up </Title>
             <Box>
-                <Label>First Name <span style={{color: "red"}}> &nbsp;* </span> </Label>
+                <Label>名 First Name <span style={{color: "red"}}> &nbsp;* </span> </Label>
                 <Input
                     value={firstName}
                     onChange={(e) => { setFirstName(e.target.value); }} 
                     />
             </Box>
             <Box>
-                <Label> Last Name <span style={{color: "red"}}> &nbsp;* </span> </Label>
+                <Label> 姓 Last Name <span style={{color: "red"}}> &nbsp;* </span> </Label>
                 <Input
                     value={lastName}
                     onChange={(e) => { setLastName(e.target.value); }} 
@@ -64,19 +65,24 @@ export default function NewUserForm(){
 
 const Container = styled.div`
     position: relative;
-    width: 50vw;
     margin: auto;
     display: flex;
     flex-direction: column;
     margin-top: 5vh;
+    @media ${devices.mobile}{
+        width: 80vw;
+    }
+
+    @media ${devices.laptop}{
+        width: 50vw;
+    }
+
+
     
 
 
 `
 const Submit = styled.a`
-    width: 15vw;
-    height: 3vw;
-    font-size: 2vw;
     border-style: solid;
     text-align: center;
     margin: auto;
@@ -86,7 +92,21 @@ const Submit = styled.a`
         transition: 0.5s;
         background-color: #87ceeb; 
     }
+    @media ${devices.mobile}{
+        width: 150px;
+    }
 
+    @media ${devices.laptop}{
+        width: 15vw;
+        height: 3vw;
+        font-size: 2vw;
+    }
+
+    @media ${devices.laptopL}{
+        width: 20vw;
+        height: 4vw;
+        font-size: 2.5vw;
+    }
 `
 
 const Box = styled.div`
@@ -96,34 +116,80 @@ const Box = styled.div`
 const Label = styled.div`
     font-weight: bold;
     margin-top: 2vw;
-    font-size: 1.25vw;
+
+    @media ${devices.mobile}{
+        font-size: 15px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    @media ${devices.laptop}{
+        font-size: 20px;
+
+    }
+    
+    @media ${devices.laptopL}{
+        font-size: 40px;
+    }
+
 `
 const Title = styled.div`
-    font-size: 3vw;
     font-weight: 900;
     text-align: center;
+
+    @media ${devices.mobile}{
+        font-size: 30px;
+    }
+
+    @media ${devices.laptop}{
+        font-size: 3vw;
+    }
 `
-const LongInput = styled.input`
-    font-size: 1.25vw;
-    font-weight: bold;
-    width: 50vw;
-    height: 4.5vh;
+
+const Input = styled.input`
     type: "text";
     required
     autofocus
 
-`
+    @media ${devices.mobile}{
+        font-size: 20px;
+        font-weight: bold;
+        width: 40vw;
+        height: 6vh;
+        
+    }
 
-const Input = styled(LongInput)`
-    width: 20vw;
+    @media ${devices.laptop}{
+        font-size: 1.25vw;
+        font-weight: bold;
+        width: 40vw;
+        height: 4.5vh;
+    }
+    @media ${devices.laptopL}{
+        height: 6vh;
+    }
 `
 
 const Link = styled.a`
     position: relative;
     font-weight: bold;
-    font-size: 1vw;
     bottom: 0;
-    margin-left: auto;
     color: blue;
-    
+    margin-top: 1vw;
+
+    @media ${devices.mobile}{
+        font-size: 15px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    @media ${devices.laptop}{
+        font-size: 1.25vw;
+    }
+
+    @media ${devices.laptopL}{
+        font-size: 2vw;
+
+    }
+
+
 `
