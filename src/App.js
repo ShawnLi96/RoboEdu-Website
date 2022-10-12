@@ -1,4 +1,4 @@
-import './App.css';
+import './styles.css';
 import styled from 'styled-components'
 import Landing from './components/Landing'
 import NewUserForm from './components/NewUserForm'

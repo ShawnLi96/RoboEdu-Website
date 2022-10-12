@@ -32,6 +32,10 @@ export default function NewUserForm(){
             <Title>Parent Sign up </Title>
             <Box>
                 <Label>名 First Name <span style={{color: "red"}}> &nbsp;* </span> </Label>
+            <link rel="stylesheet" href = "../../public/styles.css"/>
+            <Title>Parent Sign up Sheet</Title>
+            <Box>
+                <Label class = "border-solid shadow-md">First Name <span style={{color: "red"}}> &nbsp;* </span> </Label>
                 <Input
                     value={firstName}
                     onChange={(e) => { setFirstName(e.target.value); }} 
@@ -61,7 +65,8 @@ export default function NewUserForm(){
             <Submit onClick = {onSubmit()}>Submit</Submit>
             <Link href = '/#/ExistingUserForm'>I have an account!</Link>
         </Container>
-    );}
+    );
+}
 
 const Container = styled.div`
     position: relative;
@@ -190,6 +195,4 @@ const Link = styled.a`
         font-size: 2vw;
 
     }
-
-
 `
