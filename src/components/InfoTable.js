@@ -1,97 +1,92 @@
-import React, { useMemo} from 'react';
-import styled from 'styled-components';
-import { useTable } from 'react-table';
-import { devices } from './devices';
+import React, { useMemo } from 'react'
+import styled from 'styled-components'
+import { useTable } from 'react-table'
+import { COLUMNS } from '../data/columns'
+import MOCK_DATA from '../MOCK_DATA.json'
+import '../css/table.css'
 
+import check from '../images/check.png'
+import cross from '../images/cross.png'
 
 
 export default function InfoTable(){
 
-    const data = useMemo(() =>
-        [
-            {
-            campTime: 'July 1-7',
-            student: 'Baron Yu',
-            program: 'A1-D',
-            lunch: true,
-            beforecare: true,
-            aftercare: false,
-            },
-            {
-            campTime: 'July 1-7',
-            student: 'Tian Qian',
-            program: 'A1-D',
-            lunch: false,
-            beforecare: true,
-            aftercare: false,
-            },
-        ],
-        []
-        );
+    const columns = useMemo(() => COLUMNS, [])
+    const data = useMemo(() => MOCK_DATA, [])
     
-    const columns = useMemo(() =>
-        [
-            'Camptime',
-            'Program', 
-            'Lunch',
-            'Beforecare',
-            'Aftercare',
-            'Subtotal'
-        ]
-    );
+    const tableInstance = useTable({
+        columns,
+        data
+    })
     
-    
-    
+    const {
+        getTableProps,
+        getTableBodyProps,
+        headerGroups,
+        rows,
+        prepareRow,
+    } = tableInstance
     return (
-        <>
-            
+        <Container>
+            <table {...getTableProps()}>
+                <thead>
+                    {
+                        headerGroups.map((headerGroup) => (
+                        <tr {...headerGroup.getHeaderGroupProps()}>
+                            {
+                                headerGroup.headers.map((column) => (
+                                    <th {...column.getHeaderProps()}> {column.render('Header')} </th>
+                                ))
+                            }
+                            
+                        </tr>
+        
 
-        </>
-    );
-    
+                        ))
+                    }
 
+                </thead>
+                <tbody {...getTableBodyProps()}>
+                    {
+                        rows.map((row) => {
+                            prepareRow(row)
+                            return (
+                                <tr {...row.getRowProps()}>
+                                    {
+                                        row.cells.map((cell) => {
+                                            return <td {...cell.getCellProps()}> {
+                                                (typeof cell.value === "boolean") ? <Icon state={cell.value}/> : cell.render('Cell')}
+                                            </td>
+                                        })
+
+                                    }
+                                </tr>
+                            )
+                        })
+
+                    }
+                </tbody>
+
+            </table>
+        </Container>
+    );   
 }
 
-
-const Container = styled.table`
-    position: relative;
-    margin: auto;
+const Container = styled.div`
     display: flex;
-    margin-top: 5vh;
     justify-content: center;
-    @media ${devices.mobile}{
-        width: 80vw;
-    }
-
-    @media ${devices.laptop}{
-        width: 50vw;
-    }
+    margin-top: 5vh;
 `
 
-const Row = styled.tr`
-
-`
-const Header = styled.th`
-    font-weight: bold;
-    margin-top: 2vw;
-
-    @media ${devices.mobile}{
-        font-size: 15px;
-        margin-left: auto;
-        margin-right: auto;
-    }
-
-    @media ${devices.laptop}{
-        font-size: 20px;
-
-    }
+const Icon = styled.div`
+    width: 25px;
+    height: 25px;
+    background-repeat: no-repeat;
+    background-image: url(${(props) => props.state ? check : cross});
+    background-size: cover;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 5px;    
     
-    @media ${devices.laptopL}{
-        font-size: 40px;
-    }
 
-`
-
-const Cell = styled.td`
-    font-size: 10px;
 `

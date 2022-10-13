@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+table {
+  font-family: 'Poppins', sans-serif;
+  border-collapse: collapse;
+  width: 80%;
+}
+  
+table td, table th {
+  border: 1px solid #ddd;
+  padding: 8px;
+
+}
+
+
+table tr:hover {background-color: #b1b1b1;}
+
+table th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: center;
+  background-color: #04AA6D;
+  color: white;
+}
