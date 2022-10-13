@@ -29,13 +29,10 @@ export default function NewUserForm(){
     
     return (
         <Container>
-            <Title>Parent Sign up </Title>
-            <Box>
-                <Label>名 First Name <span style={{color: "red"}}> &nbsp;* </span> </Label>
             <link rel="stylesheet" href = "../../public/styles.css"/>
-            <Title>Parent Sign up Sheet</Title>
+            <Title>Parent Sign up</Title>
             <Box>
-                <Label class = "border-solid shadow-md">First Name <span style={{color: "red"}}> &nbsp;* </span> </Label>
+                <Label class = "border-solid shadow-md">名 First Name <span style={{color: "red"}}> &nbsp;* </span> </Label>
                 <Input
                     value={firstName}
                     onChange={(e) => { setFirstName(e.target.value); }} 
@@ -101,6 +98,11 @@ const Submit = styled.a`
         width: 150px;
     }
 
+    @media ${devices.tablet}{
+        width: 15vw;
+        height: 3vh;
+        font-size: 2vw;
+    }
     @media ${devices.laptop}{
         width: 15vw;
         height: 3vw;
@@ -128,13 +130,17 @@ const Label = styled.div`
         margin-right: auto;
     }
 
+    @media ${devices.tablet}{
+        font-size: 20px;
+    }
+
     @media ${devices.laptop}{
         font-size: 20px;
 
     }
     
     @media ${devices.laptopL}{
-        font-size: 40px;
+        font-size: 30px;
     }
 
 `
@@ -164,6 +170,11 @@ const Input = styled.input`
         
     }
 
+    @media ${devices.tablet}{
+        width: 60vw;
+        height: 3vh;
+    }
+
     @media ${devices.laptop}{
         font-size: 1.25vw;
         font-weight: bold;
@@ -180,12 +191,17 @@ const Link = styled.a`
     font-weight: bold;
     bottom: 0;
     color: blue;
-    margin-top: 1vw;
+    margin-top: 2vh;
 
     @media ${devices.mobile}{
         font-size: 15px;
         margin-left: auto;
         margin-right: auto;
+    }
+
+    @media ${devices.tablet}{
+        font-size: 2vw;
+
     }
     @media ${devices.laptop}{
         font-size: 1.25vw;
@@ -193,6 +209,5 @@ const Link = styled.a`
 
     @media ${devices.laptopL}{
         font-size: 2vw;
-
     }
 `
