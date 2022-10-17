@@ -1,8 +1,18 @@
 const express = require('express')
 const app = express()
+const mysql = require('mysql')
+
+const db = mysql.createPool({
+    host: 'csaa-rest-test.cluvhncij4nr.us-east-2.rds.amazonaws.com',
+    user: 'admin',
+    password: 'rootroot',
+    database: 'roboedu'
+})
 
 app.get("/api", (req, res) => {
-    res.json({"users": ["Orion", "Orion2"]})
+
+    db.query()
+    res.json({"users": ["Orion", "Orion2", "Orion3"]})
 })
 
 
