@@ -17,7 +17,7 @@ export default function InfoTable(){
     const tableInstance = useTable({
         columns,
         data
-    }, useSortBy)
+    })
     
     const {
         getTableProps,
@@ -26,6 +26,20 @@ export default function InfoTable(){
         rows,
         prepareRow,
     } = tableInstance
+
+    var formatter = new Intl.NumberFormat('en-CA', {
+        style: 'currency',
+        currency: 'CAD'
+    });
+
+    for (let i = 0; i < data.length; i++){
+        let total = 0.00;
+        if (data[i].aftercare) total += 10;
+        if (data[i].beforecare) total += 10;
+        if (data[i].lunch) total += 10;
+
+        data[i].subtotal = formatter.format(total);
+    }
     return (
         <Container>
             <table {...getTableProps()}>
@@ -35,7 +49,7 @@ export default function InfoTable(){
                         <tr {...headerGroup.getHeaderGroupProps()}>
                             {
                                 headerGroup.headers.map((column) => (
-                                    <th {...column.getHeaderProps(column.getSortByToggleProps())}> {column.render('Header')} </th>
+                                    <th {...column.getHeaderProps()}> {column.render('Header')} </th>
                                 ))
                             }
                             

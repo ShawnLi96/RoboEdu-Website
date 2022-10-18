@@ -16,7 +16,7 @@ export default function App() {
       <Router>
         <Container>
           <Routes>
-            <Route exact path='/' element={<Home/>}></Route>
+            <Route exact path='/' element={<Landing/>}></Route>
             <Route exact path='/NewUserForm' element={<NewUserForm/>}></Route>
             <Route exact path='/ExistingUserForm' element={<ExistingUserForm/>}></Route>
             <Route exact path= '/Home' element={<Home/>}></Route>

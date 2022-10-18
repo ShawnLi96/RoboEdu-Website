@@ -1,10 +1,11 @@
-[{"camp_date":"9/11/2022","student":"Gannon Thresher","program":"Legal","beforecare":true,"aftercare":true,"lunch":true},
-{"camp_date":"1/4/2022","student":"Clementia Keenan","program":"Human Resources","beforecare":false,"aftercare":true,"lunch":true},
-{"camp_date":"9/27/2022","student":"Koral Kienl","program":"Product Management","beforecare":false,"aftercare":false,"lunch":true},
-{"camp_date":"5/20/2022","student":"Thedric Hulls","program":"Marketing","beforecare":false,"aftercare":true,"lunch":false},
-{"camp_date":"9/19/2022","student":"Nobie McClenaghan","program":"Training","beforecare":true,"aftercare":true,"lunch":false},
-{"camp_date":"10/15/2022","student":"Tamma Bromont","program":"Product Management","beforecare":true,"aftercare":true,"lunch":false},
-{"camp_date":"4/2/2022","student":"Boothe Bromilow","program":"Marketing","beforecare":true,"aftercare":false,"lunch":true},
-{"camp_date":"10/17/2021","student":"Perren Rohloff","program":"Services","beforecare":false,"aftercare":true,"lunch":false},
-{"camp_date":"8/30/2022","student":"Lorna Bogue","program":"Accounting","beforecare":true,"aftercare":false,"lunch":true},
-{"camp_date":"12/9/2021","student":"Randell Hutchens","program":"Training","beforecare":false,"aftercare":false,"lunch":false}]
+[{"camp_date":"9/11/2022","student":"Gannon Thresher","program":"Legal","beforecare":true,"aftercare":true,"lunch":true,"subtotal":null},
+{"camp_date":"1/4/2022","student":"Clementia Keenan","program":"Human Resources","beforecare":false,"aftercare":true,"lunch":true,"subtotal":null},
+{"camp_date":"9/27/2022","student":"Koral Kienl","program":"Product Management","beforecare":false,"aftercare":false,"lunch":true,"subtotal":null},
+{"camp_date":"5/20/2022","student":"Thedric Hulls","program":"Marketing","beforecare":false,"aftercare":true,"lunch":false,"subtotal":null},
+{"camp_date":"9/19/2022","student":"Nobie McClenaghan","program":"Training","beforecare":true,"aftercare":true,"lunch":false,"subtotal":null},
+{"camp_date":"10/15/2022","student":"Tamma Bromont","program":"Product Management","beforecare":true,"aftercare":true,"lunch":false,"subtotal":null},
+{"camp_date":"4/2/2022","student":"Boothe Bromilow","program":"Marketing","beforecare":true,"aftercare":false,"lunch":true,"subtotal":null},
+{"camp_date":"10/17/2021","student":"Perren Rohloff","program":"Services","beforecare":false,"aftercare":true,"lunch":false,"subtotal":null},
+{"camp_date":"8/30/2022","student":"Lorna Bogue","program":"Accounting","beforecare":true,"aftercare":false,"lunch":true,"subtotal":null},
+{"camp_date":"12/9/2021","student":"Randell Hutchens","program":"Training","beforecare":false,"aftercare":false,"lunch":false,"subtotal":null}]
+

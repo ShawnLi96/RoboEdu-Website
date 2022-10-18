@@ -1,8 +1,6 @@
-import { format } from 'date-fns'
-
 export const COLUMNS = [
     {
-        Header: "Camp Date",
+        Header: "Camp Date mm/dd/yyyy",
         accessor: 'camp_date',
     },
     {
@@ -29,6 +27,7 @@ export const COLUMNS = [
         Header: "Aftercare",
         accessor: 'aftercare'
     },
+
     {
         Header: "Subtotal",
         accessor: 'subtotal'
