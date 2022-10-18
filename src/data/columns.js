@@ -1,6 +1,6 @@
 export const COLUMNS = [
     {
-        Header: "Camp Date mm/dd/yyyy",
+        Header: "Camp Date",
         accessor: 'camp_date',
     },
     {

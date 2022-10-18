@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import styled from 'styled-components';
 import { devices } from '../data/devices';
+import axios from "axios"
 
 
 
@@ -13,9 +14,10 @@ export default function NewUserForm(){
     const [email, setEmail] = useState('');
 
 
+
     // for onSubmit, should check if there are any fields ALREADY stored
     // in the database to avoid duplicates
-    function onSubmit() {
+    const onSubmit= () => {
         const data = {
             firstName: firstName,
             lastName: lastName,
@@ -23,7 +25,10 @@ export default function NewUserForm(){
             email: email,
         }
 
-        // post
+        axios.post("http://localhost:5000/api/newUser", data).then(() => {
+            console.log("successful insert");
+            }
+        )
     }
 
     
@@ -59,7 +64,7 @@ export default function NewUserForm(){
                     onChange={(e) => { setPhoneNumber(e.target.value); }} 
                     />
             </Box>
-            <Submit onClick = {onSubmit()}>Submit</Submit>
+            <Submit onClick = {onSubmit} href = '/'>Submit</Submit>
             <Link href = '/#/ExistingUserForm'>I have an account!</Link>
         </Container>
     );
@@ -90,6 +95,10 @@ const Submit = styled.a`
     margin: auto;
     margin-top: 5vh;
     align-items: center;
+    &:link { text-decoration: none; }
+    &:visited { text-decoration: none; }
+    &:hover { text-decoration: none; }
+    &:active { text-decoration: none; }
     &:hover{
         transition: 0.5s;
         background-color: #87ceeb; 

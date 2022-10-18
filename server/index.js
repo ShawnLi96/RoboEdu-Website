@@ -1,6 +1,12 @@
 const express = require('express')
 const app = express()
+var cors = require('cors')
+const bodyParser = require('body-parser')
 const mysql = require('mysql')
+
+app.use(express.json())
+app.use(cors())
+app.use(bodyParser.urlencoded({ extended: true}))
 
 const db = mysql.createPool({
     host: 'csaa-rest-test.cluvhncij4nr.us-east-2.rds.amazonaws.com',
@@ -8,11 +14,16 @@ const db = mysql.createPool({
     password: 'rootroot',
 })
 
-app.get("/api", (req, res) => {
+app.post("/api/newUser", (req, res) => {
 
-    const sqlInsert = "INSERT INTO location0.orders (ID, `Parent ID`, CamperIDs, `Last Action`, Fee, `status`, PayMethod) VALUES (125, 50880, '111, 222, 333', 1, 20.18, 0, 'card');"
-    db.query(sqlInsert, (err, result) => {
-        res.json({"users": ["Orion", "Orion2", "Orion3"]})
+    const firstName = req.body.firstName;
+    const lastName = req.body.lastName;
+    const email = req.body.email;
+    const phoneNumber = req.body.phoneNumber;
+
+    const sqlInsert = "INSERT INTO location3.parents (`first name`, `last name`, `phone number`, email) VALUES (?,?,?,?);"
+    db.query(sqlInsert, [firstName, lastName, email, phoneNumber], (err, result) => {
+        console.log("inserted")
     })
 })
 
