@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react'
 import styled from 'styled-components'
-import { useTable } from 'react-table'
+import { useTable, useSortBy } from 'react-table'
 import { COLUMNS } from '../data/columns'
 import MOCK_DATA from '../MOCK_DATA.json'
 import '../css/table.css'
@@ -17,7 +17,7 @@ export default function InfoTable(){
     const tableInstance = useTable({
         columns,
         data
-    })
+    }, useSortBy)
     
     const {
         getTableProps,
@@ -35,7 +35,7 @@ export default function InfoTable(){
                         <tr {...headerGroup.getHeaderGroupProps()}>
                             {
                                 headerGroup.headers.map((column) => (
-                                    <th {...column.getHeaderProps()}> {column.render('Header')} </th>
+                                    <th {...column.getHeaderProps(column.getSortByToggleProps())}> {column.render('Header')} </th>
                                 ))
                             }
                             

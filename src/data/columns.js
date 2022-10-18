@@ -1,7 +1,9 @@
+import { format } from 'date-fns'
+
 export const COLUMNS = [
     {
         Header: "Camp Date",
-        accessor: 'camp_date'
+        accessor: 'camp_date',
     },
     {
         Header: "Student",
