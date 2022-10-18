@@ -6,12 +6,11 @@ const db = mysql.createPool({
     host: 'csaa-rest-test.cluvhncij4nr.us-east-2.rds.amazonaws.com',
     user: 'admin',
     password: 'rootroot',
-    database: 'roboedu'
 })
 
 app.get("/api", (req, res) => {
 
-    const sqlInsert = "INSERT INTO location0.orders (ID, `Parent ID`, CamperIDs, `Last Action`, Fee, `status`, PayMethod) values (124, 50880, '111, 222, 333', 1, 20.18, 0, 'card');"
+    const sqlInsert = "INSERT INTO location0.orders (ID, `Parent ID`, CamperIDs, `Last Action`, Fee, `status`, PayMethod) VALUES (125, 50880, '111, 222, 333', 1, 20.18, 0, 'card');"
     db.query(sqlInsert, (err, result) => {
         res.json({"users": ["Orion", "Orion2", "Orion3"]})
     })
