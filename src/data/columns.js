@@ -10,11 +10,12 @@ export const COLUMNS = [
     
     {
         Header: "Program",
-        accessor: 'program'
+        accessor: 'program',
+        Cell: e =><a href={e.value}> {e.value} </a>
     },
     
     {
-        Header: "Lunch",
+        Header:   "\xA0\xA0\xA0\xA0\xA0Lunch\xA0\xA0\xA0\xA0\xA0",
         accessor: 'lunch'
     },
     

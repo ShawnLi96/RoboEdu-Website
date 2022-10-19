@@ -19,14 +19,15 @@ export default function NewUserForm(){
     // in the database to avoid duplicates
     const onSubmit= () => {
         const data = {
-            firstName: firstName,
-            lastName: lastName,
-            phoneNumber: phoneNumber,
+            firstname: firstName,
+            lastname: lastName,
+            phonenum: phoneNumber,
             email: email,
+            
         }
-
-        axios.post("http://localhost:5000/api/newUser", data).then(() => {
-            console.log("successful insert");
+        console.log("clicked");
+        axios.post("http://localhost:160/parents/newuser", data).then((res) => {
+            console.log(res);
             }
         )
     }

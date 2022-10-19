@@ -13,8 +13,6 @@ table td, table th {
 }
 
 
-table tr:hover {background-color: #b1b1b1;}
-
 table th {
   padding-top: 12px;
   padding-bottom: 12px;

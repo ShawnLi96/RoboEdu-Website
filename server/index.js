@@ -16,13 +16,13 @@ const db = mysql.createPool({
 
 app.post("/api/newUser", (req, res) => {
 
-    const firstName = req.body.firstName;
-    const lastName = req.body.lastName;
+    const firstname = req.body.firstName;
+    const lastname = req.body.lastName;
     const email = req.body.email;
-    const phoneNumber = req.body.phoneNumber;
+    const phonenum = req.body.phoneNumber;
 
     const sqlInsert = "INSERT INTO location3.parents (`first name`, `last name`, `phone number`, email) VALUES (?,?,?,?);"
-    db.query(sqlInsert, [firstName, lastName, email, phoneNumber], (err, result) => {
+    db.query(sqlInsert, [firstname, lastname, email, phonenum], (err, result) => {
         console.log("inserted")
     })
 })
