@@ -4,7 +4,7 @@ import { useTable, useSortBy } from 'react-table'
 import { COLUMNS } from '../data/columns'
 import MOCK_DATA from '../MOCK_DATA.json'
 import '../css/table.css'
-
+import '../data/fetch'
 
 import check from '../images/check.png'
 import cross from '../images/cross.png'
@@ -15,24 +15,8 @@ export default function InfoTable(){
     const columns = useMemo(() => COLUMNS, [])
     const data = useMemo(() => MOCK_DATA, [])
 
-    var formdata = new FormData();
-    
-    formdata.append("authkey", "f1a4e3f7e24acd3d2af968f44b856adacbb5d9951118b360de4323339f7abe521ade6f721e44ede2a3bb5986ffb114bf");
-    formdata.append("studentid", 3);
 
-
-  
-
-    fetch(`http://localhost:160/students/getstudent`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({studentid: 3, authkey: "f1a4e3f7e24acd3d2af968f44b856adacbb5d9951118b360de4323339f7abe521ade6f721e44ede2a3bb5986ffb114bf"})
-    }).then(res => {
-        console.log(res)
-        return res.json();
-    }).then((res) => console.log(res))
+   
 
     
       
