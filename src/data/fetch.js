@@ -1,5 +1,5 @@
-export function fetchStudent(id) {
-  return fetch(`http://localhost:160/students/getstudent`, {
+export async function fetchStudent(id) {
+  const data = await fetch(`http://localhost:160/students/getstudent`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -14,10 +14,12 @@ export function fetchStudent(id) {
   }).then((json) => {
     return json;
   })
+
+  return data;
 }
 
-export function fetchCamper(id) {
-  return fetch(`http://localhost:160/campers/getcamper`, {
+export async function fetchCamper(id) {
+  const data = await fetch(`http://localhost:160/campers/getcamper`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -32,10 +34,12 @@ export function fetchCamper(id) {
   }).then((json) => {
     return json;
   })
+
+  return data;
 }
 
-export function fetchOrders(id) {
-  return fetch(`http://localhost:160/parents/getorders`, {
+export async function fetchOrders(id) {
+  const data = await fetch(`http://localhost:160/parents/getorders`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -50,4 +54,6 @@ export function fetchOrders(id) {
   }).then((json) => {
     return json;
   });
+
+  return data;
 }

@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { COLUMNS } from "../data/columns";
 import "../css/table.css";
@@ -10,18 +10,12 @@ import cross from "../images/cross.png";
 export default function NewInfoTable() {
   const parentid = 22;
 
-  const student = fetchStudent(4);
-  const nums = [1, 2, 3, 4, 5];
-
-  console.log("hello");
-  console.log(JSON.parse("[1, 2, 3]"));
-  console.log(fetchCamper(3))
-
   var formatter = new Intl.NumberFormat("en-CA", {
     style: "currency",
     currency: "CAD",
   });
   const weeks = [
+    "",
     "July 1st to 7th",
     "July 8th to 14th",
     "July 15th to 21st",
@@ -31,6 +25,19 @@ export default function NewInfoTable() {
     "August 15th to 21st",
     "August 22nd to 29th"
   ]
+
+  const [allOrders, setOrders] = useState('');
+  const [camperInfo, setCamperInfo] = useState('');
+
+  useEffect(() => {
+    getAllOrders(),
+    getCamperInfo()
+  }, [])
+
+  const getAllOrders = async () => {
+    setOrders(await fetchOrders(parentid))
+  }
+
 
   return (
     <>
@@ -46,39 +53,50 @@ export default function NewInfoTable() {
         </thead>
         <tbody>
           {
+
             fetchOrders(parentid).then((orders) => {
               // for each order
               orders.map((order) => {
                 
                 const campers = JSON.parse(order["CamperIDs"]);
+                console.log("CAMPERS")
                 console.log(campers)
                 return (
 
                   // for each camper
                   campers.map((camper) => {
+
+
                     fetchCamper(camper).then((camperData) => {
-                      console.log(camperData);
                       
+
                         return (
                           <>
-                            <td>{weeks[camperData["Week"]]}</td>
+                            <td>{weeks[camperData[0]["Week"]]}</td>
                             <td>
                               {
-                                fetchStudent(camperData["Student ID"]).then((studentData) => 
+                                fetchStudent(camperData[0]["Student ID"]).then((studentData) => 
                                 {
+                                  console.log("STUDENT")
+                                  console.log(camperData)
+                                  console.log(camperData[0]["Student ID"])
+                                  console.log(studentData)
                                   return (studentData["first name"] + " " + studentData["last name"])
                                 })
                               }
                             </td>
-                            <td>{camperData["Program ID"]}</td>
-                            <td>{camperData["Lunch"]}</td>
-                            <td>{camperData["BeforeExt"]}</td>
-                            <td>{camperData["AfterExt"]}</td>
-                            <td>{formatter.format(
-                              camperData["Lunch"] * 50 + 
-                              camperData["BeforeExt"] * 50 + 
-                              camperData["AfterExt"] * 50
-                            )}
+                            <td>{camperData[0]["Program ID"]}</td>
+                            <td>{camperData[0]["Lunch"]}</td>
+                            <td>{camperData[0]["BeforeExt"]}</td>
+                            <td>{camperData[0]["AfterExt"]}</td>
+                            <td>
+                              {
+                                formatter.format(
+                                camperData[0]["Lunch"] * 50 + 
+                                camperData[0]["BeforeExt"] * 50 + 
+                                camperData[0]["AfterExt"] * 50
+                                )
+                              }
                             </td>
 
                           </>
