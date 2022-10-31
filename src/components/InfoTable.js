@@ -6,9 +6,6 @@ import MOCK_DATA from '../MOCK_DATA.json'
 import '../css/table.css'
 import '../data/fetch'
 
-export default function InfoTable() {
-  const columns = useMemo(() => COLUMNS, []);
-  const data = useMemo(() => MOCK_DATA, []);
 
 
 export default function InfoTable(){
@@ -16,11 +13,6 @@ export default function InfoTable(){
     const columns = useMemo(() => COLUMNS, [])
     const data = useMemo(() => MOCK_DATA, [])
 
-
-   
-
-    
-      
     const tableInstance = useTable({
         columns,
         data
@@ -115,4 +107,4 @@ const Icon = styled.div`
   margin-left: auto;
   margin-right: auto;
   padding: 5px;
-`;
+`

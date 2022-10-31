@@ -11,11 +11,13 @@ export function fetchStudent(id) {
     }),
   }).then((res) => {
     return res.json();
-  });
+  }).then((json) => {
+    return json;
+  })
 }
 
 export function fetchOrders(id) {
-  fetch(`http://localhost:160/parents/getorders`, {
+  return fetch(`http://localhost:160/parents/getorders`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -27,5 +29,7 @@ export function fetchOrders(id) {
     }),
   }).then((res) => {
     return res.json();
+  }).then((json) => {
+    return json;
   });
 }
