@@ -3,7 +3,6 @@ import styled from 'styled-components'
 import Landing from './components/Landing'
 import NewUserForm from './components/NewUserForm'
 import ExistingUserForm from './components/ExistingUserForm'
-import InfoTable from './components/InfoTable'
 import Home from './components/Home'
 
 import { HashRouter as Router,Routes, Route} from 'react-router-dom';

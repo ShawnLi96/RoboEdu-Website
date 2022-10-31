@@ -1,5 +1,5 @@
 import React from 'react'
-import InfoTable from './InfoTable'
+import InfoTable from './NewInfoTable'
 
 
 

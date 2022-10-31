@@ -1,41 +1,38 @@
-import React, { useMemo } from "react";
-import styled from "styled-components";
-import { useTable, useSortBy } from "react-table";
-import { COLUMNS } from "../data/columns";
-import MOCK_DATA from "../MOCK_DATA.json";
-import "../css/table.css";
-
-import check from "../images/check.png";
-import cross from "../images/cross.png";
+import React, { useMemo } from 'react'
+import styled from 'styled-components'
+import { useTable, useSortBy } from 'react-table'
+import { COLUMNS } from '../data/columns'
+import MOCK_DATA from '../MOCK_DATA.json'
+import '../css/table.css'
+import '../data/fetch'
 
 export default function InfoTable() {
   const columns = useMemo(() => COLUMNS, []);
   const data = useMemo(() => MOCK_DATA, []);
 
-  fetch(`http://localhost:160/parents/getorders`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      parentid: 22,
-      authkey:
-        "f99b3e0accc55b4e8df73e83e430590257dc03a4f6ac859608773d0952a04acee359c7dfeced23be88fac3a7f160e836",
-    }),
-  })
-    .then((res) => {
-      console.log(res);
-      return res.json();
+
+export default function InfoTable(){
+
+    const columns = useMemo(() => COLUMNS, [])
+    const data = useMemo(() => MOCK_DATA, [])
+
+
+   
+
+    
+      
+    const tableInstance = useTable({
+        columns,
+        data
     })
-    .then((res) => console.log(res));
-
-  const tableInstance = useTable({
-    columns,
-    data,
-  });
-
-  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
-    tableInstance;
+    
+    const {
+        getTableProps,
+        getTableBodyProps,
+        headerGroups,
+        rows,
+        prepareRow,
+    } = tableInstance
 
   var formatter = new Intl.NumberFormat("en-CA", {
     style: "currency",
