@@ -7,7 +7,7 @@ export async function fetchStudent(id) {
     body: JSON.stringify({
       studentid: id,
       authkey:
-        "f99b3e0accc55b4e8df73e83e430590257dc03a4f6ac859608773d0952a04acee359c7dfeced23be88fac3a7f160e836",
+        "88dac29638e4f20a3dc0706aa3c5a306328042f5fcb71119395aaa98c278056f31ea2ff1c9efba7c70510553416088d8",
     }),
   }).then((res) => {
     return res.json();
@@ -27,7 +27,7 @@ export async function fetchCamper(id) {
     body: JSON.stringify({
       camperid: id,
       authkey:
-        "f99b3e0accc55b4e8df73e83e430590257dc03a4f6ac859608773d0952a04acee359c7dfeced23be88fac3a7f160e836",
+        "88dac29638e4f20a3dc0706aa3c5a306328042f5fcb71119395aaa98c278056f31ea2ff1c9efba7c70510553416088d8",
     }),
   }).then((res) => {
     return res.json();
@@ -47,7 +47,7 @@ export async function fetchOrders(id) {
     body: JSON.stringify({
       parentid: id,
       authkey:
-        "f99b3e0accc55b4e8df73e83e430590257dc03a4f6ac859608773d0952a04acee359c7dfeced23be88fac3a7f160e836",
+        "88dac29638e4f20a3dc0706aa3c5a306328042f5fcb71119395aaa98c278056f31ea2ff1c9efba7c70510553416088d8",
     }),
   }).then((res) => {
     return res.json();

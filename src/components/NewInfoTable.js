@@ -8,8 +8,6 @@ import check from "../images/check.png";
 import cross from "../images/cross.png";
 
 export default function NewInfoTable() {
-  const parentid = 22;
-
   var formatter = new Intl.NumberFormat("en-CA", {
     style: "currency",
     currency: "CAD",
@@ -23,20 +21,80 @@ export default function NewInfoTable() {
     "August 1st to 7th",
     "August 8th to 14th",
     "August 15th to 21st",
-    "August 22nd to 29th"
-  ]
+    "August 22nd to 29th",
+  ];
 
-  const [allOrders, setOrders] = useState('');
-  const [camperInfo, setCamperInfo] = useState('');
+  const parentid = 22;
+  // an array of orders fetched
+  const [allOrders, setOrders] = useState([]);
+
+  // a 2D array, where each 1D array corresponds to each order
+  // allCamperInfo[i][x] stores a HTML row element for a camper
+  // displayed on row x of order i
+  const [allCamperInfo, setAllCamperInfo] = useState([]);
+
+  // fetches all the orders and saves into state
+  const getOrders = async () => {
+    const orders = fetchOrders(parentid).then((res) => {
+      return res;
+    });
+    setOrders(await orders);
+  };
+
+  //
+  const getCampers = async () => {
+    const masterCamperInfo = [];
+    allOrders.map((order) => {
+      const orderCamperData = [];
+      const campers = JSON.parse(order["CamperIDs"]);
+      campers.map(async (camper) => {
+        const camperData = await fetchCamper(camper).then((res) => {
+          return res;
+        });
+
+        // needed to fetch name, as campers/getCamper does not provide name
+        const student = await fetchStudent(camperData["Student ID"]).then(
+          (res) => {
+            return res;
+          }
+        );
+
+        // create a name key pair in the camperData
+        camperData["Name"] = student["first name"] + " " + student["last name"];
+
+        // create an entry for the camper for this order in the table
+        return orderCamperData.push(
+          <tr key={camper.id}>
+            <td>{weeks[camperData["Week"]]}</td>
+            <td>{camperData["Name"]}</td>
+            <td>{camperData["Program ID"]}</td>
+            <td>{camperData["Lunch"]}</td>
+            <td>{camperData["BeforeExt"]}</td>
+            <td>{camperData["AfterExt"]}</td>
+            <td>
+              {formatter.format(
+                camperData["Lunch"] * 50 +
+                  camperData["BeforeExt"] * 50 +
+                  camperData["AfterExt"] * 50
+              )}
+            </td>
+          </tr>
+        );
+      });
+
+      return masterCamperInfo.push(orderCamperData);
+    });
+
+    setAllCamperInfo(masterCamperInfo);
+  };
 
   useEffect(() => {
-    getAllOrders(),
-    getCamperInfo()
-  }, [])
+    getOrders();
+  }, []);
 
-  const getAllOrders = async () => {
-    setOrders(await fetchOrders(parentid))
-  }
+  useEffect(() => {
+    getCampers();
+  }, [allOrders]);
 
 
   return (
@@ -47,72 +105,22 @@ export default function NewInfoTable() {
         <thead>
           <tr>
             {COLUMNS.map((column) => {
-              return <th key = {column}>{column}</th>;
+              return <th key={column}>{column}</th>;
             })}
           </tr>
         </thead>
         <tbody>
-          {
-
-            fetchOrders(parentid).then((orders) => {
-              // for each order
-              orders.map((order) => {
-                
-                const campers = JSON.parse(order["CamperIDs"]);
-                console.log("CAMPERS")
-                console.log(campers)
-                return (
-
-                  // for each camper
-                  campers.map((camper) => {
-
-
-                    fetchCamper(camper).then((camperData) => {
-                      
-
-                        return (
-                          <>
-                            <td>{weeks[camperData[0]["Week"]]}</td>
-                            <td>
-                              {
-                                fetchStudent(camperData[0]["Student ID"]).then((studentData) => 
-                                {
-                                  console.log("STUDENT")
-                                  console.log(camperData)
-                                  console.log(camperData[0]["Student ID"])
-                                  console.log(studentData)
-                                  return (studentData["first name"] + " " + studentData["last name"])
-                                })
-                              }
-                            </td>
-                            <td>{camperData[0]["Program ID"]}</td>
-                            <td>{camperData[0]["Lunch"]}</td>
-                            <td>{camperData[0]["BeforeExt"]}</td>
-                            <td>{camperData[0]["AfterExt"]}</td>
-                            <td>
-                              {
-                                formatter.format(
-                                camperData[0]["Lunch"] * 50 + 
-                                camperData[0]["BeforeExt"] * 50 + 
-                                camperData[0]["AfterExt"] * 50
-                                )
-                              }
-                            </td>
-
-                          </>
-  
-                        )}
-                      )
-                          
-                                        
-                    })
-                )})
-
-              })
-                
-              
-          
-        }
+          {allCamperInfo.map((order) => {
+            console.log("order is here:", order)
+            return (
+              <>
+                {order}
+                <tr>
+                  <td colSpan={7}>Summary</td>
+                </tr>
+              </>
+            );
+          })}
         </tbody>
       </table>
     </>

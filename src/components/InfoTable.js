@@ -6,6 +6,8 @@ import MOCK_DATA from '../MOCK_DATA.json'
 import '../css/table.css'
 import '../data/fetch'
 
+import check from "../images/check.png";
+import cross from "../images/cross.png";
 
 
 export default function InfoTable(){
