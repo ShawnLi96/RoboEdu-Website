@@ -47,7 +47,7 @@ export default function NewInfoTable() {
     allOrders.map((order) => {
       const orderCamperData = [];
       const campers = JSON.parse(order["CamperIDs"]);
-      campers.map(async (camper) => {
+      campers.map(async (camper, i) => {
         const camperData = await fetchCamper(camper).then((res) => {
           return res;
         });
@@ -64,7 +64,7 @@ export default function NewInfoTable() {
 
         // create an entry for the camper for this order in the table
         return orderCamperData.push(
-          <tr key={camper.id}>
+          <tr key={`camper-${camper}`}>
             <td>{weeks[camperData["Week"]]}</td>
             <td>{camperData["Name"]}</td>
             <td>{camperData["Program ID"]}</td>
@@ -110,10 +110,12 @@ export default function NewInfoTable() {
           </tr>
         </thead>
         <tbody>
-          {allCamperInfo.map((order) => {
-            console.log("order is here:", order)
+          {
+        
+          allCamperInfo.map((order) => {
             return (
               <>
+                test
                 {order}
                 <tr>
                   <td colSpan={7}>Summary</td>
