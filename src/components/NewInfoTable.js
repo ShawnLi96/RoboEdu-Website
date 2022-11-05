@@ -85,12 +85,17 @@ export default function NewInfoTable(props) {
           </tr>
         </thead>
         <tbody>
-          {allCamperInfo.map((order, idx) => {
+          {allCamperInfo.map((order, i) => {
             return (
               <>
-                {order}
-                {console.log(order)}
-                <tr key={idx}>
+                
+                {order.map((entry) => {
+                  // maps thru every camper of the particular order
+                  // returns it as a <tr> HTML element
+                  return entry;
+                })}
+
+                <tr key={i}>
                   <td colSpan={7}>Summary</td>
                 </tr>
               </>
