@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import InfoTable from "./NewInfoTable";
+import Table from "./Table";
 import { fetchOrders } from "../data/fetch";
 
 export default function Home() {
@@ -24,7 +24,7 @@ export default function Home() {
 
   return (
     <>
-      <InfoTable orders={allOrders}></InfoTable>
+      <Table orders={allOrders}></Table>
     </>
   );
 }
