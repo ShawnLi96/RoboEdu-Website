@@ -12,7 +12,6 @@ export default function NewInfoTable(props) {
   // allCamperInfo[i][x] stores a HTML row element for a camper
   // displayed on row x of order i
   const [allCamperInfo, setAllCamperInfo] = useState([]);
-
   useEffect(() => {
     // setting the state allCamperInfo
     const getCampers = async () => {
@@ -23,9 +22,11 @@ export default function NewInfoTable(props) {
           const orderCamperData = [];
           const campers = JSON.parse(order["CamperIDs"]);
           campers.map(async (camper) => {
+            
             const camperData = await fetchCamper(camper).then((res) => {
               return res;
             });
+
 
             // needed to fetch name, as campers/getCamper does not provide name
             const student = await fetchStudent(camperData["Student ID"]).then(
@@ -33,13 +34,18 @@ export default function NewInfoTable(props) {
                 return res;
               }
             );
+            
+            const subtotal = camperData["Lunch"] * 50 + camperData["BeforeExt"] * 50 + camperData["AfterExt"] * 50
 
             // create a name key pair in the camperData
             camperData["Name"] =
               student["first name"] + " " + student["last name"];
-
+            
             // create an entry for the camper for this order in the table
-            return orderCamperData.push(
+            // the entry will be an array [<tr>, subtotal]
+            // <tr> is the html element that will display
+            // subtotal is the subtotal for the camper
+            return orderCamperData.push([
               <tr key={`camper-${camper}`}>
                 <td>{weeks[camperData["Week"]]}</td>
                 <td>{camperData["Name"]}</td>
@@ -54,13 +60,11 @@ export default function NewInfoTable(props) {
                   <Icon state={camperData["AfterExt"] === 1} />{" "}
                 </td>
                 <td>
-                  {formatter.format(
-                    camperData["Lunch"] * 50 +
-                      camperData["BeforeExt"] * 50 +
-                      camperData["AfterExt"] * 5
-                  )}
+                  {
+                    formatter.format(subtotal)
+                  }
                 </td>
-              </tr>
+              </tr>, subtotal]
             );
           });
 
@@ -73,7 +77,7 @@ export default function NewInfoTable(props) {
     getCampers();
   }, [props.orders]);
   // runs when orders changed
-
+  console.log('allcamperinfo', allCamperInfo)
   return (
     <>
       <table>
@@ -86,17 +90,19 @@ export default function NewInfoTable(props) {
         </thead>
         <tbody>
           {allCamperInfo.map((order, i) => {
+            var total = 0;
             return (
               <>
                 
                 {order.map((entry) => {
                   // maps thru every camper of the particular order
                   // returns it as a <tr> HTML element
-                  return entry;
+                  total += entry[1];
+                  console.log("ENTRY", entry)
+                  return entry[0];
                 })}
-
                 <tr key={i}>
-                  <td colSpan={7}>Summary</td>
+                  <td colSpan={7}>Summary: {formatter.format(total)}</td>
                 </tr>
               </>
             );
