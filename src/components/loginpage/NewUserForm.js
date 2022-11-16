@@ -1,17 +1,23 @@
 import React, {useState} from 'react';
 import styled from 'styled-components';
-import { devices } from '../data/devices';
+import { devices } from '../../data/devices';
 import axios from "axios"
 
 
 
 
-export default function NewUserForm(){
+export default function NewUserForm(props){
 
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
     const [email, setEmail] = useState('');
+    const [password1, setPassword1] = useState('');
+    const [password2, setPassword2] = useState('');
+
+    function checkPassword(){
+        return (password1 === password2) ? true: false;
+    } 
 
 
 
@@ -35,48 +41,66 @@ export default function NewUserForm(){
     
     return (
         <Container>
-            <link rel="stylesheet" href = "../../public/styles.css"/>
-            <Title>Parent Sign up</Title>
-            <Box>
-                <Label class = "border-solid shadow-md">名 First Name <span style={{color: "red"}}> &nbsp;* </span> </Label>
+            <div style = {{padding: "60px"}}>
+                <Title>Parent Sign up</Title>
+                <Box>
+                    <Label>名 First Name <span style={{color: "red"}}> &nbsp;* </span> </Label>
+                    <Input
+                        value={firstName}
+                        onChange={(e) => { setFirstName(e.target.value); }} 
+                        />
+                </Box>
+                <Box>
+                    <Label> 姓 Last Name <span style={{color: "red"}}> &nbsp;* </span> </Label>
+                    <Input
+                        value={lastName}
+                        onChange={(e) => { setLastName(e.target.value); }} 
+                        />
+                </Box>
+                <Box>
+                <Label> 邮件 Email <span style={{color: "red"}}> &nbsp;* </span> </Label> 
                 <Input
-                    value={firstName}
-                    onChange={(e) => { setFirstName(e.target.value); }} 
+                    value={email}
+                    onChange={(e) => { setEmail(e.target.value); }} 
                     />
-            </Box>
-            <Box>
-                <Label> 姓 Last Name <span style={{color: "red"}}> &nbsp;* </span> </Label>
-                <Input
-                    value={lastName}
-                    onChange={(e) => { setLastName(e.target.value); }} 
-                    />
-            </Box>
-            <Box>
-            <Label> 邮件 Email <span style={{color: "red"}}> &nbsp;* </span> </Label> 
-            <Input
-                value={email}
-                onChange={(e) => { setEmail(e.target.value); }} 
-                />
-            </Box>
-            <Box>
-                <Label> 联系电话 Phone <span style={{color: "red"}}> &nbsp;* </span> </Label> 
-                <Input
-                    value={phoneNumber}
-                    onChange={(e) => { setPhoneNumber(e.target.value); }} 
-                    />
-            </Box>
-            <Submit onClick = {onSubmit} href = '/'>Submit</Submit>
-            <Link href = '/#/ExistingUserForm'>I have an account!</Link>
+                </Box>
+                <Box>
+                    <Label> 联系电话 Phone <span style={{color: "red"}}> &nbsp;* </span> </Label> 
+                    <Input
+                        value={phoneNumber}
+                        onChange={(e) => { setPhoneNumber(e.target.value); }} 
+                        />
+                </Box>
+                <Box>
+                    <Label> Set up Password <span style={{color: "red"}}> &nbsp;* </span> </Label> 
+                    <Input
+                        value={phoneNumber}
+                        onChange={(e) => { setPassword1(e.target.value); }} 
+                        />
+                </Box>
+                <Box>
+                    <Label> Confirm Password <span style={{color: "red"}}> &nbsp;* </span> </Label> 
+                    <Input
+                        value={phoneNumber}
+                        onChange={(e) => { setPassword2(e.target.value); }} 
+                        />
+                </Box>
+                <Submit onClick = {onSubmit()} href = '/'>Submit</Submit>
+                <Link onClick = {() => props.updateSelection(0)}>I have an account!</Link>
+            </div>
         </Container>
     );
 }
 
+
 const Container = styled.div`
     position: relative;
-    margin: auto;
     display: flex;
     flex-direction: column;
     margin-top: 5vh;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #68838F;
     @media ${devices.mobile}{
         width: 80vw;
     }
@@ -84,18 +108,16 @@ const Container = styled.div`
     @media ${devices.laptop}{
         width: 50vw;
     }
-
-
-    
-
-
 `
 const Submit = styled.a`
+    background-color: #AAC9D4;
     border-style: solid;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
     text-align: center;
-    margin: auto;
-    margin-top: 5vh;
     align-items: center;
+    margin-top: 50px;
     &:link { text-decoration: none; }
     &:visited { text-decoration: none; }
     &:hover { text-decoration: none; }
@@ -121,23 +143,20 @@ const Submit = styled.a`
 
     @media ${devices.laptopL}{
         width: 20vw;
-        height: 4vw;
+        height: 3.5vw;
         font-size: 2.5vw;
     }
 `
 
 const Box = styled.div`
-    margin-left: auto;
-    margin-right: auto;
+
 `
 const Label = styled.div`
     font-weight: bold;
     margin-top: 2vw;
-
+    color: white;
     @media ${devices.mobile}{
         font-size: 15px;
-        margin-left: auto;
-        margin-right: auto;
     }
 
     @media ${devices.tablet}{
@@ -156,7 +175,6 @@ const Label = styled.div`
 `
 const Title = styled.div`
     font-weight: 900;
-    text-align: center;
 
     @media ${devices.mobile}{
         font-size: 30px;
@@ -196,17 +214,21 @@ const Input = styled.input`
     }
 `
 
-const Link = styled.a`
-    position: relative;
+const Link = styled.div`
     font-weight: bold;
-    bottom: 0;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
     color: blue;
-    margin-top: 2vh;
-
+    margin-top: 5px;
+    width: 25vw;
+    &:hover{
+        color: white;
+        transition: 0.5s;
+    }
     @media ${devices.mobile}{
         font-size: 15px;
-        margin-left: auto;
-        margin-right: auto;
     }
 
     @media ${devices.tablet}{
@@ -218,6 +240,6 @@ const Link = styled.a`
     }
 
     @media ${devices.laptopL}{
-        font-size: 2vw;
+        font-size: 1.5vw;
     }
 `

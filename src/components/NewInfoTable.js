@@ -38,7 +38,8 @@ export default function NewInfoTable(props) {
           })}
         </table>
 
-        <Refresh onClick = {(e) => setRefresh((refresh) => {console.log(refresh)
+        <Refresh onClick = {(e) => setRefresh((refresh) => {
+          console.log(refresh)
           return (refresh + 1)})}>Refresh</Refresh>
       </>
     );

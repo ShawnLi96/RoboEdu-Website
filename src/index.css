@@ -19,3 +19,7 @@ a {
 ul{
   list-style: none;
 }
+
+div * {
+  font-family: "Arial", Times, serif;
+}

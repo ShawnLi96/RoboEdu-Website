@@ -8,8 +8,7 @@ export default function Landing() {
     <Container>
       <Header/>
       <FlexContainer>
-        <Button href='/#/ExistingUserForm'> Sign in </Button>
-        <Button href='/#/NewUserForm'> New User </Button>
+        <Button href='/#/LoginPage'> Login Page </Button>
         <Button href='/#/Home'> Test Table </Button>
 
       </FlexContainer>
@@ -26,7 +25,7 @@ const Container = styled.div`
 const FlexContainer = styled.div`
   display: flex;
   width: 80%;
-  justify-content: space-between;
+  justify-content: space-around;
   margin-left: auto;
   margin-right: auto;
   margin-top: 5vw;
