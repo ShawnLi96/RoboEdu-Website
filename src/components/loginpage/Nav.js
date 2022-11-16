@@ -1,50 +1,78 @@
-import React from 'react'
-import styled from 'styled-components'
-
+import React from "react";
+import styled from "styled-components";
 
 export default function Nav(props) {
-    const title = ["Home", "Summer Camps", "March Camps", "Winter Camps", "PA Day Camps", "Register Now"]
-    const components = []
-    for (let i = 0; i < title.length; i++){
-        if (props.current === title[i]){
-            components.push(<Button>{title[i]}</Button>)
-        }
-        else components.push(<Button>{title[i]}</Button>)
+  const titles = [
+    "Home",
+    "Summer Camps",
+    "March Camps",
+    "Winter Camps",
+    "PA Day Camps",
+    "Register Now",
+  ];
+  const components = [];
+  for (let i = 0; i < titles.length; i++) {
+    // each section in the nav bar is given an id 0 - 5
+    // id keeps track of which element has been clicked, so that it would be a different color
+    components.push(
+      <Button
+        id={i}
+        state={i === props.focus}
+        onClick={() => {
+          props.setFocus(i);
+          console.log("focus", i)
+        }}
+        onMouseOver={() => unlight(i)}
+        onMouseLeave={() => relight(i)}
+      >
+        {titles[i]}
+      </Button>
+    );
+  }
 
-    }
+  function unlight(i) {
+    const curHighlight = document.getElementById(props.focus);
+    const hovering = document.getElementById(i);
+    curHighlight.style.color = "#FFFFFF";
+    hovering.style.color = "#EDD662";
+  }
+  function relight(i) {
+    if (props.focus === i) return;
+    const curHighlight = document.getElementById(props.focus);
+    const leaving = document.getElementById(i);
+    curHighlight.style.color = "#EDD662";
+    leaving.style.color = "#FFFFFF";
+  }
 
-    return (
-        <Container>
-            <Button>Home</Button>
-            <Button>Summer Camps</Button>
-            <Button>March Camps</Button>
-            <Button>Winter Camps</Button>
-            <Button>PA Day Camps</Button>
-            <Button>Register Now</Button>
-        </Container>
-    )
-
+  return <Container>{components}</Container>;
 }
 
 const Container = styled.div`
-    display: flex;
-    justify-content: space-evenly;
-    font-weight: 900;
-    height: 4vw;
-    opacity: 0.8;
-    background-color: #144257;
-    align-items: center;
-
-
-`
+  display: flex;
+  justify-content: space-evenly;
+  font-weight: 900;
+  height: 4vw;
+  opacity: 0.8;
+  background-color: #144257;
+  align-items: center;
+`;
 
 const Button = styled.a`
-    color: white;
-    &:hover{
-        color: #EDD662;
-    }
-    &:link { text-decoration: none; }
-    &:visited { text-decoration: none; }
-    &:hover { text-decoration: none; }
-    &:active { text-decoration: none; }
-`
+  color: ${(props) => (props.state ? "#EDD662" : "#FFFFFF")};
+  cursor: pointer;
+  &:hover {
+    color: #EDD662;
+  }
+  &:link {
+    text-decoration: none;
+  }
+  &:visited {
+    text-decoration: none;
+  }
+  &:hover {
+    text-decoration: none;
+  }
+  &:active {
+    text-decoration: none;
+  }
+`;

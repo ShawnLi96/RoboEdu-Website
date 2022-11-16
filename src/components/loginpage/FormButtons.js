@@ -11,7 +11,7 @@ export default function MenuButtons(props){
         // 0 means Current student
         // 1 means new student
         if (id !== props.curLoginOption){
-            props.updateLoginOption(id)
+            props.setLoginOption(id)
         }
     }
 

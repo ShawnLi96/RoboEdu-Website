@@ -8,7 +8,7 @@ export default function Landing() {
     <Container>
       <Header/>
       <FlexContainer>
-        <Button href='/#/LoginPage'> Login Page </Button>
+        <Button href='/#/LoginPage' > Login Page </Button>
         <Button href='/#/Home'> Test Table </Button>
 
       </FlexContainer>

@@ -7,7 +7,6 @@ export default function EmailLogin(){
 
     const [email, setEmail] = useState();
     const [selection, setSelection] = useState(0)
-    console.log(selection)
 
     function onSubmit(){
 
@@ -80,7 +79,6 @@ const Box = styled.div`
     justify-content: space-between;
     margin-left: auto;
     margin-right: auto;
-    background-color: red;
 `
 
 

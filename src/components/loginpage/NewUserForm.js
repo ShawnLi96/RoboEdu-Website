@@ -86,7 +86,10 @@ export default function NewUserForm(props){
                         />
                 </Box>
                 <Submit onClick = {onSubmit()} href = '/'>Submit</Submit>
-                <Link onClick = {() => props.updateSelection(0)}>I have an account!</Link>
+                <Link onClick = {() => {
+                    props.setSelection(0)
+                    props.setLoginOption(0)
+                }}>I have an account!</Link>
             </div>
         </Container>
     );
@@ -214,32 +217,41 @@ const Input = styled.input`
     }
 `
 
-const Link = styled.div`
+const Link = styled.a`
     font-weight: bold;
+    cursor: pointer;
     display: block;
     margin-left: auto;
     margin-right: auto;
     text-align: center;
     color: blue;
     margin-top: 5px;
-    width: 25vw;
+    border-style: 0;
     &:hover{
         color: white;
         transition: 0.5s;
     }
+    &:link { text-decoration: none; }
+    &:visited { text-decoration: none; }
+    &:hover { text-decoration: none; }
+    &:active { text-decoration: none; }
     @media ${devices.mobile}{
-        font-size: 15px;
+        font-size: 4vw;
+        width: 20vw;
     }
 
     @media ${devices.tablet}{
         font-size: 2vw;
+        width: 25vw;
 
     }
     @media ${devices.laptop}{
         font-size: 1.25vw;
+        width: 25vw;
     }
 
     @media ${devices.laptopL}{
         font-size: 1.5vw;
+        width: 15vw;
     }
 `

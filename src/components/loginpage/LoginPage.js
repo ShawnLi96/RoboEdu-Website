@@ -19,6 +19,7 @@ export default function LoginPage(){
 
     const [selection, setSelection] = useState(0)
     const [loginOption, setLoginOption] = useState(0)
+    const [navFocus, setNavFocus] = useState(5);
 
     function onSubmit(){
 
@@ -29,7 +30,7 @@ export default function LoginPage(){
     const display = () => {
         
         if (selection === 0){
-            elements.push(<FormButtons curLoginOption = {loginOption} updateLoginOption = {setLoginOption}/>)
+            elements.push(<FormButtons curLoginOption = {loginOption} setLoginOption = {setLoginOption}/>)
             if (loginOption === 0)
                 elements.push(<EmailLogin/>)
             else
@@ -37,15 +38,15 @@ export default function LoginPage(){
             
         }
         else
-            elements.push(<NewUserForm updateSelection = {setSelection}/>)
+            elements.push(<NewUserForm setSelection = {setSelection} setLoginOption = {setLoginOption}/>)
 
         return elements
     }
     return (
         <Container>
-            <Nav/>
+            <Nav focus = {navFocus} setFocus = {setNavFocus}/>
             <BodyContainer>
-                <MenuButtons curSelection = {selection} updateSelection = {setSelection}></MenuButtons>
+                <MenuButtons curSelection = {selection} setSelection = {setSelection}></MenuButtons>
                 {display()}
                 
                 
