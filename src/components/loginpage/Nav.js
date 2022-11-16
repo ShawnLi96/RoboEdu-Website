@@ -37,6 +37,9 @@ export default function Nav(props) {
     hovering.style.color = "#EDD662";
   }
   function relight(i) {
+
+    // need this if statement because when you leave a already focused 
+    // header, it will turn it white without it if you hover over it
     if (props.focus === i) return;
     const curHighlight = document.getElementById(props.focus);
     const leaving = document.getElementById(i);
