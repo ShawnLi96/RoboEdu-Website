@@ -31,7 +31,7 @@ export default function Table(props) {
                 return res;
               }
             );
-
+    
             const subtotal =
               camperData["Lunch"] * 50 +
               camperData["BeforeExt"] * 50 +
@@ -77,9 +77,9 @@ export default function Table(props) {
   console.log("allcamperinfo", allCamperInfo);
 
   return (
-    <>
+    <div>
       <InfoTable data={allCamperInfo}></InfoTable>
-    </>
+    </div>
   );
 }
 const Icon = styled.div`
