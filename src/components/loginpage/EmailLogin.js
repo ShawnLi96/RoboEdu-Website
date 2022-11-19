@@ -33,6 +33,7 @@ export default function EmailLogin(){
 const Submit = styled.a`
     background-color: #AAC9D4;
     border-radius: 25px;
+    cursor: pointer;
     color: white;
     display: flex;
     justify-content: center;    
@@ -124,11 +125,12 @@ const Input = styled.input`
     @media ${devices.laptop}{
         font-size: 1.25vw;
         font-weight: bold;
-        width: 40vw;
+        width: 37.5vw;
         height: 4.5vh;
     }
     @media ${devices.laptopL}{
         height: 6vh;
+        width: 40vw;
     }
 `
 

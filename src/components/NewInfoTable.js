@@ -4,51 +4,6 @@ import "../css/table.css";
 import styled from 'styled-components'
 
 export default function NewInfoTable(props) {
-<<<<<<< HEAD
-
-  var body = []
-  const build = () => {
-
-    // 3d array
-    props.data.map((order, i) => {
-      var total = 0;    
-      console.log('run')
-      console.log(order)
-      console.log(order.length)
-
-      // for every entry
-      for (let i = 0; i < order.length; i++){
-        const entry = order[i]
-        body.push(entry[0])
-        total += entry[1]
-        console.log("entry", entry)
-      }
-      body.push(
-        <tr key={i}>
-        <td colSpan={7}>Summary: {formatter.format(total)}</td>
-        </tr>
-      );
-    });
-    
-  }
-
-  return (
-    <>
-      <table>
-        <thead>
-          <tr>
-            {COLUMNS.map((column) => {
-              return <th key={column}>{column}</th>;
-            })}
-          </tr>
-        </thead>
-        <tbody>
-          {build()}
-        </tbody>
-      </table>
-    </>
-  );
-=======
   
   const [refresh, setRefresh] = useState(0)
 
@@ -89,7 +44,6 @@ export default function NewInfoTable(props) {
       </>
     );
           
->>>>>>> 2e6438449b4215214556142e36a06f5ccaa0d1d9
 }
 var formatter = new Intl.NumberFormat("en-CA", {
   style: "currency",
