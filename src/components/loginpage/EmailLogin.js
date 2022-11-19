@@ -39,6 +39,7 @@ const Submit = styled.a`
     align-items: center;
     margin-left: auto;
     margin-top: 3vh;
+    cursor: pointer;
 
     &:link { text-decoration: none; }
     &:visited { text-decoration: none; }

@@ -31,6 +31,7 @@ export default function MenuButtons(props){
 const Button = styled.a`
     text-align: center;
     font-size: 35px;
+    cursor: pointer;
     width: 20vw;
     background-color: ${(props) => props.active ? "#475F6F": "#7999A8"};
     color: ${(props) => props.active ? "#EDD662" : "#FFFFFF"};

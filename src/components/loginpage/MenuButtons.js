@@ -34,6 +34,7 @@ const Button = styled.a`
     border-style: solid;
     border-color: black;
     width: 20vw;
+    cursor: pointer;
     text-align: center;
     color: ${(props) => props.active ? "#EDD662" : "#FFFFFF"};
     background-color: ${(props) => props.active ? "#1E108A": "#000000"};
