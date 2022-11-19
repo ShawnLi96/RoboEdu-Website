@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import styled from 'styled-components';
 import { devices } from '../../data/devices';
-import axios from "axios"
 
 
 
@@ -14,6 +13,7 @@ export default function NewUserForm(props){
     const [email, setEmail] = useState('');
     const [password1, setPassword1] = useState('');
     const [password2, setPassword2] = useState('');
+    const [matching, setMatching] = useState(false);
 
     function checkPassword(){
         return (password1 === password2) ? true: false;
@@ -24,18 +24,7 @@ export default function NewUserForm(props){
     // for onSubmit, should check if there are any fields ALREADY stored
     // in the database to avoid duplicates
     const onSubmit= () => {
-        const data = {
-            firstname: firstName,
-            lastname: lastName,
-            phonenum: phoneNumber,
-            email: email,
-            
-        }
-        console.log("clicked");
-        axios.post("http://localhost:160/parents/newuser", data).then((res) => {
-            console.log(res);
-            }
-        )
+        
     }
 
     
@@ -85,6 +74,13 @@ export default function NewUserForm(props){
                         onChange={(e) => { setPassword2(e.target.value); }} 
                         />
                 </Box>
+                {
+                    () => {
+                        if (!checkPassword()){
+                            console.log("the passwords do not match")
+                        }
+                    }
+                }
                 <Submit onClick = {onSubmit()} href = '/'>Submit</Submit>
                 <Link onClick = {() => {
                     props.setSelection(0)
