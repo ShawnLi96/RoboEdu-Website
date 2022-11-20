@@ -21,7 +21,7 @@ export default function EmailLogin(){
                 </Box>
                 <Box>
                     <Label>Password:</Label>
-                    <Input type="password" style={{fontSize: "30px"}}/>
+                    <Input type="password"/>
                 </Box>
                 <Submit>Submit</Submit>
             </div>
@@ -68,8 +68,8 @@ const Submit = styled.a`
         
     }
     @media ${devices.laptop}{
-        width: 10vw;
-        height: 3.5vw;
+        width: 15vw;
+        height: 5vw;
         font-size: 2vw;
     }
 
@@ -127,29 +127,26 @@ const Input = styled.input`
     type: "text";
     required
     autofocus
+    font-size: 30px;
     @media ${devices.mobile}{
         font-weight: bold;
-        height: 4vh;
-        font-size: 15px;
+        height: 5vh;
         
     }
 
     @media ${devices.tablet}{
         width: 40vw;
         height: 5vh;
-        font-size: 17px;
 
     }
 
     @media ${devices.laptop}{
         width: 30vw;
         height: 5vh;
-        font-size: 20px;
     }
     @media ${devices.laptopL}{
         height: 4.5vh;
         width: 30vw;
-        font-size: 30px
     }
 `
 

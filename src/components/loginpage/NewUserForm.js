@@ -250,29 +250,26 @@ const Input = styled.input`
     type: "text";
     required
     autofocus
+    font-size: 30px;
     @media ${devices.mobile}{
         font-weight: bold;
         height: 4vh;
-        font-size: 15px;
         
     }
 
     @media ${devices.tablet}{
         width: 40vw;
         height: 3vh;
-        font-size: 17px;
 
     }
 
     @media ${devices.laptop}{
         width: 30vw;
         height: 4vh;
-        font-size: 20px;
     }
     @media ${devices.laptopL}{
         height: 4.5vh;
         width: 30vw;
-        font-size: 30px
     }
 `
 
@@ -280,17 +277,16 @@ const ShortInput = styled.input`
     type: "text";
     required
     autofocus
+    font-size: 30px;
     @media ${devices.mobile}{
         font-weight: bold;
         height: 4vh;
-        font-size: 15px;
 
     }
 
     @media ${devices.tablet}{
         height: 3vh;
         width: 15vw;
-        font-size: 17px;
 
     }
 
@@ -298,14 +294,12 @@ const ShortInput = styled.input`
         font-weight: bold;
         height: 4vh;
         width: 10vw;
-        font-size: 20px;
 
 
     }
     @media ${devices.laptopL}{
         height: 4.5vh;
         width: 10vw;
-        font-size: 30px;
 
     }
     `
