@@ -199,9 +199,6 @@ const Box = styled.div`
         align-items: center;
     }
 
-    @media ${devices.laptop}{
-        width: 50vw;
-    }
 `
 const Label = styled.div`
     font-weight: bold;
