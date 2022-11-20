@@ -31,11 +31,26 @@ export default function MenuButtons(props){
 const Button = styled.a`
     text-align: center;
     align-items: center;
-    font-size: 28px;
+    font-size: 40px;
     cursor: pointer;
     width: 20vw;
     background-color: ${(props) => props.active ? "#475F6F": "#7999A8"};
     color: ${(props) => props.active ? "#EDD662" : "#FFFFFF"};
+
+    @media ${devices.mobile}{
+        font-size: 20px;
+        margin-top: 7vh;
+    }
+
+    @media ${devices.tablet}{
+        font-size: 30px;
+    }
+
+    @media ${devices.laptop}{
+        font-size: 40px;
+    }
+
+    
 
 `
 

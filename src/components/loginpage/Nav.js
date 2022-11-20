@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { devices } from '../../data/devices';
 
 export default function Nav(props) {
   const titles = [
@@ -17,6 +18,7 @@ export default function Nav(props) {
     components.push(
       <Button
         id={i}
+        key = {i}
         state={i === props.focus}
         onClick={() => {
           props.setFocus(i);
@@ -54,11 +56,27 @@ const Container = styled.div`
   display: flex;
   justify-content: space-evenly;
   font-weight: 900;
-  height: 4vw;
   opacity: 0.8;
   background-color: #144257;
   align-items: center;
-`;
+
+  @media ${devices.mobile}{
+    height: 60px;
+  }
+
+  @media ${devices.tablet}{
+    height: 75px;
+  }
+
+  @media ${devices.laptop}{
+    height: 75px;
+  }
+
+  @media ${devices.laptopL}{
+    height: 75px;
+  }
+  `;
+
 
 const Button = styled.a`
   color: ${(props) => (props.state ? "#EDD662" : "#FFFFFF")};
@@ -78,4 +96,17 @@ const Button = styled.a`
   &:active {
     text-decoration: none;
   }
+
+  @media ${devices.mobile}{
+    font-size: 10px;
+  }
+
+  @media ${devices.tablet}{
+      font-size: 15px;
+  }
+
+  @media ${devices.laptop}{
+      font-size: 20px;
+  }
+
 `;

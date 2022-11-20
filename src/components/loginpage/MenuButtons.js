@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { devices } from '../../data/devices';
 
@@ -38,17 +38,33 @@ const Button = styled.a`
     text-align: center;
     color: ${(props) => props.active ? "#EDD662" : "#FFFFFF"};
     background-color: ${(props) => props.active ? "#1E108A": "#000000"};
-`
+    @media ${devices.mobile}{
+        font-size: 20px;
+        margin-top: 5vh;
+    }
+
+    @media ${devices.tablet}{
+        font-size: 30px;
+        margin-top: 2vh;
+    }
+
+    @media ${devices.laptop}{
+        font-size: 40px;
+    }
+
+    `
 
 const Container = styled.div`
     display: flex;
     margin: auto;
-=    @media ${devices.mobile}{
+   @media ${devices.mobile}{
         width: 80vw;
     }
 
     @media ${devices.laptop}{
         width: 60vw;
     }
+
+
 `
 

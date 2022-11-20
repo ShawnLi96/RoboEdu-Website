@@ -21,7 +21,7 @@ export default function EmailLogin(){
                 </Box>
                 <Box>
                     <Label>Password:</Label>
-                    <Input/>
+                    <Input type="password" style={{fontSize: "30px"}}/>
                 </Box>
                 <Submit>Submit</Submit>
             </div>
@@ -51,7 +51,12 @@ const Submit = styled.a`
         background-color: #EDD662; 
     }
     @media ${devices.mobile}{
-        width: 150px;    
+        width: 150px;
+        font-size: 5vw;
+        height: 50px;
+        margin-left: auto;
+        margin-right: auto;  
+
 
     }
 
@@ -59,11 +64,13 @@ const Submit = styled.a`
         width: 25vw;
         height: 8.33vw;
         font-size: 3vw;
+        margin-right: 0;
+        
     }
     @media ${devices.laptop}{
         width: 15vw;
-        height: 3vw;
-        font-size: 2vw;
+        height: 5vw;
+        font-size: 3vw;
     }
 
     @media ${devices.laptopL}{
@@ -76,11 +83,34 @@ const Submit = styled.a`
 
 const Box = styled.div`
     display: flex;
-    align-items: center;
-    padding: 50px 40px 10px;
+    margin: auto;
+    position: relative;
     justify-content: space-between;
-    margin-left: auto;
-    margin-right: auto;
+    @media ${devices.mobile}{
+        padding: 40px 40px 10px;
+        flex-direction: column;
+    }
+    @media ${devices.tablet}{
+        padding: 50px 40px 10px;
+        flex-direction: row;
+        align-items: center;
+        width: 60vw;
+
+    }
+
+    @media ${devices.laptop}{
+        padding: 50px 40px 10px;
+        flex-direction: row;
+        align-items: center;
+        width: 45vw;
+    }
+    
+    @media ${devices.laptopL}{
+        padding: 50px 40px 10px;
+        flex-direction: row;
+        align-items: center;
+        width: 40vw;
+    }
 `
 
 
@@ -92,49 +122,36 @@ const Container = styled.div`
     
 `
 
-const Title = styled.div`
-    font-weight: 900;
-    text-align: center;
-
-    @media ${devices.mobile}{
-        font-size: 30px;
-    }
-
-    @media ${devices.laptop}{
-        font-size: 3vw;
-    }
-`
 
 const Input = styled.input`
-    type: "text";
     required
     autofocus
-    
+    height: 6px;
+    height: 3vh;
+
     @media ${devices.mobile}{
-        font-size: 20px;
+        font-size: 15px;
         font-weight: bold;
         width: 40vw;
-        height: 6vh;
         
     }
 
     @media ${devices.tablet}{
-        width: 50vw;
+        width: 40vw;
         height: 3vh;
     }
 
     @media ${devices.laptop}{
         font-size: 1.25vw;
         font-weight: bold;
-        width: 37.5vw;
-        height: 4.5vh;
+        width: 30vw;
+        height: 3vh;
     }
     @media ${devices.laptopL}{
-        height: 6vh;
-        width: 40vw;
+        height: 4.5vh;
+        width: 30vw;
     }
 `
-
 const Link = styled.a`
     position: relative;
     font-weight: bold;
@@ -164,7 +181,7 @@ const Label = styled.div`
     color: white;
 
     @media ${devices.mobile}{
-        font-size: 15px;
+        font-size: 20px;
     }
 
     @media ${devices.tablet}{
