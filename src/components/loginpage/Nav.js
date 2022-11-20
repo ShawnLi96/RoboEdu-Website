@@ -91,7 +91,11 @@ const Button = styled.a`
   }
 
   @media ${devices.laptop}{
-      font-size: 20px;
+      font-size: 15px;
+  }
+
+  @media ${devices.laptopL}{
+    font-size: 20px;
   }
 
 `;

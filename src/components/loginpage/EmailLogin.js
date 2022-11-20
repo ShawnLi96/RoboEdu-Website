@@ -68,9 +68,9 @@ const Submit = styled.a`
         
     }
     @media ${devices.laptop}{
-        width: 15vw;
-        height: 5vw;
-        font-size: 3vw;
+        width: 10vw;
+        height: 3.5vw;
+        font-size: 2vw;
     }
 
     @media ${devices.laptopL}{
@@ -124,15 +124,15 @@ const Container = styled.div`
 
 
 const Input = styled.input`
+    type: "text";
     required
     autofocus
-    height: 6px;
-    height: 3vh;
+    font-size: 30px;
 
     @media ${devices.mobile}{
-        font-size: 15px;
         font-weight: bold;
-        width: 40vw;
+        height: 4vh;
+        font-size: 15px;
         
     }
 
@@ -145,7 +145,7 @@ const Input = styled.input`
         font-size: 1.25vw;
         font-weight: bold;
         width: 30vw;
-        height: 3vh;
+        height: 4vh;
     }
     @media ${devices.laptopL}{
         height: 4.5vh;

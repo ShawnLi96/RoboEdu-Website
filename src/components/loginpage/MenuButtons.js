@@ -29,7 +29,6 @@ export default function MenuButtons(props){
 
 }
 const Button = styled.a`
-    font-size: 40px;
     margin: auto;
     border-style: solid;
     border-color: black;
@@ -48,6 +47,10 @@ const Button = styled.a`
     }
 
     @media ${devices.laptop}{
+        font-size: 30px;
+    }
+
+    @media ${devices.laptopL}{
         font-size: 40px;
     }
 

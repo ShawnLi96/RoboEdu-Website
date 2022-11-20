@@ -110,9 +110,6 @@ const Mismatch = styled.div`
         width: 25vw;
         font-size: 3vw;
     }
-
-
-
 `
 const Pad = styled.div`
     @media ${devices.mobile}{
@@ -139,7 +136,7 @@ const Container = styled.div`
     }
 
     @media ${devices.laptop}{
-        width: 70vw;
+        width: 60vw;
     }
 
     @media ${devices.laptopL}{
@@ -172,7 +169,7 @@ const Submit = styled.a`
 
     @media ${devices.tablet}{
         width: 20vw;
-        height: 4vh;
+        height: 6vh;
         font-size: 30px;
     }
     @media ${devices.laptop}{
@@ -201,6 +198,10 @@ const Box = styled.div`
         justify-content: space-between;
         align-items: center;
     }
+
+    @media ${devices.laptop}{
+        width: 50vw;
+    }
 `
 const Label = styled.div`
     font-weight: bold;
@@ -208,7 +209,7 @@ const Label = styled.div`
     color: white;
     position: relative;
     @media ${devices.mobile}{
-        font-size: 15px;
+        font-size: 20px;
     }
 
     @media ${devices.tablet}{
@@ -272,7 +273,7 @@ const Input = styled.input`
         font-size: 1.25vw;
         font-weight: bold;
         width: 30vw;
-        height: 3vh;
+        height: 4vh;
     }
     @media ${devices.laptopL}{
         height: 4.5vh;
@@ -301,7 +302,7 @@ const ShortInput = styled.input`
     @media ${devices.laptop}{
         font-size: 1.5vw;
         font-weight: bold;
-        height: 3vh;
+        height: 4vh;
         width: 10vw;
     }
     @media ${devices.laptopL}{

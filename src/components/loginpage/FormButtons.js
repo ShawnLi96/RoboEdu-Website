@@ -47,6 +47,10 @@ const Button = styled.a`
     }
 
     @media ${devices.laptop}{
+        font-size: 35px;
+    }
+
+    @media ${devices.laptopL}{
         font-size: 40px;
     }
 
