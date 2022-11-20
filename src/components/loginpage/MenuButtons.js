@@ -40,7 +40,6 @@ const Button = styled.a`
     background-color: ${(props) => props.active ? "#1E108A": "#000000"};
     @media ${devices.mobile}{
         font-size: 20px;
-        margin-top: 5vh;
     }
 
     @media ${devices.tablet}{

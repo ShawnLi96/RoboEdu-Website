@@ -59,23 +59,8 @@ const Container = styled.div`
   opacity: 0.8;
   background-color: #144257;
   align-items: center;
-
-  @media ${devices.mobile}{
-    height: 60px;
-  }
-
-  @media ${devices.tablet}{
-    height: 75px;
-  }
-
-  @media ${devices.laptop}{
-    height: 75px;
-  }
-
-  @media ${devices.laptopL}{
-    height: 75px;
-  }
-  `;
+  height: 75px;
+`
 
 
 const Button = styled.a`

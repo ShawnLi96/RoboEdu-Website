@@ -254,12 +254,12 @@ const Input = styled.input`
     type: "text";
     required
     autofocus
+    font-size: 30px;
 
     @media ${devices.mobile}{
-        font-size: 20px;
         font-weight: bold;
-        width: 40vw;
-        height: 6vh;
+        height: 4vh;
+        font-size: 15px;
         
     }
 
@@ -284,12 +284,12 @@ const ShortInput = styled.input`
     type: "text";
     required
     autofocus
-
+    font-size: 30px;
     @media ${devices.mobile}{
-        font-size: 20px;
         font-weight: bold;
-        height: 6vh;
-        
+        height: 4vh;
+        font-size: 15px;
+
     }
 
     @media ${devices.tablet}{
