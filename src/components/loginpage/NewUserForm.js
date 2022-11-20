@@ -72,7 +72,6 @@ export default function NewUserForm(props){
                     <Label> Set up Password </Label> 
                     <Input
                         type = "password"
-                        style={{fontSize: "30px"}}
                         value={password1}
                         onChange={(e) => { setPassword1(e.target.value); }} 
                         />
@@ -81,7 +80,6 @@ export default function NewUserForm(props){
                     <Label> Confirm Password </Label> 
                     <Input
                         type = "password"
-                        style={{fontSize: "30px"}}
                         value={password2}
                         onChange={(e) => { setPassword2(e.target.value); }} 
                         />
@@ -212,7 +210,7 @@ const Label = styled.div`
     @media ${devices.tablet}{
         font-size: 20px;
         bottom: 10px;
-        
+
 
     }
 
@@ -252,8 +250,6 @@ const Input = styled.input`
     type: "text";
     required
     autofocus
-    font-size: 30px;
-
     @media ${devices.mobile}{
         font-weight: bold;
         height: 4vh;
@@ -264,17 +260,19 @@ const Input = styled.input`
     @media ${devices.tablet}{
         width: 40vw;
         height: 3vh;
+        font-size: 17px;
+
     }
 
     @media ${devices.laptop}{
-        font-size: 1.25vw;
-        font-weight: bold;
         width: 30vw;
         height: 4vh;
+        font-size: 20px;
     }
     @media ${devices.laptopL}{
         height: 4.5vh;
         width: 30vw;
+        font-size: 30px
     }
 `
 
@@ -282,7 +280,6 @@ const ShortInput = styled.input`
     type: "text";
     required
     autofocus
-    font-size: 30px;
     @media ${devices.mobile}{
         font-weight: bold;
         height: 4vh;
@@ -293,19 +290,23 @@ const ShortInput = styled.input`
     @media ${devices.tablet}{
         height: 3vh;
         width: 15vw;
+        font-size: 17px;
 
     }
 
     @media ${devices.laptop}{
-        font-size: 1.5vw;
         font-weight: bold;
         height: 4vh;
         width: 10vw;
+        font-size: 20px;
+
+
     }
     @media ${devices.laptopL}{
         height: 4.5vh;
         width: 10vw;
-        font-size: 1.25vw;
+        font-size: 30px;
+
     }
     `
 

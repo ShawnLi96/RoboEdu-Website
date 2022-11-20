@@ -127,8 +127,6 @@ const Input = styled.input`
     type: "text";
     required
     autofocus
-    font-size: 30px;
-
     @media ${devices.mobile}{
         font-weight: bold;
         height: 4vh;
@@ -138,43 +136,23 @@ const Input = styled.input`
 
     @media ${devices.tablet}{
         width: 40vw;
-        height: 3vh;
+        height: 5vh;
+        font-size: 17px;
+
     }
 
     @media ${devices.laptop}{
-        font-size: 1.25vw;
-        font-weight: bold;
         width: 30vw;
-        height: 4vh;
+        height: 5vh;
+        font-size: 20px;
     }
     @media ${devices.laptopL}{
         height: 4.5vh;
         width: 30vw;
+        font-size: 30px
     }
 `
-const Link = styled.a`
-    position: relative;
-    font-weight: bold;
-    bottom: 0;
-    color: blue;
-    margin-top: 1vw;
 
-    @media ${devices.mobile}{
-        font-size: 15px;
-        margin-left: auto;
-        margin-right: auto;
-    }
-    @media ${devices.laptop}{
-        font-size: 1.25vw;
-    }
-
-    @media ${devices.laptopL}{
-        font-size: 2vw;
-
-    }
-
-
-`
 
 const Label = styled.div`
     font-weight: bold;
