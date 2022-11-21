@@ -1,5 +1,5 @@
 export async function fetchStudent(id) {
-  const data = await fetch(`http://192.168.2.225:160/students/getstudent`, {
+  const data = await fetch(`http://192.168.2.225:80/students/getstudent`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -7,7 +7,7 @@ export async function fetchStudent(id) {
     body: JSON.stringify({
       studentid: id,
       authkey:
-        "88dac29638e4f20a3dc0706aa3c5a306328042f5fcb71119395aaa98c278056f31ea2ff1c9efba7c70510553416088d8",
+        "f99b3e0accc55b4e8df73e83e430590257dc03a4f6ac859608773d0952a04acee359c7dfeced23be88fac3a7f160e836",
     }),
   }).then((res) => {
     return res.json();
@@ -19,7 +19,7 @@ export async function fetchStudent(id) {
 }
 
 export async function fetchCamper(id) {
-  const data = await fetch(`http://192.168.2.225:160/campers/getcamper`, {
+  const data = await fetch(`http://192.168.2.225:80/campers/getcamper`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -27,7 +27,7 @@ export async function fetchCamper(id) {
     body: JSON.stringify({
       camperid: id,
       authkey:
-        "88dac29638e4f20a3dc0706aa3c5a306328042f5fcb71119395aaa98c278056f31ea2ff1c9efba7c70510553416088d8",
+        "f99b3e0accc55b4e8df73e83e430590257dc03a4f6ac859608773d0952a04acee359c7dfeced23be88fac3a7f160e836",
     }),
   }).then((res) => {
     return res.json();
@@ -39,7 +39,7 @@ export async function fetchCamper(id) {
 }
 
 export async function fetchOrders(id) {
-  const data = await fetch(`http://192.168.2.225:160/parents/getorders`, {
+  const data = await fetch(`http://192.168.2.225:80/parents/getorders`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -47,7 +47,7 @@ export async function fetchOrders(id) {
     body: JSON.stringify({
       parentid: id,
       authkey:
-        "88dac29638e4f20a3dc0706aa3c5a306328042f5fcb71119395aaa98c278056f31ea2ff1c9efba7c70510553416088d8",
+        "f99b3e0accc55b4e8df73e83e430590257dc03a4f6ac859608773d0952a04acee359c7dfeced23be88fac3a7f160e836",
     }),
   }).then((res) => {
     return res.json();

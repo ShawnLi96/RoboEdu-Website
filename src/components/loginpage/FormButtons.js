@@ -48,6 +48,7 @@ const Button = styled.a`
 
     @media ${devices.laptop}{
         font-size: 35px;
+        margin-top: 10px;
     }
 
     @media ${devices.laptopL}{
