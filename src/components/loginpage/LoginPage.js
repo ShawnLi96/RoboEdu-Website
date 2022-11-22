@@ -62,7 +62,11 @@ export default function LoginPage(){
 const Container = styled.div`
     background-image: url(${bg});
     width: 100vw;
+<<<<<<< HEAD
     height: 100vh;
+=======
+    padding: 0px 0px 20px;
+>>>>>>> d12716d4589f1e8eab58cbf686c009feb4f60322
 `
 const BodyContainer = styled.div`
     position: relative;

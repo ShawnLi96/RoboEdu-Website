@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import styled from 'styled-components';
 import { devices } from '../../data/devices';
-
+import { newUser } from '../../data/post';
 
 
 
@@ -27,9 +27,9 @@ export default function NewUserForm(props){
         }
     }
 
-    // const checkPassword = () => {
-    //     return ((password1 === password2) ? setMatching(true) : setMatching(false))
-    // }
+    function checkPassword() {
+       return ((password1 === password2) ? setMatching(true) : setMatching(false))
+    }
 
 
     
@@ -38,13 +38,13 @@ export default function NewUserForm(props){
             <Pad>
                 <Title>Parent Sign up</Title>
                 <Box>
-                    <Label>名 First Name </Label>
+                    <Label> First Name 名</Label>
                     <ShortInput
                         value={firstName}
                         onChange={(e) => { setFirstName(e.target.value); }} 
                         />
 
-                    <Label> 姓 Last Name </Label>
+                    <Label> Last Name 姓</Label>
                     <ShortInput
                         value={lastName}
                         onChange={(e) => { setLastName(e.target.value); }} 
@@ -55,14 +55,14 @@ export default function NewUserForm(props){
 
                 </Box>
                 <Box>
-                    <Label> 邮件 Email </Label> 
+                    <Label> Email 邮件</Label> 
                     <Input
                         value={email}
                         onChange={(e) => { setEmail(e.target.value); }} 
                         />
                 </Box>
                 <Box>
-                    <Label> 联系电话 Phone </Label> 
+                    <Label> Phone 联系电话</Label> 
                     <Input
                         value={phoneNumber}
                         onChange={(e) => { setPhoneNumber(e.target.value); }} 
@@ -267,8 +267,12 @@ const Input = styled.input`
     @media ${devices.laptop}{
         width: 30vw;
         height: 4vh;
+<<<<<<< HEAD
         font-size: 30px;
 
+=======
+        font-size: 23px;
+>>>>>>> d12716d4589f1e8eab58cbf686c009feb4f60322
     }
     @media ${devices.laptopL}{
         height: 4.5vh;

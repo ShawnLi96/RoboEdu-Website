@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import { devices } from '../../data/devices';
+import button1 from '../../images/title_blok_1.png'
+import button2 from '../../images/title_blok_2.png'
 
 
 export default function MenuButtons(props){
@@ -31,23 +33,34 @@ export default function MenuButtons(props){
 const Button = styled.a`
     margin: auto;
     border-style: solid;
-    border-color: black;
-    width: 20vw;
+    border-color: black; 
     cursor: pointer;
-    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     color: ${(props) => props.active ? "#EDD662" : "#FFFFFF"};
-    background-color: ${(props) => props.active ? "#1E108A": "#000000"};
+    background-image: url(${(props) => (props.active) ? button1: button2});
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
     @media ${devices.mobile}{
-        font-size: 20px;
+        font-size: 15px;
+        width: 350px;
+        height: 40px;
     }
 
     @media ${devices.tablet}{
-        font-size: 30px;
+        font-size: 25px;
         margin-top: 2vh;
+        width: 38vw;
+        height: 7.6vw;
     }
 
     @media ${devices.laptop}{
         font-size: 30px;
+        height: 5vw;
+        width: 25vw;
+
     }
 
     @media ${devices.laptopL}{
