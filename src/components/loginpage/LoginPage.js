@@ -19,7 +19,10 @@ export default function LoginPage(){
 
     const [selection, setSelection] = useState(0)
     const [loginOption, setLoginOption] = useState(0)
-    const [navFocus, setNavFocus] = useState(5);
+
+    var width = Math.max(window.screen.width, window.innerWidth);
+    var f = (width < 500) ? 2: 5;
+    const [navFocus, setNavFocus] = useState(f);
 
     function onSubmit(){
 
@@ -62,11 +65,14 @@ export default function LoginPage(){
 const Container = styled.div`
     background-image: url(${bg});
     width: 100vw;
-<<<<<<< HEAD
     height: 100vh;
-=======
-    padding: 0px 0px 20px;
->>>>>>> d12716d4589f1e8eab58cbf686c009feb4f60322
+    @media (max-height: 441px){
+        height: auto;
+    }
+
+    @media (min-height: 442px){
+        height: 100vh;
+    }
 `
 const BodyContainer = styled.div`
     position: relative;

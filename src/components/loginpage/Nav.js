@@ -11,26 +11,41 @@ export default function Nav(props) {
     "PA Day Camps",
     "Register Now",
   ];
-  const components = [];
-  for (let i = 0; i < titles.length; i++) {
-    // each section in the nav bar is given an id 0 - 5
-    // id keeps track of which element has been clicked, so that it would be a different color
-    components.push(
-      <Button
-        id={i}
-        key = {i}
-        state={i === props.focus}
-        onClick={() => {
-          props.setFocus(i);
-          console.log("focus", i)
-        }}
-        onMouseOver={() => unlight(i)}
-        onMouseLeave={() => relight(i)}
-      >
-        {titles[i]}
-      </Button>
-    );
+
+  const titlesMobile = [
+    "Home", 
+    "Camps", 
+    "Register Now"
+  ];
+  var components = [];
+  function createButtons() {
+
+    var arr = []
+    var width = Math.max(window.screen.width, window.innerWidth);
+
+    arr = (width < 500) ? titlesMobile: titles;
+    for (let i = 0; i < arr.length; i++) {
+      // each section in the nav bar is given an id 0 - 5
+      // id keeps track of which element has been clicked, so that it would be a different color
+      components.push(
+        <Button
+          id={i}
+          key = {i}
+          state={i === props.focus}
+          onClick={() => {
+            props.setFocus(i);
+            console.log("focus", i)
+          }}
+          onMouseOver={() => unlight(i)}
+          onMouseLeave={() => relight(i)}
+        >
+          {arr[i]}
+        </Button>
+      );
+    }
   }
+  createButtons();
+  
 
   function unlight(i) {
     const curHighlight = document.getElementById(props.focus);
@@ -49,7 +64,7 @@ export default function Nav(props) {
     leaving.style.color = "#FFFFFF";
   }
 
-  return <Container>{components}</Container>;
+  return <Container> {components} </Container>;
 }
 
 const Container = styled.div`
@@ -89,7 +104,7 @@ const Button = styled.a`
   }
 
   @media ${devices.mobile}{
-    font-size: 10px;
+    font-size: 15px;
   }
 
   @media ${devices.tablet}{

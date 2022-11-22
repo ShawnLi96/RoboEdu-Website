@@ -119,9 +119,9 @@ const Pad = styled.div`
 `
 const Container = styled.div`
     position: relative;
+    margin-top: 2vh;
     display: flex;
     flex-direction: column;
-    margin-top: 5vh;
     margin-left: auto;
     margin-right: auto;
     background-color: #68838F;
@@ -138,7 +138,8 @@ const Container = styled.div`
     }
 
     @media ${devices.laptopL}{
-        width: 50vw;
+        width: 50.5vw;
+        right: .25vw;
     }
 `
 const Submit = styled.a`
@@ -159,26 +160,26 @@ const Submit = styled.a`
         transition: 0.5s;
         background-color: #87ceeb; 
     }
+
     @media ${devices.mobile}{
         width: 50vw;
         font-size: 7vw;
-
+        padding: 5px 0px;
     }
 
     @media ${devices.tablet}{
         width: 20vw;
-        height: 6vh;
         font-size: 30px;
+        padding: 10px 0px;
+
     }
     @media ${devices.laptop}{
         width: 15vw;
-        height: 3vw;
         font-size: 2vw;
     }
 
     @media ${devices.laptopL}{
         width: 20vw;
-        height: 3.5vw;
         font-size: 2.5vw;
     }
 `
@@ -250,10 +251,10 @@ const Input = styled.input`
     type: "text";
     required
     autofocus
+    font-size: 30px;
     @media ${devices.mobile}{
         font-weight: bold;
-        height: 4vh;
-        font-size: 20px;
+        height: 3vh;
     }
 
     @media ${devices.tablet}{
@@ -267,12 +268,7 @@ const Input = styled.input`
     @media ${devices.laptop}{
         width: 30vw;
         height: 4vh;
-<<<<<<< HEAD
-        font-size: 30px;
-
-=======
         font-size: 23px;
->>>>>>> d12716d4589f1e8eab58cbf686c009feb4f60322
     }
     @media ${devices.laptopL}{
         height: 4.5vh;
@@ -286,9 +282,10 @@ const ShortInput = styled.input`
     type: "text";
     required
     autofocus
+    font-size: 30px;
     @media ${devices.mobile}{
         font-weight: bold;
-        height: 4vh;
+        height: 3vh;
         font-size: 20px;
 
     }

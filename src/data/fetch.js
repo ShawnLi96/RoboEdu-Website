@@ -1,5 +1,5 @@
 export async function fetchStudent(id) {
-  const data = await fetch(`http://192.168.2.225:80/students/getstudent`, {
+  const data = await fetch(`http://localhost:80/students/getstudent`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -19,7 +19,7 @@ export async function fetchStudent(id) {
 }
 
 export async function fetchCamper(id) {
-  const data = await fetch(`http://192.168.2.225:80/campers/getcamper`, {
+  const data = await fetch(`http://localhost/campers/getcamper`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -39,7 +39,7 @@ export async function fetchCamper(id) {
 }
 
 export async function fetchOrders(id) {
-  const data = await fetch(`http://192.168.2.225:80/parents/getorders`, {
+  const data = await fetch(`http://localhost/parents/getorders`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

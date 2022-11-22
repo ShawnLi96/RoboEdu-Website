@@ -7,6 +7,7 @@ import button2 from '../../images/title_blok_2.png'
 
 export default function MenuButtons(props){
 
+
     function manageClick(id) {
         console.log('clicked')
         // toggles between 1 and 0
@@ -32,8 +33,6 @@ export default function MenuButtons(props){
 }
 const Button = styled.a`
     margin: auto;
-    border-style: solid;
-    border-color: black; 
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -45,13 +44,14 @@ const Button = styled.a`
     background-position: center;
     @media ${devices.mobile}{
         font-size: 15px;
-        width: 350px;
-        height: 40px;
+        font-weight: bold;
+        width: 40vw;
+        height: 10vw;
     }
 
     @media ${devices.tablet}{
         font-size: 25px;
-        margin-top: 2vh;
+        margin-top: .5vh;
         width: 38vw;
         height: 7.6vw;
     }
