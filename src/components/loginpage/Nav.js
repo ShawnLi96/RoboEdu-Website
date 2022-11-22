@@ -59,7 +59,13 @@ const Container = styled.div`
   opacity: 0.8;
   background-color: #144257;
   align-items: center;
-  height: 75px;
+  @media ${devices.mobile}{
+    height: 50px;
+  }
+
+  @media ${devices.tablet}{
+    height: 75px;
+  }
 `
 
 

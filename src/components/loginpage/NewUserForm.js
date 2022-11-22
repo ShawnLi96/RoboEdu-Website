@@ -204,7 +204,7 @@ const Label = styled.div`
     color: white;
     position: relative;
     @media ${devices.mobile}{
-        font-size: 20px;
+        font-size: 15px;
     }
 
     @media ${devices.tablet}{
@@ -250,26 +250,31 @@ const Input = styled.input`
     type: "text";
     required
     autofocus
-    font-size: 30px;
     @media ${devices.mobile}{
         font-weight: bold;
         height: 4vh;
-        
+        font-size: 20px;
     }
 
     @media ${devices.tablet}{
         width: 40vw;
         height: 3vh;
+        font-size: 30px;
+
 
     }
 
     @media ${devices.laptop}{
         width: 30vw;
         height: 4vh;
+        font-size: 30px;
+
     }
     @media ${devices.laptopL}{
         height: 4.5vh;
         width: 30vw;
+        font-size: 30px;
+
     }
 `
 
@@ -277,22 +282,25 @@ const ShortInput = styled.input`
     type: "text";
     required
     autofocus
-    font-size: 30px;
     @media ${devices.mobile}{
         font-weight: bold;
         height: 4vh;
+        font-size: 20px;
 
     }
 
     @media ${devices.tablet}{
         height: 3vh;
         width: 15vw;
+        font-size: 30px;
+
 
     }
 
     @media ${devices.laptop}{
         font-weight: bold;
         height: 4vh;
+        font-size: 30px;
         width: 10vw;
 
 
@@ -300,6 +308,8 @@ const ShortInput = styled.input`
     @media ${devices.laptopL}{
         height: 4.5vh;
         width: 10vw;
+        font-size: 30px;
+
 
     }
     `
