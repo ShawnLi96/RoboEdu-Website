@@ -66,13 +66,14 @@ const Container = styled.div`
     background-image: url(${bg});
     width: 100vw;
     height: 100vh;
-    @media (max-height: 441px){
+    @media (max-height: 441px) {
         height: auto;
     }
 
     @media (min-height: 442px){
         height: 100vh;
     }
+
 `
 const BodyContainer = styled.div`
     position: relative;

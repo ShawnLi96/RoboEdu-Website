@@ -45,7 +45,7 @@ const Button = styled.a`
     @media ${devices.mobile}{
         font-size: 15px;
         font-weight: bold;
-        width: 40vw;
+        width: 42vw;
         height: 10vw;
     }
 
@@ -59,7 +59,7 @@ const Button = styled.a`
     @media ${devices.laptop}{
         font-size: 30px;
         height: 5vw;
-        width: 25vw;
+        width: 30vw;
 
     }
 
