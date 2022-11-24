@@ -6,19 +6,44 @@ import styled from "styled-components";
 import check from "../images/check.png";
 import cross from "../images/cross.png";
 
-export default function Table(props) {
+export default function Table() {
+
+
+
+
+  const parentid = 22;
+  // an array of orders fetched
+  const [orders, setOrders] = useState([]);  
+
+  useEffect(() => {
+    getOrders();
+  }, []);
+  // fetches all the orders and saves into state
+  const getOrders = async () => {
+    const orders = await request("/parents/getorders", "post", {parentid: 22}).then((res) => {
+      console.log("ORDERS", res)
+      return res;
+    }).catch(err => {
+      console.log(err)
+    });
+    setOrders(orders);
+  };
+
+
+
   // a 2D array, where each 1D array corresponds to each order
   // allCamperInfo[i][x] stores a HTML row element for a camper
   // displayed on row x of order i
   const [allCamperInfo, setAllCamperInfo] = useState([]);
-  const [dataFetched, setDataFetched] = useState(false);
+
+  // loop thru the orders and fetch every camper. 
+  // parse information of each camper into html and save it into state allCamperInfo
   useEffect(() => {
-    // setting the state allCamperInfo
     const getCampers = async () => {
       const masterCamperInfo = [];
-      if (props.orders) {
-        console.log("props", props.orders);
-        props.orders.map((order) => {
+      if (orders) {
+        console.log("props", orders);
+        orders.map((order) => {
           const orderCamperData = [];
           const campers = JSON.parse(order["CamperIDs"]);
           campers.map(async (camper) => {
@@ -27,14 +52,18 @@ export default function Table(props) {
             }, 
             ).then((res) => {
               return res;
-            });
+            }).catch(err => {
+              console.log(err)
+            })
 
             // needed to fetch name, as campers/getCamper does not provide name
             const student = await request("/students/getstudent", "post", {studentid: camperData["Student ID"]}).then(
               (res) => {
                 return res;
               }
-            );
+            ).catch(err => {
+              console.log(err)
+            });
     
             const subtotal =
               camperData["Lunch"] * 50 +
@@ -75,14 +104,12 @@ export default function Table(props) {
       }
     };
     getCampers();
-  }, [props.orders]);
-  // runs when orders changed
-  console.log("allcamperinfo", allCamperInfo);
-  console.log("dataFetched", dataFetched)
+  }, [orders]);
+
 
   return (
     <div>
-      <InfoTable data={allCamperInfo} setFetched = {setDataFetched} dataFetched = {dataFetched}></InfoTable>
+      <InfoTable data={allCamperInfo}></InfoTable>
     </div>
   );
 }
