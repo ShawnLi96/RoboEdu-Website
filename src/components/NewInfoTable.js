@@ -5,7 +5,9 @@ import styled from 'styled-components'
 
 export default function NewInfoTable(props) {
   
-  const [refresh, setRefresh] = useState()
+  const [refresh, setRefresh] = useState(0)
+
+  console.log("dataFetched2", props.dataFetched)
 
 
   return (

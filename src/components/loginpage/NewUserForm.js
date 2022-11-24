@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { devices } from "../../data/devices";
+import {request} from "../../data/fetch"
 
 export default function NewUserForm(props) {
   const [firstName, setFirstName] = useState("");
@@ -11,18 +12,25 @@ export default function NewUserForm(props) {
   const [password2, setPassword2] = useState("");
   const [message, setMessage] = useState("");
 
-  var route = ".";
   // for onSubmit, should check if there are any fields ALREADY stored
   // in the database to avoid duplicates
   function onSubmit() {
     if (password1 === password2) {
       setMessage("");
       console.log("match");
-      route = "/";
+      request("/parents/newuser", "post", {
+        firstname: firstName,
+        lastname: lastName,
+        phonenum: phoneNumber,
+        pswd: password1,
+        email: email,
+        address: "s",
+        location: 3
+      }).then((res) => console.log(res))
+
+
     } else {
       setMessage("The passwords do not match!");
-      route = ".";
-      console.log(route);
     }
   }
 
@@ -124,9 +132,8 @@ export default function NewUserForm(props) {
         <Submit
           onClick={() => {
             onSubmit();
-            return false;
           }}
-          href={route}
+          
         >
           Submit
         </Submit>
@@ -308,7 +315,7 @@ const Input = styled.input`
     @media ${devices.tablet}{
         width: 40vw;
         height: 3vh;
-        font-size: 30px;
+        font-size: 20px;
 
 
     }
@@ -341,7 +348,7 @@ const ShortInput = styled.input`
     @media ${devices.tablet}{
         height: 3vh;
         width: 15vw;
-        font-size: 30px;
+        font-size: 20px;
 
 
     }
@@ -349,7 +356,7 @@ const ShortInput = styled.input`
     @media ${devices.laptop}{
         font-weight: bold;
         height: 4vh;
-        font-size: 30px;
+        font-size: 20px;
         width: 10vw;
 
 

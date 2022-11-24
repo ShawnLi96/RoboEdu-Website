@@ -11,6 +11,7 @@ export default function Table(props) {
   // allCamperInfo[i][x] stores a HTML row element for a camper
   // displayed on row x of order i
   const [allCamperInfo, setAllCamperInfo] = useState([]);
+  const [dataFetched, setDataFetched] = useState(false);
   useEffect(() => {
     // setting the state allCamperInfo
     const getCampers = async () => {
@@ -69,19 +70,19 @@ export default function Table(props) {
           });
 
           return masterCamperInfo.push(orderCamperData);
-        });
-
-        setAllCamperInfo(masterCamperInfo);
+      });
+      setAllCamperInfo(masterCamperInfo);
       }
     };
     getCampers();
   }, [props.orders]);
   // runs when orders changed
   console.log("allcamperinfo", allCamperInfo);
+  console.log("dataFetched", dataFetched)
 
   return (
     <div>
-      <InfoTable data={allCamperInfo}></InfoTable>
+      <InfoTable data={allCamperInfo} setFetched = {setDataFetched} dataFetched = {dataFetched}></InfoTable>
     </div>
   );
 }
