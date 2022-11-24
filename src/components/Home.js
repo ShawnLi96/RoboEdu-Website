@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Table from "./Table";
-import { fetchOrders } from "../data/fetch";
+import { request } from "../data/fetch";
 
 export default function Home() {
   const parentid = 22;
@@ -10,12 +10,11 @@ export default function Home() {
 
   // fetches all the orders and saves into state
   const getOrders = async () => {
-    const orders = fetchOrders(parentid).then((res) => {
+    const orders = await request("/parents/getorders", "post", {parentid: 22}).then((res) => {
+      console.log("ORDERS", res)
       return res;
     });
-    setOrders(await orders);
-    console.log("ORDERS");
-    console.log(orders);
+    setOrders(orders);
   };
 
   useEffect(() => {

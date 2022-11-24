@@ -1,3 +1,27 @@
+export async function request(api, method, params) {
+  let fetchinput = {
+    method: method,
+    headers: {
+      "Content-Type": "application/json",
+    }
+  };
+  if (method === "post") {
+    params.authkey = "f99b3e0accc55b4e8df73e83e430590257dc03a4f6ac859608773d0952a04acee359c7dfeced23be88fac3a7f160e836";
+    fetchinput.body = JSON.stringify(params);
+  }
+
+  const data = await fetch(`http://localhost:80${api}`, fetchinput)
+    .then((res) => {
+      console.log(res)
+      return res.json();
+    })
+    .then((res) => {
+      return res;
+    });
+  return data;
+}
+
+/*
 export async function fetchStudent(id) {
   const data = await fetch(`http://localhost:80/students/getstudent`, {
     method: "POST",
@@ -9,11 +33,13 @@ export async function fetchStudent(id) {
       authkey:
         "f99b3e0accc55b4e8df73e83e430590257dc03a4f6ac859608773d0952a04acee359c7dfeced23be88fac3a7f160e836",
     }),
-  }).then((res) => {
-    return res.json();
-  }).then((json) => {
-    return json;
   })
+    .then((res) => {
+      return res.json();
+    })
+    .then((json) => {
+      return json;
+    });
 
   return data;
 }
@@ -29,11 +55,13 @@ export async function fetchCamper(id) {
       authkey:
         "f99b3e0accc55b4e8df73e83e430590257dc03a4f6ac859608773d0952a04acee359c7dfeced23be88fac3a7f160e836",
     }),
-  }).then((res) => {
-    return res.json();
-  }).then((json) => {
-    return json;
   })
+    .then((res) => {
+      return res.json();
+    })
+    .then((json) => {
+      return json;
+    });
 
   return data;
 }
@@ -49,11 +77,14 @@ export async function fetchOrders(id) {
       authkey:
         "f99b3e0accc55b4e8df73e83e430590257dc03a4f6ac859608773d0952a04acee359c7dfeced23be88fac3a7f160e836",
     }),
-  }).then((res) => {
-    return res.json();
-  }).then((json) => {
-    return json;
-  });
+  })
+    .then((res) => {
+      return res.json();
+    })
+    .then((json) => {
+      return json;
+    });
 
   return data;
 }
+*/

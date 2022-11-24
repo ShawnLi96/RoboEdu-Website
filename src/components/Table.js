@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import InfoTable from "./NewInfoTable";
-import { fetchCamper, fetchStudent } from "../data/fetch";
+import { request } from "../data/fetch";
 import styled from "styled-components";
 
 import check from "../images/check.png";
@@ -21,12 +21,15 @@ export default function Table(props) {
           const orderCamperData = [];
           const campers = JSON.parse(order["CamperIDs"]);
           campers.map(async (camper) => {
-            const camperData = await fetchCamper(camper).then((res) => {
+            const camperData = await request("/campers/getcamper", "post", {
+              camperid: camper
+            }, 
+            ).then((res) => {
               return res;
             });
 
             // needed to fetch name, as campers/getCamper does not provide name
-            const student = await fetchStudent(camperData["Student ID"]).then(
+            const student = await request("/students/getstudent", "post", {studentid: camperData["Student ID"]}).then(
               (res) => {
                 return res;
               }

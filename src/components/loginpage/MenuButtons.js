@@ -23,8 +23,8 @@ export default function MenuButtons(props){
         
         <Container>
 
-            <Button active = {props.curSelection === 0} onClick = {() => manageClick(0)}>Current Student</Button>
-            <Button active = {props.curSelection === 1} onClick = {() => manageClick(1)}>New Student</Button>
+            <Button active = {props.curSelection === 0} onClick = {() => manageClick(0)}>Current User</Button>
+            <Button active = {props.curSelection === 1} onClick = {() => manageClick(1)}>New User</Button>
                 
 
         </Container>

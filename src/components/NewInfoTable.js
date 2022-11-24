@@ -5,7 +5,8 @@ import styled from 'styled-components'
 
 export default function NewInfoTable(props) {
   
-  const [refresh, setRefresh] = useState(0)
+  const [refresh, setRefresh] = useState()
+
 
   return (
       <>
@@ -18,7 +19,6 @@ export default function NewInfoTable(props) {
             </tr>
           </thead>
           {
-          (props.data.length > 0) ? 
             props.data.map((order, i) => {
               var total = 0;
               return (
@@ -34,8 +34,8 @@ export default function NewInfoTable(props) {
                   </tr>
                 </tbody>
               );
-            }) :
-            () => <tbody><tr><td>No orders found</td></tr></tbody>
+            }) 
+            
           }
         </table>
 
