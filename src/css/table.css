@@ -2,15 +2,18 @@
 table {
   font-family: 'Poppins', sans-serif;
   border-collapse: collapse;
-  width: 100%;
+  width: 95vw;
   text-align: center;
   background-color: white;
   position: relative;
   margin-top: auto;
+  border-collapse: separate;
+  border-spacing: 0px;
+  border: 1px solid #000000;
 }
   
-table td, table th {
-  border: 1px solid #ddd;
+table td {
+  border: 1px solid #000000;
   padding: 8px;
 
 }

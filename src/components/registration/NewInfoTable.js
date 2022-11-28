@@ -4,11 +4,11 @@ import "../../css/table.css";
 import styled from 'styled-components'
 import check from "../../images/check.png";
 import cross from "../../images/cross.png";
+import { devices } from "../../data/devices"
 
 export default function NewInfoTable(props) {
   
   const [refresh, setRefresh] = useState(0)
-
   return (
       <div>
 
@@ -52,7 +52,7 @@ export default function NewInfoTable(props) {
                       );
                     })}
                     <tr>
-                      <td colSpan={7}>Summary: {formatter.format(total)}</td>
+                      <Summary>Summary: {formatter.format(total)}</Summary>
                     </tr>
                   </tbody>
                 );
@@ -65,6 +65,15 @@ export default function NewInfoTable(props) {
     );
           
 }
+
+const Summary = styled.td.attrs({
+  colSpan: 7
+})`  
+  @media ${devices.laptop}{
+    height: 50px;
+  }
+`
+
 const weeks = [
   "",
   "July 3 - July 7",

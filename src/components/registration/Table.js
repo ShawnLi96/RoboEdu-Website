@@ -4,12 +4,7 @@ import { request } from "../../data/fetch";
 import styled from "styled-components";
 
 
-
 export default function Table(props) {
-
-
-
-
   // an array of orders fetched
   const [orders, setOrders] = useState([]);  
 
@@ -89,10 +84,15 @@ export default function Table(props) {
 
   console.log("allcamperInfo", allCamperInfo)
   return (
-    <div>
+    <Container>
       <InfoTable data={allCamperInfo}></InfoTable>
-    </div>
+    </Container>
   );
 }
 
-
+const Container = styled.div`
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  position: relative;
+`
