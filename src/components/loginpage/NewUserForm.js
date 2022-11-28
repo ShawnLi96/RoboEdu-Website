@@ -132,8 +132,10 @@ export default function NewUserForm(props) {
         <Submit
           onClick={() => {
             onSubmit();
+            return false;
           }}
-          
+          // eslint-disable-next-line no-script-url
+          href = {(password1 === password2) ? "/": "javascript:void(0);"}
         >
           Submit
         </Submit>
