@@ -29,9 +29,6 @@ export default function Home(props) {
 const Container = styled.div`
     background-image: url(${bg});
     width: 100vw;
-  
     height: 100vh;
     position: relative;
-  
-
 `

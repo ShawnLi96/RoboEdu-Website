@@ -3,8 +3,7 @@ import InfoTable from "./NewInfoTable";
 import { request } from "../../data/fetch";
 import styled from "styled-components";
 
-import check from "../../images/check.png";
-import cross from "../../images/cross.png";
+
 
 export default function Table(props) {
 
@@ -42,7 +41,7 @@ export default function Table(props) {
         console.log("props", orders);
         orders.map((order) => {
           const campers = JSON.parse(order["CamperIDs"]);
-          campers.map(async (camper) => {
+          campers.map(async (camper, i) => {
             const camperData = await request("/campers/getcamper", "post", {
               camperid: camper
             }, 
@@ -61,10 +60,6 @@ export default function Table(props) {
               console.log(err)
             });
     
-            const subtotal =
-              camperData["Lunch"] * 50 +
-              camperData["BeforeExt"] * 50 +
-              camperData["AfterExt"] * 50;
 
             // create a name key pair in the camperData
             camperData["Name"] =
@@ -74,24 +69,15 @@ export default function Table(props) {
             // the entry will be an array [<tr>, subtotal]
             // <tr> is the html element that will display
             // subtotal is the subtotal for the camper
-            return totalWeeks[camperData["Week"]].push([
-              <tr key={`camper-${camper}`}>
-                <td>{weeks[camperData["Week"]]}</td>
-                <td>{camperData["Name"]}</td>
-                <td>{camperData["Program ID"]}</td>
-                <td>
-                  <Icon state={camperData["Lunch"] === 1} />{" "}
-                </td>
-                <td>
-                  <Icon state={camperData["BeforeExt"] === 1} />{" "}
-                </td>
-                <td>
-                  <Icon state={camperData["AfterExt"] === 1} />{" "}
-                </td>
-                <td>{formatter.format(subtotal)}</td>
-              </tr>,
-              subtotal,
-            ]);
+            return totalWeeks[camperData["Week"]].push(
+              {
+                name: camperData["Name"],
+                program: camperData["Program ID"],
+                lunch: camperData["Lunch"] === 1,
+                beforeExt: camperData["BeforeExt"] === 1,
+                afterExt: camperData["AfterExt"] === 1,
+                subtotal: camperData["Lunch"] * 50 + camperData["BeforeExt"] * 50 + camperData["AfterExt"] * 50 + 50 // program fee;
+              });
           });
         });
         return setAllCamperInfo(totalWeeks);
@@ -108,28 +94,5 @@ export default function Table(props) {
     </div>
   );
 }
-const Icon = styled.div`
-  width: 15px;
-  height: 15px;
-  background-repeat: no-repeat;
-  background-image: url(${(props) => (props.state ? check : cross)});
-  background-size: cover;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 5px;
-`;
-var formatter = new Intl.NumberFormat("en-CA", {
-  style: "currency",
-  currency: "CAD",
-});
-const weeks = [
-  "",
-  "July 3 - July 7",
-  "July 10 - July 14",
-  "July 17 - July 21",
-  "July 24 - July 28",
-  "July 31 - Aug 4",
-  "Aug 7 - Aug 11",
-  "Aug 14 - Aug 18",
-  "Aug 21 - Aug 25",
-];
+
+
