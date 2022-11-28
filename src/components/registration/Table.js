@@ -1,12 +1,32 @@
 import React, { useState, useEffect } from "react";
 import InfoTable from "./NewInfoTable";
-import { request } from "../data/fetch";
+import { request } from "../../data/fetch";
 import styled from "styled-components";
 
-import check from "../images/check.png";
-import cross from "../images/cross.png";
+import check from "../../images/check.png";
+import cross from "../../images/cross.png";
 
 export default function Table(props) {
+  const parentid = props.parentid;
+
+  // an array of orders fetched
+  const [allOrders, setOrders] = useState();
+
+  // fetches all the orders and saves into state
+  const getOrders = async () => {
+    const orders = await request("/parents/getorders", "post", {parentid: parentid}).then((res) => {
+      console.log("ORDERS", res)
+      return res;
+    });
+    setOrders(orders);
+  };
+
+  useEffect(() => {
+    getOrders();
+  }, []);
+
+
+
   // a 2D array, where each 1D array corresponds to each order
   // allCamperInfo[i][x] stores a HTML row element for a camper
   // displayed on row x of order i
@@ -16,9 +36,9 @@ export default function Table(props) {
     // setting the state allCamperInfo
     const getCampers = async () => {
       const masterCamperInfo = [];
-      if (props.orders) {
-        console.log("props", props.orders);
-        props.orders.map((order) => {
+      if (allOrders) {
+        console.log("props", allOrders);
+        allOrders.map((order) => {
           const orderCamperData = [];
           const campers = JSON.parse(order["CamperIDs"]);
           campers.map(async (camper) => {
@@ -75,7 +95,7 @@ export default function Table(props) {
       }
     };
     getCampers();
-  }, [props.orders]);
+  }, [allOrders]);
   // runs when orders changed
   console.log("allcamperinfo", allCamperInfo);
   console.log("dataFetched", dataFetched)
