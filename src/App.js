@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import Landing from './components/Landing'
 import NewUserForm from './components/loginpage/NewUserForm'
 import LoginPage from './components/loginpage/LoginPage'
-import Home from './components/Home'
+import Home from './components/registration/Home'
 import { HashRouter as Router,Routes, Route} from 'react-router-dom';
 import React from 'react'
 export default function App() {

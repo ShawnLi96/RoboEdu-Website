@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { devices } from '../../data/devices';
 
 // components
-import Nav from './Nav'
+import Nav from '../Nav'
 import MenuButtons from './MenuButtons'
 import EmailLogin from './EmailLogin'
 import FormButtons from './FormButtons'
@@ -66,12 +66,17 @@ const Container = styled.div`
     background-image: url(${bg});
     width: 100vw;
     height: 100vh;
+    position: relative;
     @media (max-height: 441px) {
         height: auto;
     }
 
     @media (min-height: 442px){
         height: 100vh;
+    }
+
+    @media ${devices.laptop}{
+        height: auto;
     }
 
 `
@@ -81,6 +86,7 @@ const BodyContainer = styled.div`
     margin-top: 5vh;
     display: flex;
     flex-direction: column;
+    bottom: 0px;
     justify-content: center;
     @media ${devices.mobile}{
         width: 80vw;

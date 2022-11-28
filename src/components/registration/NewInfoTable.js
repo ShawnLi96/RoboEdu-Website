@@ -1,6 +1,6 @@
 import React, {useState} from "react";
-import { COLUMNS } from "../data/columns";
-import "../css/table.css";
+import { COLUMNS } from "../../data/columns";
+import "../../css/table.css";
 import styled from 'styled-components'
 
 export default function NewInfoTable(props) {
@@ -52,6 +52,7 @@ var formatter = new Intl.NumberFormat("en-CA", {
 });
 
 const Refresh = styled.div `
+  background-color: white;
   text-align: center;
   width: 100px;
   margin-left: auto;
