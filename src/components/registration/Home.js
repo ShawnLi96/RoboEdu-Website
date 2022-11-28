@@ -1,13 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import Table from "./Table";
 import Nav from "../Nav";
-import { devices } from "../../data/devices";
 import bg from '../../images/background.png'
-import { HashRouter as Router,Routes, Route} from 'react-router-dom';
 
 
-export default function Home() {
+export default function Home(props) {
   const parentid =  22;
 
   // state to keep track of which page we are on
@@ -17,10 +15,11 @@ export default function Home() {
   const components = ["", <Table parentid = {parentid}/>]
   const [page, setPage] = useState(1);
 
+  const [focus, setFocus] = useState(props.focus);
 
   return (
     <Container>
-      <Nav/>
+      <Nav focus = {focus} setFocus = {setFocus}/>
       {components[page]}
     </Container>
   );

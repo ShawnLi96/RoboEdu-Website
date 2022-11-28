@@ -2,8 +2,11 @@
 table {
   font-family: 'Poppins', sans-serif;
   border-collapse: collapse;
-  width: 80%;
+  width: 100%;
   text-align: center;
+  background-color: white;
+  position: relative;
+  margin-top: auto;
 }
   
 table td, table th {

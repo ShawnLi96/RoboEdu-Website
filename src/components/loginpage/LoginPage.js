@@ -15,14 +15,11 @@ import WeChatLogin from './WeChatLogin'
 import bg from '../../images/background.png'
 
 
-export default function LoginPage(){
+export default function LoginPage(props){
 
     const [selection, setSelection] = useState(0)
     const [loginOption, setLoginOption] = useState(0)
 
-    var width = Math.max(window.screen.width, window.innerWidth);
-    var f = (width < 500) ? 2: 5;
-    const [navFocus, setNavFocus] = useState(f);
 
     function onSubmit(){
 
@@ -47,7 +44,7 @@ export default function LoginPage(){
     }
     return (
         <Container>
-            <Nav focus = {navFocus} setFocus = {setNavFocus}/>
+            <Nav focus = {props.focus} setFocus = {props.setFocus}/>
             <BodyContainer>
                 <MenuButtons curSelection = {selection} setSelection = {setSelection}></MenuButtons>
                 {display()}

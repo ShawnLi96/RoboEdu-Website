@@ -1,15 +1,22 @@
 import Header from './Header'
 import styled from 'styled-components'
+import React, { useState } from 'react';
 
 
 export default function Landing() {
+
+  var width = Math.max(window.screen.width, window.innerWidth);
+  var f = (width < 500) ? 2: 5;
+  const [navFocus, setNavFocus] = useState(f);
+
+  
   
   return (
     <Container>
       <Header/>
       <FlexContainer>
-        <Button href='/#/LoginPage' > Login Page </Button>
-        <Button href='/#/Home'> Test Table </Button>
+        <Button href='/#/LoginPage' focus = {navFocus} setFocus = {setNavFocus}> Login Page </Button>
+        <Button href='/#/Home' focus = {navFocus} setFocus = {setNavFocus}> Test Table </Button>
 
       </FlexContainer>
     </Container>

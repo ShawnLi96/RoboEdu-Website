@@ -6,8 +6,13 @@ import styled from 'styled-components'
 export default function NewInfoTable(props) {
   
   const [refresh, setRefresh] = useState(0)
+
   return (
-      <>
+      <div>
+
+        <Refresh onClick = {(e) => setRefresh((refresh) => {
+          console.log(refresh)
+          return (refresh + 1)})}>Refresh</Refresh>
         <table>
           <thead>
             <tr>
@@ -38,11 +43,7 @@ export default function NewInfoTable(props) {
             
           }
         </table>
-
-        <Refresh onClick = {(e) => setRefresh((refresh) => {
-          console.log(refresh)
-          return (refresh + 1)})}>Refresh</Refresh>
-      </>
+      </div>
     );
           
 }

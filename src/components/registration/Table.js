@@ -7,40 +7,40 @@ import check from "../../images/check.png";
 import cross from "../../images/cross.png";
 
 export default function Table(props) {
-  const parentid = props.parentid;
+
+
+
 
   // an array of orders fetched
-  const [orders, setOrders] = useState();
-
-  // fetches all the orders and saves into state
-  const getOrders = async () => {
-    const orders = await request("/parents/getorders", "post", {parentid: parentid}).then((res) => {
-      console.log("ORDERS", res)
-      return res;
-    });
-    setOrders(orders);
-  };
+  const [orders, setOrders] = useState([]);  
 
   useEffect(() => {
     getOrders();
   }, []);
+  // fetches all the orders and saves into state
+  const getOrders = async () => {
+    const orders = await request("/parents/getorders", "post", {parentid: props.parentid}).then((res) => {
+      console.log("ORDERS", res)
+      return res;
+    }).catch(err => {
+      console.log(err)
+    });
+    setOrders(orders);
+  };
 
 
 
-  // a 2D array, where each 1D array corresponds to each order
-  // allCamperInfo[i][x] stores a HTML row element for a camper
-  // displayed on row x of order i
+
   const [allCamperInfo, setAllCamperInfo] = useState([]);
 
   // loop thru the orders and fetch every camper. 
   // parse information of each camper into html and save it into state allCamperInfo
   useEffect(() => {
+    var totalWeeks = [[], [], [], [], [], [], [], [], []];
     const getCampers = async () => {
-      const masterCamperInfo = [];
       if (orders) {
         console.log("props", orders);
         orders.map((order) => {
-          const orderCamperData = [];
           const campers = JSON.parse(order["CamperIDs"]);
           campers.map(async (camper) => {
             const camperData = await request("/campers/getcamper", "post", {
@@ -74,7 +74,7 @@ export default function Table(props) {
             // the entry will be an array [<tr>, subtotal]
             // <tr> is the html element that will display
             // subtotal is the subtotal for the camper
-            return orderCamperData.push([
+            return totalWeeks[camperData["Week"]].push([
               <tr key={`camper-${camper}`}>
                 <td>{weeks[camperData["Week"]]}</td>
                 <td>{camperData["Name"]}</td>
@@ -93,16 +93,15 @@ export default function Table(props) {
               subtotal,
             ]);
           });
+        });
+        return setAllCamperInfo(totalWeeks);
 
-          return masterCamperInfo.push(orderCamperData);
-      });
-      setAllCamperInfo(masterCamperInfo);
       }
     };
     getCampers();
   }, [orders]);
 
-
+  console.log("allcamperInfo", allCamperInfo)
   return (
     <div>
       <InfoTable data={allCamperInfo}></InfoTable>
@@ -125,12 +124,12 @@ var formatter = new Intl.NumberFormat("en-CA", {
 });
 const weeks = [
   "",
-  "July 1st to 7th",
-  "July 8th to 14th",
-  "July 15th to 21st",
-  "July 22nd to 29th",
-  "August 1st to 7th",
-  "August 8th to 14th",
-  "August 15th to 21st",
-  "August 22nd to 29th",
+  "July 3 - July 7",
+  "July 10 - July 14",
+  "July 17 - July 21",
+  "July 24 - July 28",
+  "July 31 - Aug 4",
+  "Aug 7 - Aug 11",
+  "Aug 14 - Aug 18",
+  "Aug 21 - Aug 25",
 ];
