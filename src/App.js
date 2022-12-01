@@ -4,6 +4,7 @@ import Landing from './components/Landing'
 import NewUserForm from './components/loginpage/NewUserForm'
 import LoginPage from './components/loginpage/LoginPage'
 import Home from './components/registration/Home'
+import StudentInfoPage from './components/studentInfoPage/StudentInfoPage'
 import { HashRouter as Router,Routes, Route} from 'react-router-dom';
 import React from 'react'
 export default function App() {
@@ -18,6 +19,7 @@ export default function App() {
             <Route exact path='/NewUserForm' element={<NewUserForm/>}></Route>
             <Route exact path='/LoginPage' element={<LoginPage/>}></Route>
             <Route exact path= '/Home' element={<Home/>}></Route> 
+            <Route exact path= '/StudentInfoPage' element={<StudentInfoPage/>}></Route> 
   
           </Routes>
         </Container>
