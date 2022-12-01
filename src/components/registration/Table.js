@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
-import InfoTable from "./NewInfoTable";
+import InfoTable from "./InfoTable";
+import Schedule from "./Schedule"
 import { request } from "../../data/fetch";
 import styled from "styled-components";
 
 
 export default function Table(props) {
   // an array of orders fetched
-  const [orders, setOrders] = useState([]);  
+  const [fetchedOrders, setOrders] = useState([]);  
 
   useEffect(() => {
     getOrders();
@@ -22,19 +23,44 @@ export default function Table(props) {
     setOrders(orders);
   };
 
+  function buildSchedule(masterSchedule, schedule, camperData) {
+    schedule[camperData["Week"]].push(
+      {
+        name: camperData["Name"],
+        program: camperData["Program ID"],
+        lunch: camperData["Lunch"] === 1,
+        beforeExt: camperData["BeforeExt"] === 1,
+        afterExt: camperData["AfterExt"] === 1,
+        subtotal: camperData["Lunch"] * 50 + camperData["BeforeExt"] * 50 + camperData["AfterExt"] * 50 + 50 // add program fee;
+      })
+    masterSchedule[camperData["Week"]].push(
+      {
+        name: camperData["Name"],
+        program: camperData["Program ID"],
+        lunch: camperData["Lunch"] === 1,
+        beforeExt: camperData["BeforeExt"] === 1,
+        afterExt: camperData["AfterExt"] === 1,
+        subtotal: camperData["Lunch"] * 50 + camperData["BeforeExt"] * 50 + camperData["AfterExt"] * 50 + 50 // add program fee;
+      })
+  }
+
+  
 
 
 
-  const [allCamperInfo, setAllCamperInfo] = useState([]);
-
+  const [scheduleInfo, setScheduleInfo] = useState([]);
+  const [orderInfo, setOrderInfo] = useState([]);
   // loop thru the orders and fetch every camper. 
   // parse information of each camper into html and save it into state allCamperInfo
   useEffect(() => {
-    var totalWeeks = [[], [], [], [], [], [], [], [], []];
+    var masterSchedule = [[], [], [], [], [], [], [], [], []];
+    var orders = []
     const getCampers = async () => {
-      if (orders) {
-        console.log("props", orders);
-        orders.map((order) => {
+      if (fetchedOrders) {
+        console.log("props", fetchedOrders);
+        fetchedOrders.map((order) => {
+          var schedule = [[], [], [], [], [], [], [], [], []];
+
           const campers = JSON.parse(order["CamperIDs"]);
           campers.map(async (camper, i) => {
             const camperData = await request("/campers/getcamper", "post", {
@@ -64,28 +90,29 @@ export default function Table(props) {
             // the entry will be an array [<tr>, subtotal]
             // <tr> is the html element that will display
             // subtotal is the subtotal for the camper
-            return totalWeeks[camperData["Week"]].push(
-              {
-                name: camperData["Name"],
-                program: camperData["Program ID"],
-                lunch: camperData["Lunch"] === 1,
-                beforeExt: camperData["BeforeExt"] === 1,
-                afterExt: camperData["AfterExt"] === 1,
-                subtotal: camperData["Lunch"] * 50 + camperData["BeforeExt"] * 50 + camperData["AfterExt"] * 50 + 50 // program fee;
-              });
+            return buildSchedule(masterSchedule, schedule, camperData);
           });
-        });
-        return setAllCamperInfo(totalWeeks);
+          orders.push(schedule)
+      });
 
-      }
-    };
+    setScheduleInfo(masterSchedule);
+    setOrderInfo(orders);
+    }};
     getCampers();
-  }, [orders]);
+  }, [fetchedOrders]);
 
-  console.log("allcamperInfo", allCamperInfo)
+  console.log("allcamperInfo", scheduleInfo)
+  console.log("orderinfo", orderInfo);
+
+  const displayTable = () => {
+    if (props.display === 0){
+      return <InfoTable orders={scheduleInfo}/>
+    }
+    else return <Schedule schedule = {scheduleInfo}/>
+  }
   return (
     <Container>
-      <InfoTable data={allCamperInfo}></InfoTable>
+      {displayTable()}
     </Container>
   );
 }

@@ -10,7 +10,7 @@ export async function request(api, method, params) {
     fetchinput.body = JSON.stringify(params);
   }
 
-  const data = await fetch(`http://localhost:80${api}`, fetchinput)
+  const data = await fetch(`http://localhost:160${api}`, fetchinput)
     .then((res) => {
       console.log(res)
       return res.json();
