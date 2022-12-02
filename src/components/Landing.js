@@ -18,6 +18,7 @@ export default function Landing() {
         <Button href='/#/LoginPage' focus = {navFocus} setFocus = {setNavFocus}> Login Page </Button>
         <Button href='/#/Home' focus = {navFocus} setFocus = {setNavFocus}> Test Table </Button>
         <Button href='/#/StudentInfoPage' focus = {navFocus} setFocus = {setNavFocus}> Student Info Page </Button>
+        <Button href='/#/SelectTimePage' focus = {navFocus} setFocus = {setNavFocus}> Select Time Page </Button>
 
       </FlexContainer>
     </Container>
