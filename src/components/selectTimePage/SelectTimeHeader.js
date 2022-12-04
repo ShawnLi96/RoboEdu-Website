@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Container } from "react-bootstrap";
 
-export default function StudentInfoHeader() {
+export default function SelectTimeHeader() {
     const Container = styled.div`
       position: relative;
     `
@@ -14,7 +14,7 @@ export default function StudentInfoHeader() {
 
     return(
         <Container>
-            <h1 style={headerStyle}>Students Information</h1>
+            <h1 style={headerStyle}>Select A Time</h1>
         </Container>
     );
 }

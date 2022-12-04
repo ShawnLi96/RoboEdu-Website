@@ -5,17 +5,17 @@ import bg from '../../images/background.png'
 import { devices } from '../../data/devices';
 
 // components
-import StudentInfoHeader from './StudentInfoHeader'
-import StudentInfoTable from './StudentInfoTable'
-import StudentInfoButton from './StudentInfoButton';
+import SelectTimeHeader from './SelectTimeHeader'
+import SelectTimeTable from './SelectTimeTable'
+import SelectTimeButton from './SelectTimeButton'
 
-export default function StudentInfoPage(){
+export default function SelectTimePage(){
     return(
         <Container>
             <Nav/>
-            <StudentInfoHeader/>
-            <StudentInfoTable/>
-            <StudentInfoButton/>
+            <SelectTimeHeader/>
+            <SelectTimeTable/>
+            <SelectTimeButton/>
         </Container>
     );
 }
