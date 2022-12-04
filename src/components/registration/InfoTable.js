@@ -1,30 +1,38 @@
 import React from "react";
-import { COLUMNS } from "../../data/columns";
 import "../../css/table.css";
 import styled from 'styled-components'
-import check from "../../images/check.png";
-import cross from "../../images/cross.png";
 import { devices } from "../../data/devices"
 import Schedule from "./Schedule"
 
 export default function InfoTable(props) {
-  
+  console.log(props.orders)
   return (
       <div>
 
         <table>
-          <thead>
-            <tr>
-              {COLUMNS.map((column) => {
-                return <th key={column}>{column}</th>;
-              })}
-            </tr>
-          </thead>
           {
             props.orders.map((schedule, i) => {
-              var total = 0;
+              var dateEdited = new Date(props.data[i]["Last Action"]).toLocaleDateString("en-US")
               return (
-                <Schedule schedule={schedule}/>
+                <tbody>
+                  <Schedule schedule={schedule}/>
+                  <tr>
+                    <Summary>
+                      <SummaryContainer>
+                          <Info>
+                            Total: {formatter.format(props.data[i]["Fee"])}<br></br>
+                            Last edited: {dateEdited} <br></br>
+                            Status: {props.data[i]["status"]}
+                          </Info>
+                        <div style = {{display: "flex"}}>
+                          <Button name = "edit">Edit</Button>
+                          <Button name = "delete">Delete</Button>
+                          <Button name = "confirm">Confirm</Button>
+                        </div>
+                      </SummaryContainer>
+                    </Summary>
+                  </tr>
+                </tbody>
               )
               // each order will have a schedule
               
@@ -38,44 +46,22 @@ export default function InfoTable(props) {
     );
           
 }
-const Cell = styled.td`
 
-  @media ${devices.tablet}{
-    font-size: 15px;
-  }
-
-  @media ${devices.laptop}{
-    font-size: 15px;
-
-  }
-
-  @media ${devices.laptopL}{
-    font-size: 20px;
-  }
-
-
-`
-const IconTD = styled.td`
-  
-  @media ${devices.tablet}{
-    width: 100px;  
-  }
-
-  @media ${devices.laptop}{
-    width: 100px;
-  }
-
-  @media ${devices.laptopL}{
-    width: 100px;
-  }
-
-`
-const Summary = styled.div`
+const Summary = styled.td`
   display: flex;
   width: 100%;
   align-items: center;
   justify-content: center;
+  background-color: #E0E5E9;
+  column-span: 7;
+  border-top: 0;
+  @media ${devices.mobile}{
 
+  }
+
+  @media ${devices.tablet}{
+    padding: 20px 0px;
+  }
 `
 
 const SummaryContainer = styled.div`
@@ -154,17 +140,7 @@ const Button = styled.a`
       margin-left: 25px;
   }
 `
-const weeks = [
-  "",
-  "July 3 - July 7",
-  "July 10 - July 14",
-  "July 17 - July 21",
-  "July 24 - July 28",
-  "July 31 - Aug 4",
-  "Aug 7 - Aug 11",
-  "Aug 14 - Aug 18",
-  "Aug 21 - Aug 25",
-];
+
 
 
 var formatter = new Intl.NumberFormat("en-CA", {
@@ -173,13 +149,3 @@ var formatter = new Intl.NumberFormat("en-CA", {
 });
 
 
-const Icon = styled.div`
-  width: 15px;
-  height: 15px;
-  background-repeat: no-repeat;
-  background-image: url(${(props) => (props.state ? check : cross)});
-  background-size: cover;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 5px;
-`;

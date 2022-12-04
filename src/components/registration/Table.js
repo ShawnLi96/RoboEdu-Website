@@ -86,10 +86,7 @@ export default function Table(props) {
             camperData["Name"] =
               student["first name"] + " " + student["last name"];
 
-            // create an entry for the camper for this order in the table
-            // the entry will be an array [<tr>, subtotal]
-            // <tr> is the html element that will display
-            // subtotal is the subtotal for the camper
+            // create an entry for the camper for this order of the week
             return buildSchedule(masterSchedule, schedule, camperData);
           });
           orders.push(schedule)
@@ -106,7 +103,7 @@ export default function Table(props) {
 
   const displayTable = () => {
     if (props.display === 0){
-      return <InfoTable orders={scheduleInfo}/>
+      return <InfoTable orders={orderInfo} data={fetchedOrders}/>
     }
     else return <Schedule schedule = {scheduleInfo}/>
   }
