@@ -8,14 +8,12 @@ import styled from "styled-components";
 export default function Table(props) {
   // an array of orders fetched
   const [fetchedOrders, setOrders] = useState([]);  
-
   useEffect(() => {
     getOrders();
   }, []);
   // fetches all the orders and saves into state
   const getOrders = async () => {
     const orders = await request("/parents/getorders", "post", {parentid: props.parentid}).then((res) => {
-      console.log("ORDERS", res)
       return res;
     }).catch(err => {
       console.log(err)
@@ -49,7 +47,7 @@ export default function Table(props) {
 
 
   const [scheduleInfo, setScheduleInfo] = useState([]);
-  const [orderInfo, setOrderInfo] = useState([]);
+  const [allScheduleInfo, setAllScheduleInfo] = useState([]);
   // loop thru the orders and fetch every camper. 
   // parse information of each camper into html and save it into state allCamperInfo
   useEffect(() => {
@@ -57,7 +55,6 @@ export default function Table(props) {
     var orders = []
     const getCampers = async () => {
       if (fetchedOrders) {
-        console.log("props", fetchedOrders);
         fetchedOrders.map((order) => {
           var schedule = [[], [], [], [], [], [], [], [], []];
 
@@ -93,17 +90,15 @@ export default function Table(props) {
       });
 
     setScheduleInfo(masterSchedule);
-    setOrderInfo(orders);
+    setAllScheduleInfo(orders);
     }};
     getCampers();
   }, [fetchedOrders]);
 
-  console.log("allcamperInfo", scheduleInfo)
-  console.log("orderinfo", orderInfo);
 
   const displayTable = () => {
     if (props.display === 0){
-      return <InfoTable orders={orderInfo} data={fetchedOrders}/>
+      return <InfoTable orders={allScheduleInfo} data={fetchedOrders}/>
     }
     else return <Schedule schedule = {scheduleInfo}/>
   }

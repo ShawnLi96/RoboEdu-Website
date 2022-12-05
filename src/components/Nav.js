@@ -36,8 +36,8 @@ export default function Nav(props) {
             props.setFocus(i);
             console.log("focus", i)
           }}
-          onMouseOver={() => unlight(i)}
-          onMouseLeave={() => relight(i)}
+          // onMouseOver={() => unlight(i)}
+          // onMouseLeave={() => relight(i)}
         >
           {arr[i]}
         </Button>
@@ -47,22 +47,22 @@ export default function Nav(props) {
   createButtons();
   
 
-  function unlight(i) {
-    const curHighlight = document.getElementById(props.focus);
-    const hovering = document.getElementById(i);
-    curHighlight.style.color = "#FFFFFF";
-    hovering.style.color = "#EDD662";
-  }
-  function relight(i) {
+  // function unlight(i) {
+  //   const curHighlight = document.getElementById(props.focus);
+  //   const hovering = document.getElementById(i);
+  //   curHighlight.style.color = "#FFFFFF";
+  //   hovering.style.color = "#EDD662";
+  // }
+  // function relight(i) {
 
-    // need this if statement because when you leave a already focused 
-    // header, it will turn it white without it if you hover over it
-    if (props.focus === i) return;
-    const curHighlight = document.getElementById(props.focus);
-    const leaving = document.getElementById(i);
-    curHighlight.style.color = "#EDD662";
-    leaving.style.color = "#FFFFFF";
-  }
+  //   // need this if statement because when you leave a already focused 
+  //   // header, it will turn it white without it if you hover over it
+  //   if (props.focus === i) return;
+  //   const curHighlight = document.getElementById(props.focus);
+  //   const leaving = document.getElementById(i);
+  //   curHighlight.style.color = "#EDD662";
+  //   leaving.style.color = "#FFFFFF";
+  // }
 
   return <Container> {components} </Container>;
 }

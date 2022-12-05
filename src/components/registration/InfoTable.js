@@ -1,11 +1,27 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "../../css/table.css";
 import styled from 'styled-components'
 import { devices } from "../../data/devices"
 import Schedule from "./Schedule"
+import { request } from "../../data/fetch";
 
 export default function InfoTable(props) {
-  console.log(props.orders)
+  console.log("props.data", props.data)
+
+  const [data, setData] = useState([])
+  useEffect(() => {
+    setData([...props.data])
+    console.log("data", data);
+  }, [])
+  const status = ["In Cart", "Submitted", "Expired", "Paid"]
+  function deleteOrder (id){
+    request("/orders/delete", "post", {orderid: id}).then(res => console.log(res))
+  }
+
+  function confirmOrder(id){
+    request("/orders/submit", "post", {id: id})
+  }
+
   return (
       <div>
         {
@@ -21,11 +37,11 @@ export default function InfoTable(props) {
                           <Info>
                             Total: {formatter.format(props.data[i]["Fee"])}<br></br>
                             Last edited: {dateEdited} <br></br>
-                            Status: {props.data[i]["status"]}
+                            Status: {status[props.data[i]["status"] - 1]}
                           </Info>
                         <div style = {{display: "flex"}}>
                           <Button name = "edit">Edit</Button>
-                          <Button name = "delete">Delete</Button>
+                          <Button name = "delete" onClick = {() =>{deleteOrder(props.data[i]["ID"])}}>Delete</Button>
                           <Button name = "confirm">Confirm</Button>
                         </div>
                       </SummaryContainer>
@@ -94,6 +110,8 @@ const Info = styled.div`
   }
   @media ${devices.laptop}{
     height: 50px;
+    margin-right: 8vw;
+
   }
 
   @media ${devices.laptopL}{
@@ -136,8 +154,8 @@ const Button = styled.a`
       
   }
   @media ${devices.laptop}{
-      width: 12vw;
-      height: 3vw;
+      width: 10vw;
+      height: 2.5vw;
       font-size: 2vw;
   }
 
