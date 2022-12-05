@@ -8,12 +8,11 @@ export default function InfoTable(props) {
   console.log(props.orders)
   return (
       <div>
-
-        <table>
-          {
-            props.orders.map((schedule, i) => {
-              var dateEdited = new Date(props.data[i]["Last Action"]).toLocaleDateString("en-US")
-              return (
+        {
+          props.orders.map((schedule, i) => {
+            var dateEdited = new Date(props.data[i]["Last Action"]).toLocaleDateString("en-US")
+            return (
+              <Order>
                 <tbody>
                   <Schedule schedule={schedule}/>
                   <tr>
@@ -33,20 +32,29 @@ export default function InfoTable(props) {
                     </Summary>
                   </tr>
                 </tbody>
-              )
-              // each order will have a schedule
-              
-                
-              
-            }) 
+              </Order>
+            )
+            // each order will have a schedule
             
-          }
-        </table>
+              
+            
+          }) 
+          
+        }
       </div>
     );
           
 }
+const Order = styled.table`
 
+  @media ${devices.mobile}{
+
+  }
+
+  @media ${devices.tablet}{
+    margin-bottom: 20px;
+  }
+`
 const Summary = styled.td`
   display: flex;
   width: 100%;
