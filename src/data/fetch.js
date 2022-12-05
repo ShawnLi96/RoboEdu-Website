@@ -1,3 +1,4 @@
+
 export async function request(api, method, params) {
   let fetchinput = {
     method: method,
@@ -17,7 +18,7 @@ export async function request(api, method, params) {
     })
     .then((res) => {
       return res;
-    });
+    })
   return data;
 }
 

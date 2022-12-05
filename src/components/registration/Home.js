@@ -15,6 +15,9 @@ export default function Home(props) {
   const [page, setPage] = useState(1);
   const [focus, setFocus] = useState(props.focus);
   const [refresh, setRefresh] = useState(0)
+
+  // display 0 is the list of orders (default)
+  // display 1 is the schedule filled in by all orders
   const [display, setDisplay] = useState(0);
 
   console.log("display", display)
