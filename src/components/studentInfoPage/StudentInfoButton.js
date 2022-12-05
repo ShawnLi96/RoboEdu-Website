@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { devices } from "../../data/devices";
 
-export default function StudentInfoButton(){
+export default function StudentInfoButton(props){
     const Container = styled.div`
       position: relative;
     `
@@ -17,7 +17,7 @@ export default function StudentInfoButton(){
     
     return(
         <Container>
-            <button style={buttonStyle}>Next</button>
+            <button style={buttonStyle}>{props.name}</button>
         </Container>
     );
 }

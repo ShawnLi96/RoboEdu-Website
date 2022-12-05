@@ -7,19 +7,17 @@ import { devices } from '../../data/devices';
 // components
 import SelectTimeHeader from './SelectTimeHeader'
 import SelectTimeTable from './SelectTimeTable'
-import SelectTimeButton1 from './SelectTimeButton1'
-import SelectTimeButton2 from './SelectTimeButton2'
-import SelectTimeButton3 from './SelectTimeButton3'
+import SelectTimeButton from './SelectTimeButton'
 
 export default function SelectTimePage(){
     return(
         <Container>
             <Nav/>
             <SelectTimeHeader/>
-            <SelectTimeButton1/>
+            <SelectTimeButton name = "Start New Registration"/>
             <SelectTimeTable/>
-            <SelectTimeButton2/>
-            <SelectTimeButton3/>
+            <SelectTimeButton name = "Next"/>
+            <SelectTimeButton name = "Back"/>
         </Container>
     );
 }

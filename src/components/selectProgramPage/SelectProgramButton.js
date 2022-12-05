@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { devices } from "../../data/devices";
 
-export default function SelectTimeButton3(){
+export default function SelectProgramButton(props){
     const Container = styled.div`
       position: relative;
     `
@@ -17,7 +17,7 @@ export default function SelectTimeButton3(){
     
     return(
         <Container>
-            <button style={buttonStyle}>Back</button>
+            <button style={buttonStyle}>{props.name}</button>
         </Container>
     );
 }

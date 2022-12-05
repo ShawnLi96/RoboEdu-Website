@@ -6,6 +6,7 @@ import LoginPage from './components/loginpage/LoginPage'
 import Home from './components/registration/Home'
 import StudentInfoPage from './components/studentInfoPage/StudentInfoPage'
 import SelectTimePage from './components/selectTimePage/SelectTimePage'
+import SelectProgramPage from './components/selectProgramPage/SelectProgramPage'
 import { HashRouter as Router,Routes, Route} from 'react-router-dom';
 import React from 'react'
 export default function App() {
@@ -19,9 +20,10 @@ export default function App() {
             <Route exact path='/' element={<Landing/>}></Route>
             <Route exact path='/NewUserForm' element={<NewUserForm/>}></Route>
             <Route exact path='/LoginPage' element={<LoginPage/>}></Route>
-            <Route exact path= '/Home' element={<Home/>}></Route> 
-            <Route exact path= '/StudentInfoPage' element={<StudentInfoPage/>}></Route> 
-            <Route exact path= '/SelectTimePage' element={<SelectTimePage/>}></Route> 
+            <Route exact path= '/Home' element={<Home/>}></Route>
+            <Route exact path= '/StudentInfoPage' element={<StudentInfoPage/>}></Route>
+            <Route exact path= '/SelectTimePage' element={<SelectTimePage/>}></Route>
+            <Route exact path= '/SelectProgramPage' element={<SelectProgramPage/>}></Route>
   
           </Routes>
         </Container>

@@ -5,17 +5,16 @@ import bg from '../../images/background.png'
 import { devices } from '../../data/devices';
 
 // components
-import StudentInfoHeader from './StudentInfoHeader'
-import StudentInfoTable from './StudentInfoTable'
-import StudentInfoButton from './StudentInfoButton';
+import SelectProgramHeader from './SelectProgramHeader'
+import SelectProgramButton from './SelectProgramButton' 
 
-export default function StudentInfoPage(){
+export default function SelectProgramPage(){
     return(
         <Container>
             <Nav/>
-            <StudentInfoHeader/>
-            <StudentInfoTable/>
-            <StudentInfoButton name = "Next"/>
+            <SelectProgramHeader/>
+            <SelectProgramButton name = "Finish"/>
+            <SelectProgramButton name = "Back"/>
         </Container>
     );
 }
