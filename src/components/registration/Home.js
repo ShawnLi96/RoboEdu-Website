@@ -14,24 +14,22 @@ export default function Home(props) {
 
   const [page, setPage] = useState(1);
   const [focus, setFocus] = useState(props.focus);
-  const [refresh, setRefresh] = useState(0)
+  const [refresh, setRefresh] = useState(false)
 
   // display 0 is the list of orders (default)
   // display 1 is the schedule filled in by all orders
   const [display, setDisplay] = useState(0);
 
   console.log("display", display)
-  const components = ["", <Table parentid = {parentid} display = {display}/>]
+  const components = ["", <Table parentid = {parentid} display = {display} refresh = {refresh} setRefresh = {() => setRefresh(!refresh)}/>]
   return (
     <Container>
       <Nav focus = {focus} setFocus = {setFocus}/>
       
       <div style={{display: "flex"}}>
-        <Button onClick = {(e) => setRefresh((refresh) => {
-            console.log(refresh)
-            return (refresh + 1)})}>Refresh</Button>
+        <Button onClick = {() => setRefresh(!refresh)}>Refresh</Button>
 
-        <Button onClick = {(e) => setDisplay((display) => {
+        <Button onClick = {() => setDisplay((display) => {
             console.log(refresh)
             return (display ^= 1)})}>Change View</Button>
       </div>

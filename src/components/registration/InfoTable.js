@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import "../../css/table.css";
 import styled from 'styled-components'
 import { devices } from "../../data/devices"
@@ -6,21 +6,19 @@ import Schedule from "./Schedule"
 import { request } from "../../data/fetch";
 
 export default function InfoTable(props) {
-  console.log("props.data", props.data)
 
-  const [data, setData] = useState([])
-  useEffect(() => {
-    setData([...props.data])
-    console.log("data", data);
-  }, [])
+  console.log('info table')
+  console.log("props.data", props.data)
+  console.log("props.orders", props.orders);
   const status = ["In Cart", "Submitted", "Expired", "Paid"]
   function deleteOrder (id){
     request("/orders/delete", "post", {orderid: id}).then(res => console.log(res))
+    props.setRefresh(!props.refresh);
   }
 
-  function confirmOrder(id){
-    request("/orders/submit", "post", {id: id})
-  }
+  // function confirmOrder(id){
+  //   request("/orders/submit", "post", {id: id})
+  // }
 
   return (
       <div>
@@ -28,56 +26,46 @@ export default function InfoTable(props) {
           props.orders.map((schedule, i) => {
             var dateEdited = new Date(props.data[i]["Last Action"]).toLocaleDateString("en-US")
             return (
-              <Order>
-                <tbody>
-                  <Schedule schedule={schedule}/>
-                  <tr>
-                    <Summary>
-                      <SummaryContainer>
-                          <Info>
-                            Total: {formatter.format(props.data[i]["Fee"])}<br></br>
-                            Last edited: {dateEdited} <br></br>
-                            Status: {status[props.data[i]["status"] - 1]}
-                          </Info>
-                        <div style = {{display: "flex"}}>
-                          <Button name = "edit">Edit</Button>
-                          <Button name = "delete" onClick = {() =>{deleteOrder(props.data[i]["ID"])}}>Delete</Button>
-                          <Button name = "confirm">Confirm</Button>
-                        </div>
-                      </SummaryContainer>
-                    </Summary>
-                  </tr>
-                </tbody>
+              <Order key = {i}>
+                <Schedule schedule={schedule}/>
+                <Summary>
+                    <SummaryContainer>
+                        <Info>
+                          Total: {formatter.format(props.data[i]["Fee"])}<br></br>
+                          Last edited: {dateEdited} <br></br>
+                          Status: {status[props.data[i]["status"] - 1]}
+                        </Info>
+                      <div style = {{display: "flex"}}>
+                        <Button name = "edit">Edit</Button>
+                        <Button name = "delete" onClick = {() =>{deleteOrder(props.data[i]["ID"])}}>Delete</Button>
+                        <Button name = "confirm">Confirm</Button>
+                      </div>
+                    </SummaryContainer>
+                </Summary>
               </Order>
             )
-            // each order will have a schedule
-            
-              
-            
           }) 
-          
         }
       </div>
     );
-          
 }
-const Order = styled.table`
+
+const Order = styled.div`
 
   @media ${devices.mobile}{
 
   }
-
   @media ${devices.tablet}{
     margin-bottom: 20px;
   }
 `
-const Summary = styled.td`
+const Summary = styled.div`
+  outline: 1px solid black;
   display: flex;
   width: 100%;
   align-items: center;
   justify-content: center;
   background-color: #E0E5E9;
-  column-span: 7;
   border-top: 0;
   @media ${devices.mobile}{
 
@@ -85,8 +73,10 @@ const Summary = styled.td`
 
   @media ${devices.tablet}{
     padding: 20px 0px;
+
   }
 `
+
 
 const SummaryContainer = styled.div`
   display: flex;

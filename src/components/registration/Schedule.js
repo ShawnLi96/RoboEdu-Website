@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import { COLUMNS } from "../../data/columns";
 import "../../css/table.css";
 import styled from 'styled-components'
@@ -9,53 +9,47 @@ import { devices } from "../../data/devices"
 export default function Schedule(props) {
   
   return (
-      <div>
-        <table>
-          <thead>
-            <tr>
-              {COLUMNS.map((column) => {
-                return <Header key={column}>{column}</Header>;
-              })}
-            </tr>
-          </thead>
-          {
-            props.schedule.map((week, i) => {
-              // each order is 
-              // [name, program, lunch, beforeExt, afterExt, subtotal]
-              if (week.length > 0){
-                var total = 0;
-                console.log(props.schedule);
-                return (
-                  <tbody key={i}>
-                    
-                    {week.map((entry, k) => {
-                      // maps thru every camper of the particular order
-                      // returns it as a <tr> HTML element
+    <table>
+      <thead>
+        <tr>
+          {COLUMNS.map((column) => {
+            return <Header key={column}>{column}</Header>;
+          })}
+        </tr>
+      </thead>
+      {
+        props.schedule.map((week, i) => {
+          // each order is 
+          // [name, program, lunch, beforeExt, afterExt, subtotal]
+          if (week.length > 0){
+          return (
+              <tbody key={i}>
+                
+                {week.map((entry, k) => {
+                  // maps thru every camper of the particular order
+                  // returns it as a <tr> HTML element
 
-                      const weekHeader = (k === 0) ? <Date rowSpan = {week.length}>{weeks[i]}</Date>: '';
-                      
-                      total += entry.subtotal;
-                      return (
-                        <tr key = {k}>
-                          {weekHeader}
-                          <Student>{entry.name}</Student>
-                          <Program>{entry.program}</Program>
-                          <IconTD> <Icon state={entry.lunch} /></IconTD>
-                          <IconTD> <Icon state={entry.beforeExt} /></IconTD>
-                          <IconTD> <Icon state={entry.afterExt} /></IconTD>
-                          <Subtotal> {formatter.format(entry.subtotal)} </Subtotal>
-                        </tr>
-                      );
-                    })}
-                  </tbody>
-                );
-              }
-            }) 
-            
+                  const weekHeader = (k === 0) ? <Date rowSpan = {week.length}>{weeks[i]}</Date>: '';
+                  
+                  return (
+                    <tr key = {k}>
+                      {weekHeader}
+                      <Student>{entry.name}</Student>
+                      <Program>{entry.program}</Program>
+                      <IconTD> <Icon state={entry.lunch} /></IconTD>
+                      <IconTD> <Icon state={entry.beforeExt} /></IconTD>
+                      <IconTD> <Icon state={entry.afterExt} /></IconTD>
+                      <Subtotal> {formatter.format(entry.subtotal)} </Subtotal>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            );
           }
-        </table>
-      </div>
-    );
+        }) 
+      }
+    </table>
+  );
           
 }
 
@@ -135,7 +129,7 @@ const Program = styled.td`
 `
 const IconTD = styled.td`
   outline: 1px solid black;
-
+  
   @media ${devices.tablet}{
     width: 80px;  
   }
