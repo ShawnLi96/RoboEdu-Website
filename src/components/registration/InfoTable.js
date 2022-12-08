@@ -9,12 +9,17 @@ export default function InfoTable(props) {
 
   console.log('info table')
   console.log("props.data", props.data)
-  console.log("props.orders", props.orders);
+  console.log("props.orders", props.orders)
+
+  if (props.orders.length === 0){
+    props.setRefresh(!props.refresh);
+  }
   const status = ["In Cart", "Submitted", "Expired", "Paid"]
   function deleteOrder (id){
     request("/orders/delete", "post", {orderid: id}).then(res => console.log(res))
     props.setRefresh(!props.refresh);
   }
+
 
   // function confirmOrder(id){
   //   request("/orders/submit", "post", {id: id})

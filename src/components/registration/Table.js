@@ -14,12 +14,13 @@ export default function Table(props) {
   }, [props.refresh]);
   // fetches all the orders and saves into state
   const getOrders = async () => {
-    const orders = await request("/parents/getorders", "post", {parentid: props.parentid}).then((res) => {
-      return res;
+    return await request("/parents/getorders", "post", {parentid: props.parentid}).then((res) => {
+      setOrders(res);
+      console.log(res)
+      console.log('data set')
     }).catch(err => {
       console.log(err)
     });
-    setOrders(orders);
   };
 
   function buildSchedule(masterSchedule, schedule, camperData) {
@@ -49,6 +50,7 @@ export default function Table(props) {
   // parse information of each camper into html and save it into state allCamperInfo
 
 
+  
   const getCampers = async () => {
     var masterSchedule = [[], [], [], [], [], [], [], [], []];
     var orders = []
@@ -58,36 +60,37 @@ export default function Table(props) {
 
         const campers = JSON.parse(order["CamperIDs"]);
         campers.map(async (camper, i) => {
-          const camperData = await request("/campers/getcamper", "post", {
+          await request("/campers/getcamper", "post", {
             camperid: camper
-          }, 
-          ).then((res) => {
-            return res;
+          },
+          ).then(async (res) => {
+            const camperData = res;
+             // needed to fetch name, as campers/getCamper does not provide name
+            await request("/students/getstudent", "post", {studentid: camperData["Student ID"]}).then(
+              (res) => {
+                const studentData = res;
+                  // create a name key pair in the camperData
+                  camperData["Name"] =
+                  studentData["first name"] + " " + studentData["last name"];
+
+                // create an entry for the camper for this order of the week
+                return buildSchedule(masterSchedule, schedule, camperData);
+              }
+            ).catch(err => {
+              console.log(err)
+            });
           }).catch(err => {
             console.log(err)
           })
-
-          // needed to fetch name, as campers/getCamper does not provide name
-          const student = await request("/students/getstudent", "post", {studentid: camperData["Student ID"]}).then(
-            (res) => {
-              return res;
-            }
-          ).catch(err => {
-            console.log(err)
-          });
-  
-
-          // create a name key pair in the camperData
-          camperData["Name"] =
-            student["first name"] + " " + student["last name"];
-
-          // create an entry for the camper for this order of the week
-          return buildSchedule(masterSchedule, schedule, camperData);
         });
         orders.push(schedule)
     });
     setScheduleInfo(masterSchedule);
     setAllOrders(orders);
+    console.log(allOrders)
+    console.log("orders set")
+    console.log(scheduleInfo)
+    console.log("schedule set")
   }}
 
   useEffect(() => 
