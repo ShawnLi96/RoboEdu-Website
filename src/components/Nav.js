@@ -79,7 +79,11 @@ const Container = styled.div`
   }
 
   @media ${devices.tablet}{
-    height: 75px;
+    height: 60px;
+  }
+
+  @media ${devices.laptop}{
+    height: 60px;
   }
 `
 

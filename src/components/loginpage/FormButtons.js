@@ -39,7 +39,6 @@ const Button = styled.a`
 
     @media ${devices.mobile}{
         font-size: 20px;
-        margin-top: 7vh;
     }
 
     @media ${devices.tablet}{
@@ -48,7 +47,6 @@ const Button = styled.a`
 
     @media ${devices.laptop}{
         font-size: 35px;
-        margin-top: 15px;
     }
 
     @media ${devices.laptopL}{
@@ -61,14 +59,15 @@ const Button = styled.a`
 
 const Container = styled.div`
     display: flex;
-    margin-top: 2vw;
     justify-content: space-between;
     @media ${devices.mobile}{
         width: 80vw;
+        margin-top: 5vh;
     }
 
     @media ${devices.laptop}{
         width: 60vw;
+        margin-top: 5vh;
     }
 `
 

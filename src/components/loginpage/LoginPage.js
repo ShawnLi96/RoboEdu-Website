@@ -43,17 +43,14 @@ export default function LoginPage(props){
         return elements
     }
     return (
-        <Container>
+        <Container selection={selection}>
             <Nav focus = {props.focus} setFocus = {props.setFocus}/>
             <BodyContainer>
                 <MenuButtons curSelection = {selection} setSelection = {setSelection}></MenuButtons>
                 {display()}
                 
-                
-
+            
             </BodyContainer>
-
-
         </Container>
     );
 
@@ -62,20 +59,8 @@ export default function LoginPage(props){
 const Container = styled.div`
     background-image: url(${bg});
     width: 100vw;
-    height: 100vh;
+    height: ${(props) => props.selection === 0? "100vh" : "auto"};
     position: relative;
-    @media (max-height: 441px) {
-        height: auto;
-    }
-
-    @media (min-height: 442px){
-        height: 100vh;
-    }
-
-    @media ${devices.laptop}{
-        height: auto;
-    }
-
 `
 const BodyContainer = styled.div`
     position: relative;
@@ -83,7 +68,6 @@ const BodyContainer = styled.div`
     margin-top: 5vh;
     display: flex;
     flex-direction: column;
-    bottom: 0px;
     justify-content: center;
     @media ${devices.mobile}{
         width: 80vw;

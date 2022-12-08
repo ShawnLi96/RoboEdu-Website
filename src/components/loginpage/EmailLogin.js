@@ -116,10 +116,11 @@ const Box = styled.div`
 
 const Container = styled.div`
     background-color: #475F6F;
-    display: flex;
+    display: flex; 
     flex-direction: column;
     padding: 20px;
     position: relative;
+    bottom: 0px;
     
 `
 
