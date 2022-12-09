@@ -1,21 +1,27 @@
 import React from "react";
 import styled from 'styled-components'
-import { devices } from "../../data/devices"
-import title1 from "../../images/title1.png"
-import title2 from "../../images/title2.png"
-import title3 from "../../images/title3.png"
-import title4 from "../../images/title4.png"
-import title5 from "../../images/title5.png"
+import { devices } from "../data/devices"
+import title1 from "../images/title1.png"
+import title2 from "../images/title2.png"
+import title3 from "../images/title3.png"
+import title4 from "../images/title4.png"
+import title5 from "../images/title5.png"
+const titles = [title1, title2, title3, title4, title5];
 
 
 
 export default function ProgressBar(props) {
-    const titles = [title1, title2, title3, title4, title5];
 
+    const display = () => {
+        var arr = []
+        for (let i = 0; i < titles.length; i++){
+            arr.push(<Arrow number={i}/>);
+        }
+        return arr;
+    }
     return(
         <Container>
-            <Arrow number = {0}></Arrow>
-
+            {display()}
         </Container>
     )
 }

@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Table from "./Table";
 import Nav from "../Nav";
 import bg from '../../images/background.png'
-
+import ProgressBar from "../ProgressBar"
 
 export default function Home(props) {
   const parentid =  22;
@@ -25,6 +25,7 @@ export default function Home(props) {
   return (
     <Container>
       <Nav focus = {focus} setFocus = {setFocus}/>
+      <ProgressBar/>
       
       <div style={{display: "flex"}}>
         <Button onClick = {() => setRefresh(!refresh)}>Refresh</Button>
