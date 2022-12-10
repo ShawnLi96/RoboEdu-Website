@@ -30,5 +30,8 @@ const Container = styled.div`
     display: flex;
 `
 const Arrow = styled.div`
-    background-image: ${(props) => titles[props.number]}
+    background-image: url(${(props) => titles[props.number]});
+    background-size: cover;
+    width: 300px;
+    height: 100px;
 `
