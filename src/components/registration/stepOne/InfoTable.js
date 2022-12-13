@@ -1,9 +1,10 @@
 import React from "react";
-import "../../css/table.css";
+import "../../../css/table.css";
 import styled from 'styled-components'
-import { devices } from "../../data/devices"
+import { devices } from "../../../data/devices"
 import Schedule from "./Schedule"
-import { request } from "../../data/fetch";
+import { request } from "../../../data/fetch";
+
 
 export default function InfoTable(props) {
 
@@ -26,7 +27,7 @@ export default function InfoTable(props) {
   // }
 
   return (
-      <div>
+      <Container>
         {
           props.orders.map((schedule, i) => {
             var dateEdited = new Date(props.data[i]["Last Action"]).toLocaleDateString("en-US")
@@ -51,12 +52,17 @@ export default function InfoTable(props) {
             )
           }) 
         }
-      </div>
+      </Container>
     );
 }
-
+const Container = styled.div`
+  
+  @media ${devices.tablet}{
+    width: 95vw;
+  }
+`
 const Order = styled.div`
-
+  background-color: black;
   @media ${devices.mobile}{
 
   }

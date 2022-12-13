@@ -1,17 +1,19 @@
 import React, { useState, useEffect } from "react";
 import InfoTable from "./InfoTable";
 import Schedule from "./Schedule"
-import { request } from "../../data/fetch";
+import { request } from "../../../data/fetch";
 import styled from "styled-components";
+import { devices } from '../../../data/devices'
 
 
 export default function Table(props) {
 
+  console.log('rerender')
   // an array of orders fetched
   const [fetchedOrders, setOrders] = useState([]);  
   useEffect(() => {
     getOrders();
-  }, [props.refresh]);
+  }, []);
   // fetches all the orders and saves into state
   const getOrders = async () => {
     return await request("/parents/getorders", "post", {parentid: props.parentid}).then((res) => {
@@ -74,23 +76,20 @@ export default function Table(props) {
                   studentData["first name"] + " " + studentData["last name"];
 
                 // create an entry for the camper for this order of the week
-                return buildSchedule(masterSchedule, schedule, camperData);
+                buildSchedule(masterSchedule, schedule, camperData);
+
               }
             ).catch(err => {
               console.log(err)
             });
+            setScheduleInfo(masterSchedule);
+            setAllOrders(orders);
           }).catch(err => {
             console.log(err)
           })
         });
         orders.push(schedule)
     });
-    setScheduleInfo(masterSchedule);
-    setAllOrders(orders);
-    console.log(allOrders)
-    console.log("orders set")
-    console.log(scheduleInfo)
-    console.log("schedule set")
   }}
 
   useEffect(() => 
@@ -99,21 +98,110 @@ export default function Table(props) {
   }, [fetchedOrders]);
 
   const displayTable = () => {
-    if (props.display === 0 && allOrders){
+    if (display === 0 && allOrders){
       return <InfoTable orders={allOrders} data={fetchedOrders} refresh = {props.refresh} setRefresh = {() => props.setRefresh}/>
     }
     else return <Schedule schedule = {scheduleInfo}/>
   }
+
+  // display 0 is the list of orders (default)
+  // display 1 is the schedule filled in by all orders
+  const [display, setDisplay] = useState(0);
   return (
     <Container>
-      {displayTable()}
+      <Box>
+        <CircularButton onClick = {() => {
+          console.log('clicked')
+          props.setPage(1)}}>Account Settings</CircularButton>
+        <CircularButton onClick = {() => props.setPage(2)}>Start New Registration</CircularButton>
+      </Box>
+      <div style={{ display: "flex" }}>
+        <Button onClick={() => props.setRefresh(!props.refresh)}>Refresh</Button>
+        <Button
+          onClick={() =>
+            setDisplay((display) => {
+              return (display ^= 1);
+            })
+          }
+        >
+          Change View
+        </Button>
+      </div>
+      <div style={{display: "flex", justifyContent: "center"}}>
+        {displayTable()}
+      </div>
     </Container>
   );
 }
-
+const Box = styled.div`
+  position: relative;
+  display: flex;
+  @media ${devices.laptop} {
+    left: 50px;
+    padding: 25px 0px;
+  }
+`;
+const Button = styled.div`
+  background-color: white;
+  text-align: center;
+  width: 100px;
+  margin-left: auto;
+  margin-right: auto;
+  border-style: solid;
+`;
 const Container = styled.div`
   width: 100vw;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   position: relative;
 `
+const CircularButton = styled.a`
+  background-color: #aac9d4;
+  border-radius: 25px;
+  cursor: pointer;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  margin-top: 10px;
+  &:link {
+    text-decoration: none;
+  }
+  &:visited {
+    text-decoration: none;
+  }
+  &:hover {
+    text-decoration: none;
+  }
+  &:active {
+    text-decoration: none;
+  }
+  &:hover {
+    transition: 0.5s;
+    background-color: #edd662;
+  }
+  @media ${devices.mobile} {
+    width: 150px;
+    font-size: 5vw;
+    height: 50px;
+  }
+
+  @media ${devices.tablet} {
+    width: 25vw;
+    height: 8.33vw;
+    font-size: 3vw;
+  }
+  @media ${devices.laptop} {
+    width: 15vw;
+    height: 5vw;
+    font-size: 1.25vw;
+    margin-right: 50px;
+  }
+
+  @media ${devices.laptopL} {
+    width: 15vw;
+    height: 3.5vw;
+    font-size: 1.25vw;
+  }
+`;

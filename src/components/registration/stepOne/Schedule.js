@@ -1,10 +1,10 @@
 import React from "react";
-import { COLUMNS } from "../../data/columns";
-import "../../css/table.css";
+import { COLUMNS } from "../../../data/columns";
+import "../../../css/table.css";
 import styled from 'styled-components'
-import check from "../../images/check.png";
-import cross from "../../images/cross.png";
-import { devices } from "../../data/devices"
+import check from "../../../images/check.png";
+import cross from "../../../images/cross.png";
+import { devices } from "../../../data/devices"
 
 export default function Schedule(props) {
   
