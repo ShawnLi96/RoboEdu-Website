@@ -34,7 +34,10 @@ export default function Home(props) {
     <AccountSettings
       {...params}
     />,
-    <StudentInfoTable/>
+    <StudentInfoTable
+      {...params}
+    />
+
   ];
   const titles = [
     "My Registration",

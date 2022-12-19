@@ -3,7 +3,6 @@ import "../../../css/table.css";
 import styled from 'styled-components'
 import { devices } from "../../../data/devices"
 import { request } from "../../../data/fetch";
-import { parseWithOptions } from "date-fns/fp";
 
 export default function AccountSettings(props) {
 
@@ -93,22 +92,32 @@ export default function AccountSettings(props) {
       else bar.type = "password";
     }
   }
-  const [success, setSuccess] = useState();
-  const [mismatch, setMismatch] = useState();
-  const [loading, setLoading] = useState();
   function onSubmit() {
-    const args = {
-      pswd: password1,
-      email: email,
-      phonenumber: phoneNumber,
-      address: address
+    if (password1 !== password2){
+      setMessage("The passwords do not match!")
     }
-    const post = async() => {
-      await request("/edit/protected", "post", args);
-      setLoading(false);
+    else{
+      const args = {
+        authkey: 0,
+        pswd: password1,
+        email: email,
+        phonenumber: phoneNumber,
+        address: address
+      }
+      const post = async() => {
+        await request("/edit/protected", "post", args).then((res) => {
+          if (res["error"] === undefined){
+            setMessage("Wrong Password")
+          }
+          else{
+            setMessage("Information Updated")
+          }
+        })
+      }
+      post();
+
     }
-    setLoading(true);
-    post();
+    
   }
   return (
     <Container>
@@ -139,13 +148,18 @@ export default function AccountSettings(props) {
               Toggle Visibility
             </button>
           </div>
-            
-          <Mismatch>{mismatch}</Mismatch>
         </Section>
         <Section>
           <div>
-            <Submit>Update</Submit>
-            <Success>{success}</Success>
+            <Submit
+                 onClick={() => {
+                  onSubmit();
+                  return false;
+                }}
+                // eslint-disable-next-line no-script-url
+                href = {(password1 === password2) ? "/": "javascript:void(0);"}
+            >Update</Submit>
+            <Message>{message}</Message>
           </div>
         </Section>
       </Pad>
@@ -164,7 +178,7 @@ const LanguageContainer = styled.div`
   }
 `
 
-const Mismatch = styled.div`
+const Message = styled.div`
   color: red;
   text-align: center;
   @media ${devices.mobile} {

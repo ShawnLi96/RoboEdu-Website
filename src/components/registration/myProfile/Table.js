@@ -9,6 +9,7 @@ import { devices } from '../../../data/devices'
 export default function Table(props) {
 
   console.log('rerender')
+  console.log(props.parentid)
   // an array of orders fetched
   const [fetchedOrders, setOrders] = useState([]);  
   useEffect(() => {

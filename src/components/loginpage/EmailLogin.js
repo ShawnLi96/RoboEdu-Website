@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useNavigate } from 'react';
 import styled from 'styled-components';
 import { devices } from '../../data/devices';
 import { request } from '../../data/fetch';
@@ -6,12 +6,12 @@ import { request } from '../../data/fetch';
 
 export default function EmailLogin(){
 
-    const [email, setEmail] = useState();
-    
-    const [password, setPassword] = useState();
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
     const [success, setSuccess] = useState(false);
-    const [auth, setAuth] = useState();
+    const [auth, setAuth] = useState(''); 
 
+    const navigate = useNavigate();
     function onSubmit(){
         request("/logins/loginemailpswd", "post", {
             email: email,
@@ -19,41 +19,43 @@ export default function EmailLogin(){
             expiry: 1000
         }).then((res) => {
             console.log(res)
-            if (res["error"] === undefined && res["auth-key"] !== undefined){
+            console.log("Email: " + email + " " + "password: " + password);
+            if (res["error"] === undefined ){
                 setAuth(res["auth-key"])
                 setSuccess(true);
             }
         })
-
     }
+
+    console.log("Email: " + email + " " + "password: " + password);
     return (
         <Container>
             <div>
                 <Box>
-                    <Label
-                        value={email}
-                        onChange={(e) => {
-                            setEmail(e.target.value);
-                        }}>
+                    <Label>
                     Email:
                     </Label>
-                    <Input/>
+                    <Input
+                      value={email}
+                      onChange={(e) => {
+                        setEmail(e.target.value)
+                      }}/>
                 </Box>
                 <Box>
                     <Label
+>Password:
+                    </Label>
+                    <Input type="password"
                         value={password}
                         onChange={(e) => {
                         setPassword(e.target.value);
-                        }}>Password:
-                    </Label>
-                    <Input type="password"/>
+                    }}/>
                 </Box>
-                <Submit  onClick={() => {
+                <Submit  
+                    onClick={() => {
                     onSubmit();
                     return false;
                     }}
-                    // eslint-disable-next-line no-script-url
-                    href = {(success) ? "/#/Home": "javascript:void(0);"}
                     >
                     Submit
                 </Submit>
