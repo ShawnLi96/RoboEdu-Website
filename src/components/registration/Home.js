@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import Table from "./stepOne/Table";
+import Table from "./myProfile/Table";
 import Nav from "../Nav";
 import bg from "../../images/background.png";
 import ProgressBar from "../ProgressBar";
 import { devices } from "../../data/devices";
-import AccountSettings from "./stepOne/AccountSettings";
+import AccountSettings from "./myProfile/AccountSettings";
+import StudentInfoTable from "../studentInfoPage/StudentInfoTable"
 
 export default function Home(props) {
   const parentid = 22;
@@ -14,20 +15,26 @@ export default function Home(props) {
   // 5 pages in total of registration process starting from 1 (the table of orders)
   // page 0 is account settings page
 
-  const [page, setPage] = useState(0);
+  const [curPage, setPage] = useState(0);
   const [focus, setFocus] = useState(props.focus);
   const [refresh, setRefresh] = useState(false);
-
+  
+  const params = {
+    parentid: parentid,
+    refresh: refresh,
+    setRefresh: () => setRefresh(!refresh),
+    setPage: setPage
+  }
 
 
   const components = [
     <Table
-      parentid={parentid}
-      refresh={refresh}
-      setRefresh={() => setRefresh(!refresh)}
-      setPage = {setPage}
+      {...params}
     />,
-    <AccountSettings/>
+    <AccountSettings
+      {...params}
+    />,
+    <StudentInfoTable/>
   ];
   const titles = [
     "My Registration",
@@ -37,15 +44,15 @@ export default function Home(props) {
     "Select Program",
     "Waiver and Policy",
   ];
-  console.log(page)
+  console.log(curPage)
   return (
     <Container>
       <Nav focus={focus} setFocus={setFocus} />
-      <ProgressBar page={page} />
+      <ProgressBar curPage={curPage} setPage={setPage}/>
       <Box>
-        <Title>{titles[page]}</Title>
+        <Title>{titles[curPage]}</Title>
       </Box>
-      {components[page]}
+      {components[curPage]}
     </Container>
   );
 }
@@ -58,18 +65,23 @@ const Container = styled.div`
 
 const Box = styled.div`
   position: relative;
+  display: flex;
+  @media ${devices.tablet}{
+    left: 25px;
+    margin-top: 25px;
+  }
   @media ${devices.laptop} {
     left: 50px;
-    margin-top: 25px;
   }
 `;
 
 
 
-
 const Title = styled.div`
   color: white;
-
+  @media ${devices.tablet}{
+    font-size: 40px;
+  }
   @media ${devices.laptop} {
     font-size: 50px;
   }

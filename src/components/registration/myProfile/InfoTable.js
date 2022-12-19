@@ -141,10 +141,10 @@ const Button = styled.a`
         transition: 0.5s;
         filter: brightness(1.25);
     }
-    @media ${devices.mobile}{
-      width: 150px;
-      font-size: 5vw;
-      height: 50px;
+  @media ${devices.mobile}{
+    width: 150px;
+    font-size: 5vw;
+    height: 50px;
 
   }
 
@@ -152,19 +152,21 @@ const Button = styled.a`
       width: 10vw;
       height: 3vw;
       font-size: 1.5vw;
+      margin-left: 25px;
       
   }
   @media ${devices.laptop}{
       width: 10vw;
       height: 2.5vw;
       font-size: 2vw;
+      margin-left: 25px;
+
   }
 
   @media ${devices.laptopL}{
       width: 10vw;
       height: 2.5vw;
       font-size: 1.25vw;
-      margin-left: 25px;
   }
 `
 

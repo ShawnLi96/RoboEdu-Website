@@ -136,6 +136,10 @@ export default function Table(props) {
 const Box = styled.div`
   position: relative;
   display: flex;
+  @media ${devices.tablet}{
+    left: 25px;
+    padding: 25px 0px;
+  }
   @media ${devices.laptop} {
     left: 50px;
     padding: 25px 0px;
@@ -189,8 +193,9 @@ const CircularButton = styled.a`
 
   @media ${devices.tablet} {
     width: 25vw;
-    height: 8.33vw;
-    font-size: 3vw;
+    height: 5.8vw;
+    font-size: 2vw;
+    margin-right: 30px;
   }
   @media ${devices.laptop} {
     width: 15vw;

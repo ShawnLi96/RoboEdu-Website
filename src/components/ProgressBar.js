@@ -19,11 +19,11 @@ export default function ProgressBar(props) {
         // because if you render first arrow to fifth arrow,
         // newly rendered components would overlap onto the previous ones
         var arr = 
-        [<FifthArrow page = {props.page}>Confirmation</FifthArrow>, 
-        <FourthArrow page = {props.page}>Select Program</FourthArrow>, 
-        <ThirdArrow page = {props.page}>Select Time</ThirdArrow>, 
-        <SecondArrow page = {props.page}>Student Info</SecondArrow>, 
-        <FirstArrow page = {props.page}>My Profile</FirstArrow>]
+        [<FifthArrow page = {props.curPage} onClick = {() => props.setPage(5)}>Confirmation</FifthArrow>, 
+        <FourthArrow page = {props.curPage} onClick = {() => props.setPage(4)}>Select Program</FourthArrow>, 
+        <ThirdArrow page = {props.curPage} onClick = {() => props.setPage(3)}>Select Time</ThirdArrow>, 
+        <SecondArrow page = {props.curPage} onClick = {() => props.setPage(2)}>Student Info</SecondArrow>, 
+        <FirstArrow page = {props.curPage} onClick = {() => props.setPage(0)}>My Profile</FirstArrow>]
 
         return arr;
     }
@@ -56,7 +56,11 @@ const FirstArrow = styled.div`
     align-items: center;
     display: flex;
     color: ${(props) => props.page === 1 || props.page === 0 ? "#EDD662" : "#FFFFFF"};
+    &:hover {
+        color: #EDD662;
+        cursor: pointer;
 
+      }
     @media ${devices.tablet}{
         width: 195px;
         height: 41px;
@@ -80,6 +84,11 @@ const SecondArrow = styled.div`
     justify-content: center;
     align-items: center;
     display: flex;
+    &:hover {
+        color: #EDD662;
+        cursor: pointer;
+
+      }
     color: ${(props) => props.page === 2 ? "#EDD662" : "#FFFFFF"};
     @media ${devices.tablet}{
         width: 195px;
@@ -106,6 +115,11 @@ const ThirdArrow = styled.div`
     justify-content: center;
     align-items: center;
     display: flex;
+    &:hover {
+        color: #EDD662;
+        cursor: pointer;
+
+      }
     color: ${(props) => props.page === 3 ? "#EDD662" : "#FFFFFF"};
     @media ${devices.tablet}{
         width: 195px;
@@ -134,6 +148,10 @@ const FourthArrow = styled.div`
     justify-content: center;
     align-items: center;
     display: flex;
+    &:hover {
+        color: #EDD662;
+        cursor: pointer;
+      }
     color: ${(props) => props.page === 4 ? "#EDD662" : "#FFFFFF"};
     @media ${devices.tablet}{
         width: 195px;
@@ -161,6 +179,11 @@ const FifthArrow = styled.div`
     justify-content: center;
     align-items: center;
     display: flex;
+    &:hover {
+        color: #EDD662;
+        cursor: pointer;
+
+      }
     color: ${(props) => props.page === 5 ? "#EDD662" : "#FFFFFF"};
     @media ${devices.tablet}{
         width: 195px;

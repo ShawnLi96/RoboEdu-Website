@@ -12,8 +12,7 @@ export default function NewUserForm(props) {
   const [password2, setPassword2] = useState("");
   const [message, setMessage] = useState("");
 
-  // for onSubmit, should check if there are any fields ALREADY stored
-  // in the database to avoid duplicates
+
   function onSubmit() {
     if (password1 === password2) {
       setMessage("");

@@ -1,29 +1,62 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { devices } from '../../data/devices';
+import { request } from '../../data/fetch';
 
 
 export default function EmailLogin(){
 
     const [email, setEmail] = useState();
-    const [selection, setSelection] = useState(0)
+    
+    const [password, setPassword] = useState();
+    const [success, setSuccess] = useState(false);
+    const [auth, setAuth] = useState();
 
     function onSubmit(){
+        request("/logins/loginemailpswd", "post", {
+            email: email,
+            password: password,
+            expiry: 1000
+        }).then((res) => {
+            console.log(res)
+            if (res["error"] === undefined && res["auth-key"] !== undefined){
+                setAuth(res["auth-key"])
+                setSuccess(true);
+            }
+        })
 
-        // post
     }
     return (
         <Container>
             <div>
                 <Box>
-                    <Label>Email:</Label>
+                    <Label
+                        value={email}
+                        onChange={(e) => {
+                            setEmail(e.target.value);
+                        }}>
+                    Email:
+                    </Label>
                     <Input/>
                 </Box>
                 <Box>
-                    <Label>Password:</Label>
+                    <Label
+                        value={password}
+                        onChange={(e) => {
+                        setPassword(e.target.value);
+                        }}>Password:
+                    </Label>
                     <Input type="password"/>
                 </Box>
-                <Submit>Submit</Submit>
+                <Submit  onClick={() => {
+                    onSubmit();
+                    return false;
+                    }}
+                    // eslint-disable-next-line no-script-url
+                    href = {(success) ? "/#/Home": "javascript:void(0);"}
+                    >
+                    Submit
+                </Submit>
             </div>
             
         </Container>
@@ -129,26 +162,30 @@ const Input = styled.input`
     type: "text";
     required
     autofocus
-    font-size: 30px;
+    font-size: 40px;
+
     @media ${devices.mobile}{
-        font-weight: bold;
-        height: 5vh;
+        font-weight: normal;
+        height: 3vh;
         
     }
 
     @media ${devices.tablet}{
         width: 40vw;
         height: 5vh;
+        font-size: 25px;
 
     }
 
     @media ${devices.laptop}{
         width: 30vw;
         height: 5vh;
+        font-size: 30px;
     }
     @media ${devices.laptopL}{
         height: 4.5vh;
         width: 30vw;
+        font-size: 25px;
     }
 `
 
