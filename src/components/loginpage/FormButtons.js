@@ -20,8 +20,8 @@ export default function MenuButtons(props){
         
         <Container>
 
-            <Button active = {props.curLoginOption === 0} onClick = {() => manageClick(0)}>Login with Email</Button>
-            <Button active = {props.curLoginOption === 1} onClick = {() => manageClick(1)}>Login with WeChat ID</Button>
+            <Button key = {0} active = {props.curLoginOption === 0} onClick = {() => manageClick(0)}>Login with Email</Button>
+            <Button key = {1} active = {props.curLoginOption === 1} onClick = {() => manageClick(1)}>Login with WeChat ID</Button>
                 
 
         </Container>

@@ -26,6 +26,18 @@ export default function InfoTable(props) {
   //   request("/orders/submit", "post", {id: id})
   // }
 
+  function displayButtons (i){
+    if (props.data[i]["status"] > 0){
+      return (
+        <div style = {{display: "flex"}}>
+          <Button name = "edit">Edit</Button>
+          <Button name = "delete" onClick = {() =>{deleteOrder(props.data[i]["ID"])}}>Delete</Button>
+          <Button name = "confirm">Confirm</Button>
+        </div>
+      )
+    }
+
+  }
   return (
       <Container>
         {
@@ -41,11 +53,7 @@ export default function InfoTable(props) {
                           Last edited: {dateEdited} <br></br>
                           Status: {status[props.data[i]["status"] - 1]}
                         </Info>
-                      <div style = {{display: "flex"}}>
-                        <Button name = "edit">Edit</Button>
-                        <Button name = "delete" onClick = {() =>{deleteOrder(props.data[i]["ID"])}}>Delete</Button>
-                        <Button name = "confirm">Confirm</Button>
-                      </div>
+                      {displayButtons(i)}
                     </SummaryContainer>
                 </Summary>
               </Order>

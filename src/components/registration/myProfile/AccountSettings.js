@@ -98,7 +98,6 @@ export default function AccountSettings(props) {
     }
     else{
       const args = {
-        authkey: 0,
         pswd: password1,
         email: email,
         phonenumber: phoneNumber,
@@ -106,7 +105,7 @@ export default function AccountSettings(props) {
       }
       const post = async() => {
         await request("/edit/protected", "post", args).then((res) => {
-          if (res["error"] === undefined){
+          if (res["error"]){
             setMessage("Wrong Password")
           }
           else{
@@ -154,10 +153,7 @@ export default function AccountSettings(props) {
             <Submit
                  onClick={() => {
                   onSubmit();
-                  return false;
                 }}
-                // eslint-disable-next-line no-script-url
-                href = {(password1 === password2) ? "/": "javascript:void(0);"}
             >Update</Submit>
             <Message>{message}</Message>
           </div>

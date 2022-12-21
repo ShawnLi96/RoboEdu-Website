@@ -19,6 +19,7 @@ export default function LoginPage(props){
 
     const [selection, setSelection] = useState(0)
     const [loginOption, setLoginOption] = useState(0)
+    const [auth, setAuth] = useState();
 
 
     function onSubmit(){
@@ -32,7 +33,7 @@ export default function LoginPage(props){
         if (selection === 0){
             elements.push(<FormButtons curLoginOption = {loginOption} setLoginOption = {setLoginOption}/>)
             if (loginOption === 0)
-                elements.push(<EmailLogin/>)
+                elements.push(<EmailLogin setAuth = {props.setAuth}/>)
             else
                 elements.push(<WeChatLogin/>)
             
