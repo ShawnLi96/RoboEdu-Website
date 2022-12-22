@@ -116,24 +116,42 @@ export default function Table(props) {
           props.setPage(1)}}>Account Settings</CircularButton>
         <CircularButton onClick = {() => props.setPage(2)}>Start New Registration</CircularButton>
       </Box>
-      <div style={{ display: "flex" }}>
-        <Button onClick={() => props.setRefresh(!props.refresh)}>Refresh</Button>
-        <Button
+
+      <div style={{margin: "auto"}}>
+        <div style={{display: "flex", justifyContent: "space-between"}}>
+          <Button onClick={() => props.setRefresh(!props.refresh)}>Refresh</Button>
+          <ChangeView
           onClick={() =>
             setDisplay((display) => {
               return (display ^= 1);
             })
           }
-        >
-          Change View
-        </Button>
-      </div>
-      <div style={{display: "flex", justifyContent: "center"}}>
-        {displayTable()}
+          > 
+            Change View
+          </ChangeView>
+        </div>
+        
+        <div style={{width: "95vw"}}>
+          {displayTable()}
+        </div>
       </div>
     </Container>
   );
 }
+
+const ChangeView = styled.a`
+  background-color: white;
+  left: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  @media ${devices.tablet}{
+    width: 13vw;
+    height: 4vw;
+    border-radius: 25px;
+    margin-bottom: 10px;
+  }
+`
 const Box = styled.div`
   position: relative;
   display: flex;
