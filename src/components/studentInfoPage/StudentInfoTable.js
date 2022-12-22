@@ -3,6 +3,7 @@ import React, { useEffect, useInsertionEffect, useState } from "react";
 import styled from "styled-components";
 import { devices } from "../../data/devices";
 import { request } from "../../data/fetch";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default function StudentInfoTable(props) {
   const tableStyle = {
@@ -46,7 +47,7 @@ export default function StudentInfoTable(props) {
   }, []);
 
   const Row = (props) => {
-    const {name, dob, gender, grade, exp} = props
+    const {id, name, dob, gender, grade, exp} = props
 
     return(
         <React.Fragment>
@@ -55,7 +56,12 @@ export default function StudentInfoTable(props) {
                 <td height={30}>{dob}</td>
                 <td height={30}>{gender}</td>
                 <td height={30}>{grade}</td>
-                <td height={60} rowSpan={2}></td>
+                <td height={60} rowSpan={2}>
+                <div class="form-check" style={{display: 'flex', alignItems: 'center', justifyContent: 'center',}}>
+                  <input class="form-check-input" type="checkbox" value="" id={id}/>
+                  <label class="form-check-label" for="flexCheckDefault"/>
+                </div>
+                </td>
               </tr>
               <tr>
                 <td height={30} colSpan={3}>{exp}</td>
@@ -80,6 +86,7 @@ export default function StudentInfoTable(props) {
 
           {data.map(row =>
             <Row
+            id = {row.id}
             name = {row.name}
             dob = {row.dob}
             gender = {row.gender}
@@ -92,7 +99,12 @@ export default function StudentInfoTable(props) {
             <td height={30}></td>
             <td height={30}></td>
             <td height={30}></td>
-            <td height={60} rowSpan={2}></td>
+            <td height={60} rowSpan={2}>
+            <div class="form-check" style={{display: 'flex', alignItems: 'center', justifyContent: 'center',}}>
+              <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"/>
+              <label class="form-check-label" for="flexCheckDefault"/>
+            </div>
+            </td>
           </tr>
           <tr>
             <td height={30} colSpan={3}>STEM Experience: </td>
