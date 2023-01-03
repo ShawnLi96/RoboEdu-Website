@@ -8,9 +8,18 @@ import { useNavigate } from 'react-router-dom'
 export default function EmailLogin() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [success, setSuccess] = useState();
-  const [auth, setAuth] = useState("");
+  const [success, setSuccess] = useState("");
 
+
+  var input = document.getElementById("myInput");
+  if (input){
+    input.addEventListener("keypress", function(event) {
+      if (event.key === "Enter") {
+        event.preventDefault();
+        onSubmit();
+      }
+    });
+  }
   const navigate = useNavigate()
   function onSubmit() {
     request("/logins/loginemailpswd", "post", {
@@ -51,26 +60,38 @@ export default function EmailLogin() {
         <Box>
           <Label>Password:</Label>
           <Input
+            id="myInput"
             type="password"
             value={password}
             onChange={(e) => {
               setPassword(e.target.value);
             }}
+          
           />
         </Box>
         <Submit
+          id="myBtn"
           onClick={() => {
             onSubmit();
           }}
         >
           Submit
         </Submit>
+        <Message success = {success}> {(success !== "") ? (success) ? "Success": "Invalid Credentials": ""} </Message>
       </div>
 
     </Container>
     
   );
 }
+const Message = styled.div`
+
+  @media ${devices.tablet}{
+    color: ${(props) => (props.success) ? "green": "red"};
+    font-size: 1vw;
+
+  }
+`
 const Submit = styled.a`
   background-color: #aac9d4;
   border-radius: 25px;
@@ -82,6 +103,7 @@ const Submit = styled.a`
   margin-left: auto;
   margin-top: 3vh;
   cursor: pointer;
+  type: "submit";
 
   &:link {
     text-decoration: none;

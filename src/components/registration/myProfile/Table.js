@@ -67,6 +67,7 @@ export default function Table(props) {
             camperid: camper
           },
           ).then(async (res) => {
+            console.log("camperdata", res)
             const camperData = res;
              // needed to fetch name, as campers/getCamper does not provide name
             await request("/students/getstudent", "post", {studentid: camperData["Student ID"]}).then(

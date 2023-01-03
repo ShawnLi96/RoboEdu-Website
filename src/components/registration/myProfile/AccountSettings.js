@@ -22,7 +22,6 @@ export default function AccountSettings(props) {
     const update = [setFirstName, setLastName, setPhoneNumber, setEmail, setAddress]
     var arr = []
     for (let i = 0; i < labels.length; i++){
-      console.log(i);
       arr.push(
         <Box key = {i}>
           <Label> {labels[i]} </Label>
@@ -31,6 +30,7 @@ export default function AccountSettings(props) {
             onChange={(e) => {
               update[i](e.target.value);
             }}
+            readOnly = {(i < 2)}
           />
         </Box>
       );
@@ -38,16 +38,15 @@ export default function AccountSettings(props) {
     return arr;
   }
 
-  const [curPassword, setCurPassword] = useState()
-  const [password1, setPassword1] = useState();
-  const [password2, setPassword2] = useState();
+  const [curPassword, setCurPassword] = useState("")
+  const [password1, setPassword1] = useState("");
+  const [password2, setPassword2] = useState("");
   function displayPasswordFields()  {
-    const labels = ["Current Pasword", "New Pasword", "Confirm Password"]
-    const states = [curPassword, password1, password2]
-    const update = [setCurPassword, setPassword1, setPassword2]
+    const labels = ["New Pasword", "Confirm Password"]
+    const states = [password1, password2]
+    const update = [setPassword1, setPassword2]
     var arr = []
     for (let i = 0; i < labels.length; i++){
-      console.log(i);
       arr.push(
         <Box key = {i}>
           <Label> {labels[i]} </Label>
@@ -95,21 +94,29 @@ export default function AccountSettings(props) {
   function onSubmit() {
     if (password1 !== password2){
       setMessage("The passwords do not match!")
+      console.log("no match between changed passwords")
     }
-    else{
+    else if (curPassword === ""){
+      setMessage("Please enter your password to save changes")
+    }
+    else {
       const args = {
-        pswd: password1,
+        pswd: curPassword,
         email: email,
         phonenumber: phoneNumber,
-        address: address
+        address: address,
+        authkey: sessionStorage.getItem("authkey")
       }
       const post = async() => {
-        await request("/edit/protected", "post", args).then((res) => {
-          if (res["error"]){
+        await request("/parents/edit/protected", "post", args).then((res) => {
+          console.log(res[0]["status"])
+          if (res[0]["error"]){
             setMessage("Wrong Password")
+            console.log("not updated")
           }
           else{
             setMessage("Information Updated")
+            console.log("updated")
           }
         })
       }
@@ -130,10 +137,10 @@ export default function AccountSettings(props) {
           <LanguageContainer>
             <Title>Language</Title>
             <div style={{display: "flex"}}>
-              <MiniButton active = {language} lang = {0} onClick = {() => setLanguage(0)}>
+              <MiniButton active = {language === "0"}  onClick = {() => setLanguage(0)}>
                 English
               </MiniButton>
-              <MiniButton active = {language} lang = {1} onClick = {() => setLanguage(1)}>
+              <MiniButton active = {language === "1"}  onClick = {() => setLanguage(1)}>
                 中文
               </MiniButton>
             </div>
@@ -149,11 +156,25 @@ export default function AccountSettings(props) {
           </div>
         </Section>
         <Section>
+          <Title>
+            Confirm
+          </Title>
+          <Box key = {2}>
+            <Label> Current Password </Label>
+            <Input
+              id={`password-2`}
+              value={curPassword}
+              type="password"
+              onChange={(e) => {
+                setCurPassword(e.target.value);
+              }}
+            />
+          </Box>
+        </Section>
+        <Section>
           <div>
             <Submit
-                 onClick={() => {
-                  onSubmit();
-                }}
+              onClick = {() => onSubmit()}
             >Update</Submit>
             <Message>{message}</Message>
           </div>
@@ -175,7 +196,7 @@ const LanguageContainer = styled.div`
 `
 
 const Message = styled.div`
-  color: red;
+  color: white;
   text-align: center;
   @media ${devices.mobile} {
     font-size: 15px;
@@ -203,7 +224,7 @@ const Section = styled.div`
   }
 `
 const MiniButton = styled.div`
-  background-color: ${(props) => (props.active === props.lang) ? "#EDD662": "white"};
+  background-color: ${(props) => (props.active) ? "#EDD662": "white"};
   border-radius: 25px;
   font-weight: 700;
 

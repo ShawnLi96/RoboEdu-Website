@@ -51,7 +51,7 @@ export default function Home(props) {
   return (
     <Container>
       <Nav focus={focus} setFocus={setFocus} />
-      <ProgressBar curPage={curPage} setPage={setPage}/>
+      <ProgressBar curPage={curPage}/>
       <Box>
         <Title>{titles[curPage]}</Title>
       </Box>

@@ -15,8 +15,11 @@ export async function request(api, method, params) {
 
   const data = await fetch(`http://localhost:160${api}`, fetchinput)
     .then((res) => {
-      console.log(res)
-      return res.json();
+      if (res){
+        console.log(res)
+        return res.json();
+      }
+
     })
     .then((res) => {
       return res;
