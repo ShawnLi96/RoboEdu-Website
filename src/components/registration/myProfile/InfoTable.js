@@ -15,7 +15,7 @@ export default function InfoTable(props) {
   if (props.orders.length === 0){
     props.setRefresh(!props.refresh);
   }
-  const status = ["In Cart", "Submitted", "Expired", "Paid"]
+  const status = ["", "In Cart", "Submitted", "Expired", "Paid"]
   function deleteOrder (id){
     request("/orders/delete", "post", {orderid: id}).then(res => console.log(res))
     props.setRefresh(!props.refresh);
@@ -27,7 +27,7 @@ export default function InfoTable(props) {
   // }
 
   function displayButtons (i){
-    if (props.data[i]["status"] > 0){
+    if (props.data[i]["status"] === 1){
       return (
         <div style = {{display: "flex"}}>
           <Button name = "edit">Edit</Button>
@@ -51,7 +51,7 @@ export default function InfoTable(props) {
                         <Info>
                           Total: {formatter.format(props.data[i]["Fee"])}<br></br>
                           Last edited: {dateEdited} <br></br>
-                          Status: {status[props.data[i]["status"] - 1]}
+                          Status: {status[props.data[i]["status"]]}
                         </Info>
                       {displayButtons(i)}
                     </SummaryContainer>

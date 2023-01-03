@@ -3,8 +3,9 @@ import React, { useEffect, useInsertionEffect, useState } from "react";
 import styled from "styled-components";
 import { devices } from "../../data/devices";
 import { request } from "../../data/fetch";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-export default function StudentInfoTable() {
+export default function StudentInfoTable(props) {
   const tableStyle = {
     color: "black",
     width: "1000px",
@@ -14,84 +15,113 @@ export default function StudentInfoTable() {
     backgroundColor: "#04aa6d",
     color: "white",
   };
-/*
-  useEffect(() => {
-    const getStudents = async () => {
-      if(fetchedOrders){
-        fetchedOrders.map((order) => {
-          const campers = JSON.parse(order["CampersId"]);
-          campers.map(async (camper, i) => {
-            const camperData = await request("/campers/getcamper", "post", {camperid: camper},
-            ).then(
-              (res) => {
-              return res;
-            }
-            ).catch(err => {
-              console.log(err)
-            })
 
-            const student = await request("/students/getstudent", "post", {studentid: camperData["Student ID"]}
-            ).then(
-              (res) => {
-                return res;
-              }
+  const [info, setInfo] = useState([]);
+
+  const getStudents = async () => {
+    const parent = await request("/parents/getparent", "post", {parentid: props.parentid})
+    .then(
+      (res) => {
+        const children = res.children;
+        
+        const studentData = children.map(
+          async(i) => {
+            await request("/students/getstudent", "post", {studentid: i})
+            .then(
+              studentData.push(i)
             ).catch(err => {
               console.log(err)
             });
+          }
+        );
 
-            camperData["Name"] = student["first name"] + " " + student["last name"];
-          });
-        });
+        return setInfo(studentData);
       }
-    };
+    ).catch(err => {
+      console.log(err)
+    });
+  }
+
+  useEffect(() => {
     getStudents();
-  });
-*/
+  }, []);
+
+  const Row = (props) => {
+    const {id, name, dob, gender, grade, exp} = props
+
+    return(
+        <React.Fragment>
+              <tr>
+                <td height={60} rowSpan={2}>{name}</td>
+                <td height={30}>{dob}</td>
+                <td height={30}>{gender}</td>
+                <td height={30}>{grade}</td>
+                <td height={60} rowSpan={2}>
+                <div class="form-check" style={{display: 'flex', alignItems: 'center', justifyContent: 'center',}}>
+                  <input class="form-check-input" type="checkbox" value="" id={id}/>
+                  <label class="form-check-label" for="flexCheckDefault"/>
+                </div>
+                </td>
+              </tr>
+              <tr>
+                <td height={30} colSpan={3}>{exp}</td>
+              </tr>
+        </React.Fragment>
+    );
+  };
+
+  const Table = (props) => {
+    const {data} = props
+
+    return(
+      <table style={tableStyle}>
+        <tbody>
+          <tr>
+            <th style={tableHeaderStyle}>Name</th>
+            <th style={tableHeaderStyle}>Date of Birth</th>
+            <th style={tableHeaderStyle}>Gender</th>
+            <th style={tableHeaderStyle}>Grade</th>
+            <th style={tableHeaderStyle}>Select</th>
+          </tr>
+
+          {data.map(row =>
+            <Row
+            id = {row.id}
+            name = {row.name}
+            dob = {row.dob}
+            gender = {row.gender}
+            grade = {row.grade}
+            exp = {row.exp}/>
+          )}
+
+          <tr>
+            <td height={60} rowSpan={2}>+ New Student</td>
+            <td height={30}></td>
+            <td height={30}></td>
+            <td height={30}></td>
+            <td height={60} rowSpan={2}>
+            <div class="form-check" style={{display: 'flex', alignItems: 'center', justifyContent: 'center',}}>
+              <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"/>
+              <label class="form-check-label" for="flexCheckDefault"/>
+            </div>
+            </td>
+          </tr>
+          <tr>
+            <td height={30} colSpan={3}>STEM Experience: </td>
+          </tr>
+        </tbody>
+      </table>
+    );
+  };
+
   return (
     <Container>
-      <table style={tableStyle}>
-        <tr>
-          <th style={tableHeaderStyle}>Name</th>
-          <th style={tableHeaderStyle}>Date of Birth</th>
-          <th style={tableHeaderStyle}>Gender</th>
-          <th style={tableHeaderStyle}>Grade</th>
-          <th style={tableHeaderStyle}>Select</th>
-        </tr>
+      <Table data = {info}/>
 
-        
-
-        <tr>
-          <td height={60} rowSpan={2}>Baron Yu</td>
-          <td height={30}>2016.12.22</td>
-          <td height={30}>M</td>
-          <td height={30}>G1</td>
-          <td height={60} rowSpan={2}></td>
-        </tr>
-        <tr>
-          <td height={30} colSpan={3}>STEM Experience: Creator LV. 1</td>
-        </tr>
-        <tr>
-          <td height={60} rowSpan={2}>Tian Qin</td>
-          <td height={30}>2016.12.22</td>
-          <td height={30}>M</td>
-          <td height={30}>G3</td>
-          <td height={60} rowSpan={2}></td>
-        </tr>
-        <tr>
-          <td height={30} colSpan={3}>STEM Experience: Wedo 2.0 LV. 3</td>
-        </tr>
-
-        <tr>
-          <td height={60} rowSpan={2}>+ New Student</td>
-          <td height={30}></td>
-          <td height={30}></td>
-          <td height={30}></td>
-          <td height={60} rowSpan={2}></td>
-        </tr>
-        <tr>
-          <td height={30} colSpan={3}>STEM Experience: </td>
-        </tr>
-      </table>
+      <Box>
+        <Button>Next</Button>
+      </Box>
+      
     </Container>
   );
 }
@@ -106,4 +136,31 @@ const Container = styled.div`
   @media ${devices.laptop} {
     width: 60vw;
   }
+`;
+
+const Box = styled.div`
+  position: relative;
+  display: flex;
+  @media ${devices.tablet}{
+    left: 25px;
+    padding: 25px 0px;
+  }
+  @media ${devices.laptop} {
+    left: 50px;
+    padding: 25px 0px;
+  }
+`;
+
+const Button = styled.div`
+  color: black;
+  background-color: white;
+  width: 200px;
+  height: 40px;
+  float: right;
+  margin: 30px;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+  padding-top: 20px;
 `;

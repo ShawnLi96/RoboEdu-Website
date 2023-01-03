@@ -15,6 +15,8 @@ export default function SelectTimeTable() {
 
   return (
     <Container>
+      <Button primary>Start New Registration</Button>
+
       <table style={tableStyle}>
         <tr>
           <th style={tableHeaderStyle}>Time</th>
@@ -44,6 +46,11 @@ export default function SelectTimeTable() {
           <td>Program 3</td>
         </tr>
       </table>
+
+      <Box>
+        <Button>Next</Button>
+        <Button>Back</Button>
+      </Box>
     </Container>
   );
 }
@@ -58,4 +65,31 @@ const Container = styled.div`
   @media ${devices.laptop} {
     width: 60vw;
   }
+`;
+
+const Box = styled.div`
+  position: relative;
+  display: flex;
+  @media ${devices.tablet}{
+    left: 25px;
+    padding: 25px 0px;
+  }
+  @media ${devices.laptop} {
+    left: 50px;
+    padding: 25px 0px;
+  }
+`;
+
+const Button = styled.div`
+  color: black;
+  background-color: white;
+  width: 200px;
+  height: 40px;
+  float: right;
+  margin: 30px;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+  padding-top: 20px;
 `;

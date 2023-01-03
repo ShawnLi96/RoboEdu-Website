@@ -7,7 +7,6 @@ import { devices } from '../../data/devices';
 // components
 import StudentInfoHeader from './StudentInfoHeader'
 import StudentInfoTable from './StudentInfoTable'
-import StudentInfoButton from './StudentInfoButton';
 
 export default function StudentInfoPage(){
     return(
@@ -15,7 +14,6 @@ export default function StudentInfoPage(){
             <Nav/>
             <StudentInfoHeader/>
             <StudentInfoTable/>
-            <StudentInfoButton name = "Next"/>
         </Container>
     );
 }
