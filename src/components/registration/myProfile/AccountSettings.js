@@ -121,6 +121,7 @@ export default function AccountSettings(props) {
         })
       }
       post();
+      setMessage("Changes saved!")
 
     }
     
@@ -157,7 +158,7 @@ export default function AccountSettings(props) {
         </Section>
         <Section>
           <Title>
-            Confirm
+            Save Changes
           </Title>
           <Box key = {2}>
             <Label> Current Password </Label>

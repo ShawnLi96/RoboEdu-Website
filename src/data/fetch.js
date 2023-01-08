@@ -7,7 +7,7 @@ export async function request(api, method, params) {
     }
   };
   if (method === "post") {
-    params.authkey = "f99b3e0accc55b4e8df73e83e430590257dc03a4f6ac859608773d0952a04acee359c7dfeced23be88fac3a7f160e836";
+    params.authkey = sessionStorage.getItem("authkey");
     fetchinput.body = JSON.stringify(params);
   }
 

@@ -9,49 +9,57 @@ import { devices } from "../../../data/devices"
 export default function Schedule(props) {
   
   return (
-    <table>
-      <thead>
-        <tr>
-          {COLUMNS.map((column) => {
-            return <Header key={column}>{column}</Header>;
-          })}
-        </tr>
-      </thead>
-      {
-        props.schedule.map((week, i) => {
-          // each order is 
-          // [name, program, lunch, beforeExt, afterExt, subtotal]
-          if (week.length > 0){
-          return (
-              <tbody key={i}>
-                
-                {week.map((entry, k) => {
-                  // maps thru every camper of the particular order
-                  // returns it as a <tr> HTML element
-
-                  const weekHeader = (k === 0) ? <Date rowSpan = {week.length}>{weeks[i]}</Date>: '';
+    <Container>
+      <table>
+        <thead>
+          <tr>
+            {COLUMNS.map((column) => {
+              return <Header key={column}>{column}</Header>;
+            })}
+          </tr>
+        </thead>
+        {
+          props.schedule.map((week, i) => {
+            // each order is 
+            // [name, program, lunch, beforeExt, afterExt, subtotal]
+            if (week.length > 0){
+            return (
+                <tbody key={i}>
                   
-                  return (
-                    <tr key = {k}>
-                      {weekHeader}
-                      <Student>{entry.name}</Student>
-                      <Program>{entry.program}</Program>
-                      <IconTD> <Icon state={entry.lunch} /></IconTD>
-                      <IconTD> <Icon state={entry.beforeExt} /></IconTD>
-                      <IconTD> <Icon state={entry.afterExt} /></IconTD>
-                      <Subtotal> {formatter.format(entry.subtotal)} </Subtotal>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            );
-          }
-        }) 
-      }
-    </table>
+                  {week.map((entry, k) => {
+                    // maps thru every camper of the particular order
+                    // returns it as a <tr> HTML element
+
+                    const weekHeader = (k === 0) ? <Date rowSpan = {week.length}>{weeks[i]}</Date>: '';
+                    
+                    return (
+                      <tr key = {k}>
+                        {weekHeader}
+                        <Student>{entry.name}</Student>
+                        <Program>{entry.program}</Program>
+                        <IconTD> <Icon state={entry.lunch} /></IconTD>
+                        <IconTD> <Icon state={entry.beforeExt} /></IconTD>
+                        <IconTD> <Icon state={entry.afterExt} /></IconTD>
+                        <Subtotal> {formatter.format(entry.subtotal)} </Subtotal>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              );
+            }
+          }) 
+        }
+      </table>
+    </Container>
   );
           
 }
+const Container = styled.div`
+
+  @media ${devices.tablet}{
+    width: 95vw;
+  }
+`
 
 const Student = styled.td`
   outline: 1px solid black;
@@ -71,7 +79,7 @@ const Date = styled.td`
 
   }
   @media ${devices.tablet}{
-    width: 20%;
+    width: 10%;
   }
 `
 const Subtotal = styled.td`
@@ -130,6 +138,7 @@ const Program = styled.td`
 const IconTD = styled.td`
   outline: 1px solid black;
   
+  // CHANGE TO PERCENTAGES
   @media ${devices.tablet}{
     width: 80px;  
   }
@@ -139,7 +148,7 @@ const IconTD = styled.td`
   }
 
   @media ${devices.laptopL}{
-    width: 100px;
+    width: 5%;
   }
 
 `
@@ -163,12 +172,25 @@ var formatter = new Intl.NumberFormat("en-CA", {
 
 
 const Icon = styled.div`
-  width: 15px;
-  height: 15px;
   background-repeat: no-repeat;
   background-image: url(${(props) => (props.state ? check : cross)});
   background-size: cover;
   margin-left: auto;
   margin-right: auto;
   padding: 5px;
+
+  @media ${devices.tablet}{
+    width: 20px;
+    height: 20px;
+  }
+
+  @media ${devices.laptop}{
+    width: 25px;
+    height: 25px;
+  }
+
+  @media ${devices.laptopL}{
+    width: 25px;
+    height: 25px;
+  }
 `;

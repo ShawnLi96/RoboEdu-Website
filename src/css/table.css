@@ -6,16 +6,12 @@ table {
   background-color: white;
   position: relative;
   margin-top: auto;
-  border-collapse: separate;
-  border-spacing: 0px;
   outline: 1px solid black;
-
 }
   
 table td {
   border: 1px solid #000000;
   padding: 8px;
-
 }
 
 
@@ -25,4 +21,6 @@ table th {
   text-align: center;
   background-color: #E0E5E9;
   color: white;
+  width: 1%;
+  white-space: nowrap;
 }

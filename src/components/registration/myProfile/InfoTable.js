@@ -71,6 +71,7 @@ const Container = styled.div`
 `
 const Order = styled.div`
   background-color: black;
+  border: 1px solid black;
   @media ${devices.mobile}{
 
   }
@@ -81,7 +82,6 @@ const Order = styled.div`
 const Summary = styled.div`
   outline: 1px solid black;
   display: flex;
-  width: 100%;
   align-items: center;
   justify-content: center;
   background-color: #E0E5E9;
@@ -106,7 +106,6 @@ const SummaryContainer = styled.div`
   }
 
   @media ${devices.tablet}{
-    margin-left: 25px;
   }
 
 `
@@ -119,7 +118,6 @@ const Info = styled.div`
   }
   @media ${devices.laptop}{
     height: 50px;
-    margin-right: 8vw;
 
   }
 

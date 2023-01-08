@@ -11,11 +11,16 @@ export default function NewUserForm(props) {
   const [password1, setPassword1] = useState("");
   const [password2, setPassword2] = useState("");
   const [message, setMessage] = useState("");
+  const [success, setSuccess] = useState(false);
 
 
   function onSubmit() {
-    if (password1 === password2) {
+    if (!firstName || !lastName || !email || !phoneNumber || !password1 || !password2){
+      setMessage("Please fill in all the fields!")
+    }
+    else if (password1 === password2) {
       setMessage("");
+      setSuccess(true);
       console.log("match");
       request("/parents/newuser", "post", {
         firstname: firstName,
@@ -134,7 +139,7 @@ export default function NewUserForm(props) {
             return false;
           }}
           // eslint-disable-next-line no-script-url
-          href = {(password1 === password2) ? "/": "javascript:void(0);"}
+          href = {(success) ? "/": "javascript:void(0);"}
         >
           Submit
         </Submit>

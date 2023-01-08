@@ -132,14 +132,17 @@ export default function Table(props) {
           </ChangeView>
         </div>
         
-        <div style={{width: "95vw"}}>
+        <TableContainer>
           {displayTable()}
-        </div>
+        </TableContainer>
       </div>
     </Container>
   );
 }
-
+const TableContainer = styled.div`
+  display: flex;
+  justify-content: center;
+`
 const ChangeView = styled.a`
   background-color: white;
   left: auto;

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import Table from "./myProfile/Table";
+import {useLocation} from 'react-router-dom';
 import Nav from "../Nav";
 import bg from "../../images/background.png";
 import ProgressBar from "../ProgressBar";
@@ -9,7 +10,8 @@ import AccountSettings from "./myProfile/AccountSettings";
 import StudentInfoTable from "../studentInfoPage/StudentInfoTable"
 
 export default function Home(props) {
-  const parentid = 22;
+  const { state } = useLocation();
+  const parentid = state.parentid;
 
   // state to keep track of which page we are on
   // 5 pages in total of registration process starting from 1 (the table of orders)

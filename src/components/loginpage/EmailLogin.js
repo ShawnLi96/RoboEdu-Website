@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import Home from "../registration/Home"
 import { devices } from "../../data/devices";
 import { request } from "../../data/fetch";
 import { useNavigate } from 'react-router-dom'
@@ -37,8 +36,9 @@ export default function EmailLogin() {
       else {
         console.log(res["auth-key"])
         sessionStorage.setItem("authkey", res["auth-key"]);
+        console.log(res["user id"])
         setSuccess(true)
-        navigate("/Home")
+        navigate("/Home", {state:{parentid: res["user id"]}})
       }
     });
   }
