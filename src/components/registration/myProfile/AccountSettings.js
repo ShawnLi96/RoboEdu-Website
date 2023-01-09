@@ -109,19 +109,17 @@ export default function AccountSettings(props) {
       }
       const post = async() => {
         await request("/parents/edit/protected", "post", args).then((res) => {
-          console.log(res[0]["status"])
+          console.log(res)
           if (res[0]["error"]){
             setMessage("Wrong Password")
-            console.log("not updated")
           }
           else{
-            setMessage("Information Updated")
-            console.log("updated")
+            setMessage("Changes saved!")
           }
         })
       }
       post();
-      setMessage("Changes saved!")
+      
 
     }
     

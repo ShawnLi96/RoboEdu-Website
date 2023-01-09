@@ -21,18 +21,17 @@ export default function InfoTable(props) {
     props.setRefresh(!props.refresh);
   }
 
-
-  // function confirmOrder(id){
-  //   request("/orders/submit", "post", {id: id})
-  // }
+  function confirmOrder(id){
+    request("/orders/submit", "post", {orderid: id}).then(res => console.log(res))
+  }
 
   function displayButtons (i){
     if (props.data[i]["status"] === 1){
       return (
         <div style = {{display: "flex"}}>
           <Button name = "edit">Edit</Button>
-          <Button name = "delete" onClick = {() =>{deleteOrder(props.data[i]["ID"])}}>Delete</Button>
-          <Button name = "confirm">Confirm</Button>
+          <Button name = "delete" onClick = {() =>deleteOrder(props.data[i]["ID"])}>Delete</Button>
+          <Button name = "confirm" onClick = {() => confirmOrder(props.data[i]["ID"])}>Confirm</Button>
         </div>
       )
     }
