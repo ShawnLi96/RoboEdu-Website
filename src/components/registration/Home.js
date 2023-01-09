@@ -19,12 +19,9 @@ export default function Home(props) {
 
   const [curPage, setPage] = useState(0);
   const [focus, setFocus] = useState(props.focus);
-  const [refresh, setRefresh] = useState(false);
   
   const params = {
     parentid: parentid,
-    refresh: refresh,
-    setRefresh: () => setRefresh(!refresh),
     setPage: setPage
   }
 

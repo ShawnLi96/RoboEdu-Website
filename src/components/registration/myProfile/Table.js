@@ -8,6 +8,7 @@ import { devices } from '../../../data/devices'
 
 export default function Table(props) {
 
+  const [refresh, setRefresh] = useState(false);
   console.log('rerender')
   console.log(props.parentid)
   // an array of orders fetched
@@ -99,16 +100,24 @@ export default function Table(props) {
     getCampers();
   }, [fetchedOrders]);
 
+  const params = {
+    orders: allOrders,
+    data: fetchedOrders,
+    refresh: refresh,
+    setRefresh: () => setRefresh
+  }
+
   const displayTable = () => {
     if (display === 0 && allOrders){
-      return <InfoTable orders={allOrders} data={fetchedOrders} refresh = {props.refresh} setRefresh = {() => props.setRefresh}/>
+      return <InfoTable {...params}/>
     }
     else return <Schedule schedule = {scheduleInfo}/>
-  }
+  } 
 
   // display 0 is the list of orders (default)
   // display 1 is the schedule filled in by all orders
   const [display, setDisplay] = useState(0);
+  console.log(refresh)
   return (
     <Container>
       <Box>
@@ -120,7 +129,7 @@ export default function Table(props) {
 
       <div style={{margin: "auto"}}>
         <div style={{display: "flex", justifyContent: "space-between"}}>
-          <Button onClick={() => props.setRefresh(!props.refresh)}>Refresh</Button>
+          <Button onClick={() =>setRefresh(!refresh)}>Refresh</Button>
           <ChangeView
           onClick={() =>
             setDisplay((display) => {

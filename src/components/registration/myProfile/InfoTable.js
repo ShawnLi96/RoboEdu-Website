@@ -22,7 +22,17 @@ export default function InfoTable(props) {
   }
 
   function confirmOrder(id){
-    request("/orders/submit", "post", {orderid: id}).then(res => console.log(res))
+    request("/orders/submit", "post", {orderid: id}).then((res) => {
+      console.log(res)
+      if (res[0]["error"]){
+        console.log("program is full")
+      }
+      else{
+        console.log('success')
+        props.setRefresh(!props.refresh);
+        console.log(props.refresh)
+      }
+    })
   }
 
   function displayButtons (i){
@@ -62,6 +72,10 @@ export default function InfoTable(props) {
       </Container>
     );
 }
+
+const Message = styled.div`
+
+`
 const Container = styled.div`
   
   @media ${devices.tablet}{
