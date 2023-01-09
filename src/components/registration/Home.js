@@ -8,6 +8,8 @@ import ProgressBar from "../ProgressBar";
 import { devices } from "../../data/devices";
 import AccountSettings from "./myProfile/AccountSettings";
 import StudentInfoTable from "../studentInfoPage/StudentInfoTable"
+import SelectTimeTable from "../selectTimePage/SelectTimeTable"
+import SelectProgramChart from "../selectProgramPage/SelectProgramChart"
 
 export default function Home(props) {
   const { state } = useLocation();
@@ -34,6 +36,12 @@ export default function Home(props) {
       {...params}
     />,
     <StudentInfoTable
+      {...params}
+    />,
+    <SelectTimeTable
+      {...params}
+    />,
+    <SelectProgramChart
       {...params}
     />
 

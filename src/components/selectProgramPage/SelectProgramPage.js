@@ -6,15 +6,14 @@ import { devices } from '../../data/devices';
 
 // components
 import SelectProgramHeader from './SelectProgramHeader'
-import SelectProgramButton from './SelectProgramButton' 
+import SelectProgramChart from './SelectProgramChart' 
 
 export default function SelectProgramPage(){
     return(
         <Container>
             <Nav/>
             <SelectProgramHeader/>
-            <SelectProgramButton name = "Finish"/>
-            <SelectProgramButton name = "Back"/>
+            <SelectProgramChart/>
         </Container>
     );
 }
