@@ -7,21 +7,19 @@ import { devices } from '../../../data/devices'
 
 
 export default function Table(props) {
-
   const [refresh, setRefresh] = useState(false);
-  console.log('rerender')
-  console.log(props.parentid)
+  console.log(refresh)
   // an array of orders fetched
   const [fetchedOrders, setOrders] = useState([]);  
   useEffect(() => {
     getOrders();
-  }, []);
+  }, [refresh]);
   // fetches all the orders and saves into state
   const getOrders = async () => {
     return await request("/parents/getorders", "post", {parentid: props.parentid}).then((res) => {
       setOrders(res);
       console.log(res)
-      console.log('data set')
+      console.log('refetch')
     }).catch(err => {
       console.log(err)
     });
@@ -104,7 +102,7 @@ export default function Table(props) {
     orders: allOrders,
     data: fetchedOrders,
     refresh: refresh,
-    setRefresh: () => setRefresh
+    setRefresh: setRefresh
   }
 
   const displayTable = () => {
@@ -117,7 +115,6 @@ export default function Table(props) {
   // display 0 is the list of orders (default)
   // display 1 is the schedule filled in by all orders
   const [display, setDisplay] = useState(0);
-  console.log(refresh)
   return (
     <Container>
       <Box>

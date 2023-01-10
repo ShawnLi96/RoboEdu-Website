@@ -8,10 +8,6 @@ import { request } from "../../../data/fetch";
 
 export default function InfoTable(props) {
 
-  console.log('info table')
-  console.log("props.data", props.data)
-  console.log("props.orders", props.orders)
-
   if (props.orders.length === 0){
     props.setRefresh(!props.refresh);
   }
