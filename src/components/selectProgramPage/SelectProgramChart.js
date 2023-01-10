@@ -19,6 +19,7 @@ export default function SelectProgramChart(props){
 
 const Container = styled.div`
   display: flex;
+  flex-direction: column;
   margin: auto;
   @media ${devices.mobile} {
     width: 80vw;
