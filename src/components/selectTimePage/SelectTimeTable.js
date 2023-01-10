@@ -12,16 +12,21 @@ export default function SelectTimeTable(props) {
   const tableHeaderStyle = {
     backgroundColor: "#04aa6d",
     color: "white",
+    width: "11%"
+  };
+
+  const mainTableHeaderStyle = {
+    backgroundColor: "#04aa6d",
+    color: "white",
+    width: "78%"
   };
 
   return (
     <Container>
-      <Button>Start New Registration</Button>
-
       <table style={tableStyle}>
         <tr>
           <th style={tableHeaderStyle}>Time</th>
-          <th style={tableHeaderStyle}>Summary</th>
+          <th style={mainTableHeaderStyle}>Summary</th>
           <th style={tableHeaderStyle}>Select</th>
         </tr>
         <tr>
@@ -68,6 +73,7 @@ export default function SelectTimeTable(props) {
 
 const Container = styled.div`
   display: flex;
+  flex-direction: column;
   margin: auto;
   @media ${devices.mobile} {
     width: 80vw;

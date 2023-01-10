@@ -96,9 +96,9 @@ export default function StudentInfoTable(props) {
 
           <tr>
             <td height={60} rowSpan={2}>+ New Student</td>
-            <td height={30}></td>
-            <td height={30}></td>
-            <td height={30}></td>
+            <td height={30}><Input></Input></td>
+            <td height={30}><Input></Input></td>
+            <td height={30}><Input></Input></td>
             <td height={60} rowSpan={2}>
             <div class="form-check" style={{display: 'flex', alignItems: 'center', justifyContent: 'center',}}>
               <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"/>
@@ -107,7 +107,7 @@ export default function StudentInfoTable(props) {
             </td>
           </tr>
           <tr>
-            <td height={30} colSpan={3}>STEM Experience: </td>
+            <td height={30} colSpan={3}>STEM Experience: <Input></Input></td>
           </tr>
         </tbody>
       </table>
@@ -128,6 +128,7 @@ export default function StudentInfoTable(props) {
 
 const Container = styled.div`
   display: flex;
+  flex-direction: column;
   margin: auto;
   @media ${devices.mobile} {
     width: 80vw;
@@ -205,4 +206,35 @@ const Button = styled.a`
     height: 2vw;
     font-size: 1vw;
   }
+`;
+
+const Input = styled.input`
+    type: "text";
+    required
+    autofocus
+    font-size: 15px;
+
+    @media ${devices.mobile}{
+        font-weight: normal;
+        height: 2vh;
+        
+    }
+
+    @media ${devices.tablet}{
+        width: 10vw;
+        height: 2vh;
+        font-size: 15px;
+
+    }
+
+    @media ${devices.laptop}{
+        width: 10vw;
+        height: 2vh;
+        font-size: 15px;
+    }
+    @media ${devices.laptopL}{
+        height: 2vh;
+        width: 10vw;
+        font-size: 15px;
+    }
 `;
