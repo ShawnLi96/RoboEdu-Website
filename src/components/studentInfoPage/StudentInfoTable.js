@@ -28,6 +28,7 @@ export default function StudentInfoTable(props) {
           async(i) => {
             await request("/students/getstudent", "post", {studentid: i})
             .then((res) =>{
+              console.log(res);
               temp.push(res);
             }
             ).catch(err => {
@@ -35,6 +36,7 @@ export default function StudentInfoTable(props) {
             });
           }
         );
+        console.log(temp);
         setInfo(temp);
       }
     ).catch(err => {
@@ -47,7 +49,6 @@ export default function StudentInfoTable(props) {
     getStudents();
   }, []);
 
-  console.log(info)
   const Row = (props) => {
     const {id, name, dob, gender, grade, exp} = props
 
@@ -74,6 +75,7 @@ export default function StudentInfoTable(props) {
 
   const Table = (props) => {
     const {data} = props
+    console.log({data});
 
     return(
       <table style={tableStyle}>
@@ -88,12 +90,12 @@ export default function StudentInfoTable(props) {
 
           {data.map(row =>
             <Row
-            id = {row.id}
-            name = {row.name}
+            id = {row.ID}
+            name = {row["first name"] + " " + row["last name"]}
             dob = {row.dob}
-            gender = {row.gender}
+            gender = {row.status}
             grade = {row.grade}
-            exp = {row.exp}/>
+            exp = {row.school}/>
           )}
 
           <tr>
