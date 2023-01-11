@@ -8,14 +8,14 @@ import { devices } from '../../data/devices';
 import StudentInfoHeader from './StudentInfoHeader'
 import StudentInfoTable from './StudentInfoTable'
 
-export default function StudentInfoPage(){
+export default function StudentInfoPage(props){
     return(
         <Container>
             <Nav/>
             <StudentInfoHeader/>
-            <StudentInfoTable/>
+            <StudentInfoTable parentid = {props.parentid}/>
         </Container>
-    );
+    )
 }
 
 const Container = styled.div`

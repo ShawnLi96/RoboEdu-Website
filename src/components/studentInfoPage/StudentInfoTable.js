@@ -1,5 +1,4 @@
-import { id } from "date-fns/locale";
-import React, { useEffect, useInsertionEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { devices } from "../../data/devices";
 import { request } from "../../data/fetch";
@@ -19,33 +18,36 @@ export default function StudentInfoTable(props) {
   const [info, setInfo] = useState([]);
 
   const getStudents = async () => {
-    const parent = await request("/parents/getparent", "post", {parentid: props.parentid})
+    return await request("/parents/getparent", "post", {parentid: props.parentid})
     .then(
       (res) => {
-        const children = res.children;
-        
-        const studentData = children.map(
+        console.log(res);
+        const children = JSON.parse(res.children);
+        var temp = []
+        children.map(
           async(i) => {
             await request("/students/getstudent", "post", {studentid: i})
-            .then(
-              studentData.push(i)
+            .then((res) =>{
+              temp.push(res);
+            }
             ).catch(err => {
               console.log(err)
             });
           }
         );
-
-        return setInfo(studentData);
+        setInfo(temp);
       }
     ).catch(err => {
       console.log(err)
     });
   }
 
+
   useEffect(() => {
     getStudents();
   }, []);
 
+  console.log(info)
   const Row = (props) => {
     const {id, name, dob, gender, grade, exp} = props
 

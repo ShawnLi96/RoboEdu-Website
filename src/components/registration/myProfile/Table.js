@@ -7,23 +7,25 @@ import { devices } from '../../../data/devices'
 
 
 export default function Table(props) {
-  const [refresh, setRefresh] = useState(false);
-  console.log(refresh)
+
   // an array of orders fetched
   const [fetchedOrders, setOrders] = useState([]);  
   useEffect(() => {
     getOrders();
-  }, [refresh]);
-  // fetches all the orders and saves into state
+  }, []);
+  // fetches all the orders initially and saves into state
+
+
   const getOrders = async () => {
     return await request("/parents/getorders", "post", {parentid: props.parentid}).then((res) => {
       setOrders(res);
       console.log(res)
-      console.log('refetch')
     }).catch(err => {
       console.log(err)
     });
   };
+
+
 
   function buildSchedule(masterSchedule, schedule, camperData) {
     schedule[camperData["Week"]].push(
@@ -93,6 +95,8 @@ export default function Table(props) {
     });
   }}
 
+
+
   useEffect(() => 
   {
     getCampers();
@@ -101,8 +105,7 @@ export default function Table(props) {
   const params = {
     orders: allOrders,
     data: fetchedOrders,
-    refresh: refresh,
-    setRefresh: setRefresh
+    refetchOrders: () => getOrders()
   }
 
   const displayTable = () => {
@@ -126,7 +129,7 @@ export default function Table(props) {
 
       <div style={{margin: "auto"}}>
         <div style={{display: "flex", justifyContent: "space-between"}}>
-          <Button onClick={() =>setRefresh(!refresh)}>Refresh</Button>
+          <Button onClick={() =>getOrders()}>Refresh</Button>
           <ChangeView
           onClick={() =>
             setDisplay((display) => {

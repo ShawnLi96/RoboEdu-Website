@@ -8,13 +8,10 @@ import { request } from "../../../data/fetch";
 
 export default function InfoTable(props) {
 
-  if (props.orders.length === 0){
-    props.setRefresh(!props.refresh);
-  }
   const status = ["", "In Cart", "Submitted", "Expired", "Paid"]
   function deleteOrder (id){
     request("/orders/delete", "post", {orderid: id}).then(res => console.log(res))
-    props.setRefresh(!props.refresh);
+    props.refetchOrders()
   }
 
   function confirmOrder(id){
@@ -25,7 +22,7 @@ export default function InfoTable(props) {
       }
       else{
         console.log('success')
-        props.setRefresh(!props.refresh);
+        props.refetchOrders()
         console.log(props.refresh)
       }
     })
