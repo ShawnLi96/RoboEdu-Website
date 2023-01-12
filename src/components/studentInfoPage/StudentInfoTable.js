@@ -16,6 +16,7 @@ export default function StudentInfoTable(props) {
   };
 
   const [info, setInfo] = useState([]);
+  const [students, setStudents] = useState([]);
 
   const getStudents = async () => {
     return await request("/parents/getparent", "post", {parentid: props.parentid})
@@ -44,34 +45,9 @@ export default function StudentInfoTable(props) {
     });
   }
 
-
   useEffect(() => {
     getStudents();
   }, []);
-
-  const Row = (props) => {
-    const {id, name, dob, gender, grade, exp} = props
-
-    return(
-        <React.Fragment>
-              <tr>
-                <td height={60} rowSpan={2}>{name}</td>
-                <td height={30}>{dob}</td>
-                <td height={30}>{gender}</td>
-                <td height={30}>{grade}</td>
-                <td height={60} rowSpan={2}>
-                <div class="form-check" style={{display: 'flex', alignItems: 'center', justifyContent: 'center',}}>
-                  <input class="form-check-input" type="checkbox" value="" id={id}/>
-                  <label class="form-check-label" for="flexCheckDefault"/>
-                </div>
-                </td>
-              </tr>
-              <tr>
-                <td height={30} colSpan={3}>STEM Experience: {exp}</td>
-              </tr>
-        </React.Fragment>
-    );
-  };
 
   const Table = (props) => {
     const {data} = props
@@ -118,12 +94,52 @@ export default function StudentInfoTable(props) {
     );
   };
 
+  const Row = (props) => {
+    const {id, name, dob, gender, grade, exp} = props
+
+    return(
+        <React.Fragment>
+              <tr>
+                <td height={60} rowSpan={2}>{name}</td>
+                <td height={30}>{dob}</td>
+                <td height={30}>{gender}</td>
+                <td height={30}>{grade}</td>
+                <td height={60} rowSpan={2}>
+                <div class="form-check" style={{display: 'flex', alignItems: 'center', justifyContent: 'center',}}>
+                  <input class="form-check-input" type="checkbox" value="" id={id} onClick={(c) => updateStudents(c.target)}/>
+                </div>
+                </td>
+              </tr>
+              <tr>
+                <td height={30} colSpan={3}>STEM Experience: {exp}</td>
+              </tr>
+        </React.Fragment>
+    );
+  };
+
+  const updateStudents = (s) => {
+    var temp = students;
+    if(s.checked == true) temp.push(s.id);
+    else{
+      for(var i = 0; i < temp.length; i++){
+        if(temp[i] == s.id) temp.splice(i, 1);
+      }
+    };
+
+    setStudents(temp);
+    console.log({students});
+  };
+
+  const sendStudents = () => {
+    props.setPage(3)
+  };
+
   return (
     <Container>
       <Table data = {info}/>
 
       <Box>
-        <Button onClick = {() => props.setPage(3)}>Next</Button>
+        <Button onClick = {() => sendStudents()}>Next</Button>
       </Box>
       
     </Container>
