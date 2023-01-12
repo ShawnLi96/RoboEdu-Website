@@ -67,7 +67,7 @@ export default function StudentInfoTable(props) {
                 </td>
               </tr>
               <tr>
-                <td height={30} colSpan={3}>{exp}</td>
+                <td height={30} colSpan={3}>STEM Experience: {exp}</td>
               </tr>
         </React.Fragment>
     );
