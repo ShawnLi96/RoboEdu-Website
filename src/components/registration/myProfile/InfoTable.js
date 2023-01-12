@@ -7,7 +7,6 @@ import { request } from "../../../data/fetch";
 
 
 export default function InfoTable(props) {
-
   const status = ["", "In Cart", "Submitted", "Expired", "Paid"]
   function deleteOrder (id){
     request("/orders/delete", "post", {orderid: id}).then(res => console.log(res))
@@ -29,12 +28,12 @@ export default function InfoTable(props) {
   }
 
   function displayButtons (i){
-    if (props.data[i]["status"] === 1){
+    if (props.fetchedOrders[i]["status"] === 1){
       return (
         <div style = {{display: "flex"}}>
           <Button name = "edit">Edit</Button>
-          <Button name = "delete" onClick = {() =>deleteOrder(props.data[i]["ID"])}>Delete</Button>
-          <Button name = "confirm" onClick = {() => confirmOrder(props.data[i]["ID"])}>Confirm</Button>
+          <Button name = "delete" onClick = {() =>deleteOrder(props.fetchedOrders[i]["ID"])}>Delete</Button>
+          <Button name = "confirm" onClick = {() => confirmOrder(props.fetchedOrders[i]["ID"])}>Confirm</Button>
         </div>
       )
     }
@@ -44,16 +43,16 @@ export default function InfoTable(props) {
       <Container>
         {
           props.orders.map((schedule, i) => {
-            var dateEdited = new Date(props.data[i]["Last Action"]).toLocaleDateString("en-US")
+            var dateEdited = new Date(props.fetchedOrders[i]["Last Action"]).toLocaleDateString("en-US")
             return (
               <Order key = {i}>
                 <Schedule schedule={schedule}/>
                 <Summary>
                     <SummaryContainer>
                         <Info>
-                          Total: {formatter.format(props.data[i]["Fee"])}<br></br>
+                          Total: {formatter.format(props.fetchedOrders[i]["Fee"])}<br></br>
                           Last edited: {dateEdited} <br></br>
-                          Status: {status[props.data[i]["status"]]}
+                          Status: {status[props.fetchedOrders[i]["status"]]}
                         </Info>
                       {displayButtons(i)}
                     </SummaryContainer>

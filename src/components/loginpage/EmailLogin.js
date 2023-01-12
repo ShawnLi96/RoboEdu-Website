@@ -21,26 +21,28 @@ export default function EmailLogin() {
   }
   const navigate = useNavigate()
   function onSubmit() {
-    request("/logins/loginemailpswd", "post", {
-      email: email,
-      password: password,
-      expiry: 1000,
-    }).then((res) => {
-      console.log(res);
+    if (email !== "" && password !== ""){
+      request("/logins/loginemailpswd", "post", {
+        email: email,
+        password: password,
+        expiry: 1000,
+      }).then((res) => {
+        console.log(res);
 
-      // invalid credentials
-      if (res["auth-key"] === undefined) {
-        setSuccess(false)
-      }
-      // successful login
-      else {
-        console.log(res["auth-key"])
-        sessionStorage.setItem("authkey", res["auth-key"]);
-        console.log(res["user id"])
-        setSuccess(true)
-        navigate("/Home", {state:{parentid: res["user id"]}})
-      }
-    });
+        // invalid credentials
+        if (res["auth-key"] === undefined) {
+          setSuccess(false)
+        }
+        // successful login
+        else {
+          console.log(res["auth-key"])
+          sessionStorage.setItem("authkey", res["auth-key"]);
+          console.log(res["user id"])
+          setSuccess(true)
+          navigate("/Home", {state:{parentid: res["user id"]}})
+        }
+      });
+    }
   }
 
   console.log("Email:", email)
@@ -104,17 +106,8 @@ const Submit = styled.a`
   margin-top: 3vh;
   cursor: pointer;
   type: "submit";
-
-  &:link {
-    text-decoration: none;
-  }
-  &:visited {
-    text-decoration: none;
-  }
-  &:hover {
-    text-decoration: none;
-  }
-  &:active {
+  text-decoration: none;
+  &:focus, &:visited, &:link, &:active {
     text-decoration: none;
   }
   &:hover {

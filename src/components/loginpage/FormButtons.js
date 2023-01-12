@@ -33,6 +33,10 @@ const Button = styled.a`
     align-items: center;
     font-size: 40px;
     cursor: pointer;
+    text-decoration: none;
+    &:focus, &:visited, &:link, &:active {
+      text-decoration: none;
+    }
     width: 20vw;
     background-color: ${(props) => props.active ? "#475F6F": "#7999A8"};
     color: ${(props) => props.active ? "#EDD662" : "#FFFFFF"};

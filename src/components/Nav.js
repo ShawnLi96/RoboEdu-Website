@@ -91,22 +91,14 @@ const Container = styled.div`
 const Button = styled.a`
   color: ${(props) => (props.state ? "#EDD662" : "#FFFFFF")};
   cursor: pointer;
+
+  text-decoration: none;
+  &:focus, &:visited, &:link, &:active {
+    text-decoration: none;
+  }
   &:hover {
     color: #EDD662;
   }
-  &:link {
-    text-decoration: none;
-  }
-  &:visited {
-    text-decoration: none;
-  }
-  &:hover {
-    text-decoration: none;
-  }
-  &:active {
-    text-decoration: none;
-  }
-
   @media ${devices.mobile}{
     font-size: 15px;
   }

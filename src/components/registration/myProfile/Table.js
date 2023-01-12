@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import InfoTable from "./InfoTable";
 import Schedule from "./Schedule"
 import { request } from "../../../data/fetch";
@@ -7,19 +7,34 @@ import { devices } from '../../../data/devices'
 
 
 export default function Table(props) {
-
-  // an array of orders fetched
-  const [fetchedOrders, setOrders] = useState([]);  
+  
+  const [refresh, setRefresh] = useState(false);
+  const [scheduleInfo, setScheduleInfo] = useState([]);
+  const [orderInfo, setAllOrders] = useState([]);
+  
+  let fetchedOrders = useRef(null);
   useEffect(() => {
-    getOrders();
-  }, []);
-  // fetches all the orders initially and saves into state
+    build();
+  }, [refresh]);
+
+  async function build(){
+    try{
+      const orders = await getOrders();
+      fetchedOrders.current = orders;
+      console.log(orders)
+      await getCampers(orders)
+      console.log('campers gotten')
+    }
+    catch (err) {
+      console.log(err);
+    }
+  }
 
 
-  const getOrders = async () => {
+  async function getOrders() {
     return await request("/parents/getorders", "post", {parentid: props.parentid}).then((res) => {
-      setOrders(res);
-      console.log(res)
+      console.log(res);
+      return res;
     }).catch(err => {
       console.log(err)
     });
@@ -48,22 +63,17 @@ export default function Table(props) {
       })
   }
 
-  const [scheduleInfo, setScheduleInfo] = useState([]);
-  const [allOrders, setAllOrders] = useState([]);
-  // loop thru the orders and fetch every camper. 
-  // parse information of each camper into html and save it into state allCamperInfo
-
-
   
-  const getCampers = async () => {
+  async function getCampers(fetchedOrders) {
     var masterSchedule = [[], [], [], [], [], [], [], [], []];
     var orders = []
+    console.log("camper resources", fetchedOrders)
     if (fetchedOrders) {
-      fetchedOrders.map((order) => {
+      fetchedOrders.forEach(async (order) => {
         var schedule = [[], [], [], [], [], [], [], [], []];
 
         const campers = JSON.parse(order["CamperIDs"]);
-        campers.map(async (camper, i) => {
+        await campers.forEach(async (camper, i) => {
           await request("/campers/getcamper", "post", {
             camperid: camper
           },
@@ -80,36 +90,33 @@ export default function Table(props) {
 
                 // create an entry for the camper for this order of the week
                 buildSchedule(masterSchedule, schedule, camperData);
-
+                setScheduleInfo(masterSchedule);
               }
             ).catch(err => {
               console.log(err)
             });
-            setScheduleInfo(masterSchedule);
-            setAllOrders(orders);
+
           }).catch(err => {
             console.log(err)
           })
         });
         orders.push(schedule)
+        setAllOrders(orders);
+
     });
   }}
 
 
 
-  useEffect(() => 
-  {
-    getCampers();
-  }, [fetchedOrders]);
 
   const params = {
-    orders: allOrders,
-    data: fetchedOrders,
-    refetchOrders: () => getOrders()
+    orders: orderInfo,
+    fetchedOrders: fetchedOrders.current,
+    refetchOrders: () => setRefresh(!refresh)
   }
 
   const displayTable = () => {
-    if (display === 0 && allOrders){
+    if (display === 0 && orderInfo){
       return <InfoTable {...params}/>
     }
     else return <Schedule schedule = {scheduleInfo}/>
@@ -147,6 +154,7 @@ export default function Table(props) {
       </div>
     </Container>
   );
+  
 }
 const TableContainer = styled.div`
   display: flex;

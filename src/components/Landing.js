@@ -50,6 +50,10 @@ const Button = styled.a`
   width: 20vw;
   border-radius: 25%;
   font-size: 2vw;
+  text-decoration: none;
+  &:focus, &:visited, &:link, &:active {
+    text-decoration: none;
+  }
   &:hover{
     background-color: #C0C0C0;
     transition: 0.25s;

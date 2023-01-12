@@ -209,16 +209,8 @@ const Submit = styled.a`
   align-items: center;
   cursor: pointer;
   margin-top: 2vh;
-  &:link {
-    text-decoration: none;
-  }
-  &:visited {
-    text-decoration: none;
-  }
-  &:hover {
-    text-decoration: none;
-  }
-  &:active {
+  text-decoration: none;
+  &:focus, &:visited, &:link, &:active {
     text-decoration: none;
   }
   &:hover {

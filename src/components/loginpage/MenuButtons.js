@@ -42,6 +42,10 @@ const Button = styled.a`
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
+    text-decoration: none;
+    &:focus, &:visited, &:link, &:active {
+      text-decoration: none;
+    }
     @media ${devices.mobile}{
         font-size: 15px;
         font-weight: bold;

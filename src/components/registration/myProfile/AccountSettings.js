@@ -13,7 +13,7 @@ export default function AccountSettings(props) {
   const [address, setAddress] = useState("");
 
   // 0 means english, 1 means chinese
-  const [language, setLanguage] = useState(0);
+  const [language, setLanguage] = useState();
   const [message, setMessage] = useState("");
   
   function displayParentFields()  {
@@ -75,7 +75,7 @@ export default function AccountSettings(props) {
         setPhoneNumber(parent["phone number"])
         setEmail(parent["email"])
         setAddress(parent["address"])
-        if (parent["language"]) setLanguage(parent["language"])
+        if (parent["language"]) setLanguage(JSON.parse(parent["language"]))
       }).catch(err => {
         console.log(err)
       });
@@ -91,10 +91,28 @@ export default function AccountSettings(props) {
       else bar.type = "password";
     }
   }
+
+  function onChangeLanguage(lang) {
+    const postLanguage = async() => {
+      await request("/parents/changelanguage", "post", {
+        authkey: sessionStorage.getItem("authkey"),
+        language: lang
+      }).then((res) => {
+        console.log(res)
+        if (res[0]["error"]){
+          setMessage("Unable to perform action")
+        }
+        else{
+          setMessage("Changes saved!")
+        }
+      })
+    }
+    postLanguage();
+
+  }
   function onSubmit() {
     if (password1 !== password2){
       setMessage("The passwords do not match!")
-      console.log("no match between changed passwords")
     }
     else if (curPassword === ""){
       setMessage("Please enter your password to save changes")
@@ -105,7 +123,7 @@ export default function AccountSettings(props) {
         email: email,
         phonenumber: phoneNumber,
         address: address,
-        authkey: sessionStorage.getItem("authkey")
+        authkey: sessionStorage.getItem("authkey"),
       }
       const post = async() => {
         await request("/parents/edit/protected", "post", args).then((res) => {
@@ -124,6 +142,8 @@ export default function AccountSettings(props) {
     }
     
   }
+  console.log(language)
+
   return (
     <Container>
       <Pad>
@@ -136,10 +156,21 @@ export default function AccountSettings(props) {
           <LanguageContainer>
             <Title>Language</Title>
             <div style={{display: "flex"}}>
-              <MiniButton active = {language === "0"}  onClick = {() => setLanguage(0)}>
+            <MiniButton active = {language === 0}  onClick = {() => {
+                setLanguage(0);
+                onChangeLanguage(0);
+                // u cannot use the state to change the language because 
+                // the state only changes to 0 AFTER the component refreshes,
+                // which is AFTER you run onChangeLanguage(), so 
+                // onChangeLanguage is going to take the previous state of language
+                // rather than what u just clicked on
+              }}>                
                 English
               </MiniButton>
-              <MiniButton active = {language === "1"}  onClick = {() => setLanguage(1)}>
+              <MiniButton active = {language === 1}  onClick = {() => {
+                setLanguage(1);
+                onChangeLanguage(1);
+              }}>
                 中文
               </MiniButton>
             </div>
@@ -171,17 +202,25 @@ export default function AccountSettings(props) {
           </Box>
         </Section>
         <Section>
-          <div>
-            <Submit
+
+          <Block>
+            <Button 
+            >Back</Button>
+            <Button
               onClick = {() => onSubmit()}
-            >Update</Submit>
-            <Message>{message}</Message>
-          </div>
+            >Update</Button>
+          </Block>
+          <Message>{message}</Message>
         </Section>
       </Pad>
     </Container>
   );
 }
+
+const Block = styled.div`
+  display: flex;
+  justify-content: space-between;
+`
 const LanguageContainer = styled.div`
    
   @media ${devices.mobile}{
@@ -193,7 +232,47 @@ const LanguageContainer = styled.div`
     margin: auto;   
   }
 `
+const Button = styled.a`
+  background-color: #AAC9D4;
+  border-radius: 25px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;    
+  align-items: center;
+  cursor: pointer;
+  color: black;
+  text-decoration: none;
+  &:focus, &:visited, &:link, &:active {
+    text-decoration: none;
+  }
+  &:hover{
+      transition: 0.5s;
+      background-color: #EDD662; 
+  }
+  @media ${devices.mobile}{
+      width: 150px;
+      font-size: 5vw;
+      height: 50px;
+  }
 
+  @media ${devices.tablet}{
+      width: 20vw;
+      height: 6vw;
+      font-size: 2.5vw;
+      
+  }
+  @media ${devices.laptop}{
+      width: 15vw;
+      height: 5vw;
+      font-size: 2vw;
+  }
+
+  @media ${devices.laptopL}{
+      width: 15vw;
+      height: 3.5vw;
+      font-size: 2vw;
+  }
+`
 const Message = styled.div`
   color: white;
   text-align: center;
@@ -202,6 +281,7 @@ const Message = styled.div`
   }
   @media ${devices.tablet} {
     font-size: 20px;
+    margin-top: 20px;
   }
 `;
 
@@ -260,16 +340,7 @@ const MiniButton = styled.div`
     margin-left: 20px;
   }
 `
-const Success = styled.div`
-  color: white;
-  text-align: center;
-  @media ${devices.mobile} {
-    font-size: 15px;
-  }
-  @media ${devices.tablet} {
-    font-size: 20px;
-  }
-`;
+
 const Pad = styled.div`
   @media ${devices.mobile} {
     padding: 10px 10px 5px;
@@ -302,55 +373,6 @@ const Container = styled.div`
     width: 50.5vw;
   }
 `;
-const Submit = styled.a`
-    background-color: #AAC9D4;
-    border-radius: 25px;
-    cursor: pointer;
-    display: flex;
-    justify-content: center;    
-    align-items: center;
-    margin-left: auto;
-    margin-top: 3vh;
-    cursor: pointer;
-
-    &:link { text-decoration: none; }
-    &:visited { text-decoration: none; }
-    &:hover { text-decoration: none; }
-    &:active { text-decoration: none; }
-    &:hover{
-        transition: 0.5s;
-        background-color: #EDD662; 
-    }
-    @media ${devices.mobile}{
-        width: 150px;
-        font-size: 5vw;
-        height: 50px;
-        margin-left: auto;
-        margin-right: auto;  
-
-
-    }
-
-    @media ${devices.tablet}{
-        width: 20vw;
-        height: 6vw;
-        font-size: 2.5vw;
-        margin-right: 0;
-        
-    }
-    @media ${devices.laptop}{
-        width: 15vw;
-        height: 5vw;
-        font-size: 2vw;
-    }
-
-    @media ${devices.laptopL}{
-        width: 15vw;
-        height: 3.5vw;
-        font-size: 2vw;
-        margin-bottom: 
-    }
-`
 
 const Box = styled.div`
   display: flex;
