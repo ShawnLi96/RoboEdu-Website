@@ -204,7 +204,8 @@ export default function AccountSettings(props) {
         <Section>
 
           <Block>
-            <Button 
+            <Button
+              onClick = {() => props.setPage(0)} 
             >Back</Button>
             <Button
               onClick = {() => onSubmit()}
