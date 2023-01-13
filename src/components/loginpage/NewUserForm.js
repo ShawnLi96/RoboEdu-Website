@@ -382,16 +382,8 @@ const Link = styled.a`
     color: white;
     transition: 0.5s;
   }
-  &:link {
-    text-decoration: none;
-  }
-  &:visited {
-    text-decoration: none;
-  }
-  &:hover {
-    text-decoration: none;
-  }
-  &:active {
+  text-decoration: none;
+  &:focus, &:visited, &:link, &:active {
     text-decoration: none;
   }
   @media ${devices.mobile} {

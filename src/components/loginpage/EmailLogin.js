@@ -88,10 +88,20 @@ export default function EmailLogin() {
 }
 const Message = styled.div`
 
+  position: relative;
+  margin-left: auto;
+  text-align: center;
+  color: ${(props) => (props.success) ? "green": "red"};
   @media ${devices.tablet}{
-    color: ${(props) => (props.success) ? "green": "red"};
     font-size: 1vw;
+    width: 3vw;
+    margin-top: 10px;
 
+  }
+
+  @media ${devices.laptopL}{
+    width: 15vw;
+    margin-top: 10px;
   }
 `
 const Submit = styled.a`

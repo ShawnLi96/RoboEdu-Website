@@ -15,7 +15,7 @@ export default function Table(props) {
   let fetchedOrders = useRef(null);
   useEffect(() => {
     build();
-  }, [refresh]);
+  }, []);
 
   async function build(){
     try{
@@ -112,7 +112,7 @@ export default function Table(props) {
   const params = {
     orders: orderInfo,
     fetchedOrders: fetchedOrders.current,
-    refetchOrders: () => setRefresh(!refresh)
+    refetchOrders: () => build()
   }
 
   const displayTable = () => {
@@ -136,7 +136,8 @@ export default function Table(props) {
 
       <div style={{margin: "auto"}}>
         <div style={{display: "flex", justifyContent: "space-between"}}>
-          <Button onClick={() =>getOrders()}>Refresh</Button>
+          {/* <Button 
+            onClick = {() => build()}>Refresh</Button> */}
           <ChangeView
           onClick={() =>
             setDisplay((display) => {
@@ -162,10 +163,14 @@ const TableContainer = styled.div`
 `
 const ChangeView = styled.a`
   background-color: white;
-  left: auto;
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-left: auto;
+  text-decoration: none;
+  &:focus, &:visited, &:link, &:active {
+    text-decoration: none;
+  }
   @media ${devices.tablet}{
     width: 13vw;
     height: 4vw;
@@ -209,16 +214,8 @@ const CircularButton = styled.a`
   align-items: center;
   cursor: pointer;
   margin-top: 10px;
-  &:link {
-    text-decoration: none;
-  }
-  &:visited {
-    text-decoration: none;
-  }
-  &:hover {
-    text-decoration: none;
-  }
-  &:active {
+  text-decoration: none;
+  &:focus, &:visited, &:link, &:active {
     text-decoration: none;
   }
   &:hover {
