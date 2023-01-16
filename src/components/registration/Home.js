@@ -21,10 +21,14 @@ export default function Home(props) {
 
   const [curPage, setPage] = useState(0);
   const [focus, setFocus] = useState(props.focus);
+
+  const [selectedStudents, setStudents] = useState([]);
   
   const params = {
     parentid: parentid,
-    setPage: setPage
+    setPage: setPage,
+    setStudents: setStudents,
+    selectedStudents: selectedStudents
   }
 
 
