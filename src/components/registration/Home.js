@@ -21,8 +21,8 @@ export default function Home(props) {
 
   const [curPage, setPage] = useState(0);
   const [focus, setFocus] = useState(props.focus);
-
   const [selectedStudents, setStudents] = useState([]);
+  const [settings, enterSettings] = useState(false);
   
   const params = {
     parentid: parentid,
@@ -35,9 +35,7 @@ export default function Home(props) {
   const components = [
     <Table
       {...params}
-    />,
-    <AccountSettings
-      {...params}
+      enterSettings = {enterSettings}
     />,
     <StudentInfoTable
       {...params}
@@ -59,6 +57,15 @@ export default function Home(props) {
     "Waiver and Policy",
   ];
   console.log(curPage)
+
+  function display(){
+    if (settings){
+      return <AccountSettings {...params} enterSettings = {enterSettings} />
+    }
+    else {
+      return components[curPage]
+    }
+  }
   return (
     <Container>
       <Nav focus={focus} setFocus={setFocus} />
@@ -66,7 +73,7 @@ export default function Home(props) {
       <Box>
         <Title>{titles[curPage]}</Title>
       </Box>
-      {components[curPage]}
+      {display()}
     </Container>
   );
 }

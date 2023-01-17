@@ -3,7 +3,6 @@ import "../../../css/table.css";
 import styled from 'styled-components'
 import { devices } from "../../../data/devices"
 import { request } from "../../../data/fetch";
-import SelectTimePage from "../../selectTimePage/SelectTimePage";
 
 export default function AccountSettings(props) {
 
@@ -206,7 +205,7 @@ export default function AccountSettings(props) {
 
           <Block>
             <Button
-              onClick = {() => props.setPage(0)} 
+              onClick = {() => props.enterSettings(false)} 
             >Back</Button>
             <Button
               onClick = {() => onSubmit()}

@@ -32,7 +32,10 @@ export default function Table(props) {
 
 
   async function getOrders() {
-    return await request("/parents/getorders", "post", {parentid: props.parentid}).then((res) => {
+    return await request("/parents/getorders", "post", 
+    {
+      parentid: props.parentid
+    }).then((res) => {
       console.log(res);
       return res;
     }).catch(err => {
@@ -130,8 +133,8 @@ export default function Table(props) {
       <Box>
         <CircularButton onClick = {() => {
           console.log('clicked')
-          props.setPage(1)}}>Account Settings</CircularButton>
-        <CircularButton onClick = {() => props.setPage(2)}>Start New Registration</CircularButton>
+          props.enterSettings(true)}}>Account Settings</CircularButton>
+        <CircularButton onClick = {() => props.setPage(1)}>Start New Registration</CircularButton>
       </Box>
 
       <div style={{margin: "auto"}}>
