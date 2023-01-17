@@ -16,7 +16,6 @@ export default function StudentInfoTable(props) {
   };
 
   const [info, setInfo] = useState([]);
-  const [students, setStudents] = useState([]);
 
   const getStudents = async () => {
     return await request("/parents/getparent", "post", {parentid: props.parentid})
@@ -98,36 +97,36 @@ export default function StudentInfoTable(props) {
     const {id, name, dob, gender, grade, exp} = props
 
     return(
-        <React.Fragment>
-              <tr>
-                <td height={60} rowSpan={2}>{name}</td>
-                <td height={30}>{dob}</td>
-                <td height={30}>{gender}</td>
-                <td height={30}>{grade}</td>
-                <td height={60} rowSpan={2}>
-                <div class="form-check" style={{display: 'flex', alignItems: 'center', justifyContent: 'center',}}>
-                  <input class="form-check-input" type="checkbox" value="" id={id} onClick={(c) => updateStudents(c.target)}/>
-                </div>
-                </td>
-              </tr>
-              <tr>
-                <td height={30} colSpan={3}>STEM Experience: {exp}</td>
-              </tr>
-        </React.Fragment>
+      <React.Fragment>
+        <tr>
+          <td height={60} rowSpan={2}>{name}</td>
+          <td height={30}>{dob}</td>
+          <td height={30}>{gender}</td>
+          <td height={30}>{grade}</td>
+          <td height={60} rowSpan={2}>
+          <div class="form-check" style={{display: 'flex', alignItems: 'center', justifyContent: 'center',}}>
+            <input class="form-check-input" type="checkbox" value="" id={id} onClick={(c) => updateStudents(c.target)}/>
+          </div>
+          </td>
+        </tr>
+        <tr>
+          <td height={30} colSpan={3}>STEM Experience: {exp}</td>
+        </tr>
+      </React.Fragment>
     );
   };
 
   const updateStudents = (s) => {
-    var temp = students;
-    if(s.checked == true) temp.push(s.id);
+    var temp = props.selectedStudents;
+    if(s.checked === true) temp.push(s.id);
     else{
       for(var i = 0; i < temp.length; i++){
-        if(temp[i] == s.id) temp.splice(i, 1);
+        if(temp[i] === s.id) temp.splice(i, 1);
       }
     };
 
-    setStudents(temp);
-    console.log({students});
+    props.setStudents(temp);
+    console.log(props.selectedStudents);
   };
 
   const sendStudents = () => {

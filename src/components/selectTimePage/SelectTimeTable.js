@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { devices } from "../../data/devices";
+import { request } from "../../data/fetch";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default function SelectTimeTable(props) {
@@ -21,9 +22,101 @@ export default function SelectTimeTable(props) {
     width: "78%"
   };
 
+  const [info, setInfo] = useState([]);
+  const [weeks, setWeeks] = useState([]);
+  const auth = sessionStorage.getItem("authkey");
+
+  const getWeeks = async () => {
+    props.selectedStudents.map(
+      async (i) => {
+        return await request("/programs/getweeks", "post", {
+          authkey: auth,
+          studentid: i
+        })
+        .then(
+          (res) => {
+            console.log(res);
+            setWeeks(res);
+          }
+        ).catch(err => {
+          console.log(err)
+        });
+      }
+    );
+  }
+
+  useEffect(() => {
+    getWeeks();
+  }, []);
+
+  const Table = (props) => {
+    const {data} = props
+    console.log({data});
+
+    return(
+      <table style={tableStyle}>
+        <tbody>
+          <tr>
+            <th style={tableHeaderStyle}>Time</th>
+            <th style={mainTableHeaderStyle}>Summary</th>
+            <th style={tableHeaderStyle}>Select</th>
+          </tr>
+
+          {data.map(row =>
+            <Row
+            program1 = {row.program1}
+            program2 = {row.program2}
+            program3 = {row.program3}/>
+          )}
+        </tbody>
+      </table>
+    );
+  };
+
+  const Row = (props) => {
+    const {id, i, program1, program2, program3} = props
+
+    return(
+      <React.Fragment>
+        <tr>
+          <td rowSpan={3}>Week {i}</td>
+          <td>Program 1: {program1}</td>
+          <td rowSpan={3}>
+          <div class="form-check" style={{display: 'flex', alignItems: 'center', justifyContent: 'center',}}>
+            <input class="form-check-input" type="checkbox" value="" id={id} onClick={(c) => updateWeeks(c.target)}/>
+          </div>
+          </td>
+        </tr>
+        <tr>
+          <td>Program 2: {program2}</td>
+        </tr>
+        <tr>
+          <td>Program 3: {program3}</td>
+        </tr>
+      </React.Fragment>
+    );
+  };
+
+  const updateWeeks = (w) => {
+    var temp = weeks;
+    if(w.checked === true) temp.push(w.id);
+    else{
+      for(var i = 0; i < temp.length; i++){
+        if(temp[i] === w.id) temp.splice(i, 1);
+      }
+    };
+
+    setWeeks(temp);
+    console.log({weeks});
+  };
+
+  const sendWeeks = () => {
+    props.setPage(4)
+  };
+
   return (
     <Container>
-      <table style={tableStyle}>
+      {/* <table style={tableStyle}>
         <tr>
           <th style={tableHeaderStyle}>Time</th>
           <th style={mainTableHeaderStyle}>Summary</th>
@@ -61,7 +154,9 @@ export default function SelectTimeTable(props) {
         <tr>
           <td>Program 3</td>
         </tr>
-      </table>
+      </table> */}
+
+      <Table data = {info}/>
 
       <Box>
         <Button onClick = {() => props.setPage(2)}>Back</Button>
