@@ -130,7 +130,7 @@ export default function StudentInfoTable(props) {
   };
 
   const sendStudents = () => {
-    props.setPage(3)
+    props.setPage(2)
   };
 
   return (

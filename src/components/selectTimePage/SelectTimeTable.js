@@ -111,7 +111,7 @@ export default function SelectTimeTable(props) {
   };
 
   const sendWeeks = () => {
-    props.setPage(4)
+    props.setPage(3)
   };
 
   return (
@@ -159,8 +159,8 @@ export default function SelectTimeTable(props) {
       <Table data = {info}/>
 
       <Box>
-        <Button onClick = {() => props.setPage(2)}>Back</Button>
-        <Button onClick = {() => props.setPage(4)}>Next</Button>
+        <Button onClick = {() => props.setPage(1)}>Back</Button>
+        <Button onClick = {() => sendWeeks()}>Next</Button>
       </Box>
     </Container>
   );
