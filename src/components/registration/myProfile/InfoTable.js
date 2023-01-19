@@ -9,8 +9,10 @@ import { request } from "../../../data/fetch";
 export default function InfoTable(props) {
   const status = ["", "In Cart", "Submitted", "Expired", "Paid"]
   function deleteOrder (id){
-    request("/orders/delete", "post", {orderid: id}).then(res => console.log(res))
-    props.refetchOrders()
+    request("/orders/delete", "post", {orderid: id}).then(res => {
+      console.log(res)
+      props.refetchOrders()
+    })
   }
 
   function confirmOrder(id){
@@ -65,9 +67,7 @@ export default function InfoTable(props) {
     );
 }
 
-const Message = styled.div`
 
-`
 const Container = styled.div`
   
   @media ${devices.tablet}{
@@ -144,10 +144,10 @@ const Button = styled.a`
     justify-content: center;    
     align-items: center;
     cursor: pointer;
-    &:link { text-decoration: none; }
-    &:visited { text-decoration: none; }
-    &:hover { text-decoration: none; }
-    &:active { text-decoration: none; }
+    text-decoration: none;
+    &:focus, &:visited, &:link, &:active {
+      text-decoration: none;
+    }
     &:hover{
         transition: 0.5s;
         filter: brightness(1.25);

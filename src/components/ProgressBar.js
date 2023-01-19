@@ -46,6 +46,13 @@ const Arrow = styled.div`
         }
         else return "#FFFFFF"
     }};
+
+    @media ${devices.mobile}{
+        width: 70px;
+        height: 25px;
+        font-size: 10px;
+
+    }   
     @media ${devices.tablet}{
         width: 195px;
         height: 41px;
@@ -64,14 +71,17 @@ const Arrow = styled.div`
 `
 const Container = styled.div`
     display: flex;
-    justify-content: left;
     width: 100vw;
-    background-color: red;
     flex-direction: row-reverse;
+    @media ${devices.mobile}{
+        padding: 20px 0px;
+        justify-content: space-evenly;
+    }
     @media ${devices.tablet}{
-        margin-top: 40px;
+        padding: 40px 0px 20px 0px;
+        justify-content: left;
     }
     @media ${devices.laptop}{
-        margin-top: 40px;
+        padding: 40px 0px 20px 0px;
     }
 `

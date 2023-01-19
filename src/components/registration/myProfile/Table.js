@@ -1,128 +1,20 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useMemo } from "react";
 import InfoTable from "./InfoTable";
 import Schedule from "./Schedule"
-import { request } from "../../../data/fetch";
 import styled from "styled-components";
 import { devices } from '../../../data/devices'
 
 
 export default function Table(props) {
   
-  const [refresh, setRefresh] = useState(false);
-  const [scheduleInfo, setScheduleInfo] = useState([]);
-  const [orderInfo, setAllOrders] = useState([]);
-  
-  let fetchedOrders = useRef(null);
-  useEffect(() => {
-    build();
-  }, []);
-
-  async function build(){
-    try{
-      const orders = await getOrders();
-      fetchedOrders.current = orders;
-      console.log(orders)
-      await getCampers(orders)
-      console.log('campers gotten')
-    }
-    catch (err) {
-      console.log(err);
-    }
-  }
 
 
-  async function getOrders() {
-    return await request("/parents/getorders", "post", 
-    {
-      parentid: props.parentid
-    }).then((res) => {
-      console.log(res);
-      return res;
-    }).catch(err => {
-      console.log(err)
-    });
-  };
-
-
-
-  function buildSchedule(masterSchedule, schedule, camperData) {
-    schedule[camperData["Week"]].push(
-      {
-        name: camperData["Name"],
-        program: camperData["Program ID"],
-        lunch: camperData["Lunch"] === 1,
-        beforeExt: camperData["BeforeExt"] === 1,
-        afterExt: camperData["AfterExt"] === 1,
-        subtotal: camperData["Lunch"] * 50 + camperData["BeforeExt"] * 50 + camperData["AfterExt"] * 50 + 50 // add program fee;
-      })
-    masterSchedule[camperData["Week"]].push(
-      {
-        name: camperData["Name"],
-        program: camperData["Program ID"],
-        lunch: camperData["Lunch"] === 1,
-        beforeExt: camperData["BeforeExt"] === 1,
-        afterExt: camperData["AfterExt"] === 1,
-        subtotal: camperData["Lunch"] * 50 + camperData["BeforeExt"] * 50 + camperData["AfterExt"] * 50 + 50 // add program fee;
-      })
-  }
-
-  
-  async function getCampers(fetchedOrders) {
-    var masterSchedule = [[], [], [], [], [], [], [], [], []];
-    var orders = []
-    console.log("camper resources", fetchedOrders)
-    if (fetchedOrders) {
-      fetchedOrders.forEach(async (order) => {
-        var schedule = [[], [], [], [], [], [], [], [], []];
-
-        const campers = JSON.parse(order["CamperIDs"]);
-        await campers.forEach(async (camper, i) => {
-          await request("/campers/getcamper", "post", {
-            camperid: camper
-          },
-          ).then(async (res) => {
-            console.log("camperdata", res)
-            const camperData = res;
-             // needed to fetch name, as campers/getCamper does not provide name
-            await request("/students/getstudent", "post", {studentid: camperData["Student ID"]}).then(
-              (res) => {
-                const studentData = res;
-                  // create a name key pair in the camperData
-                  camperData["Name"] =
-                  studentData["first name"] + " " + studentData["last name"];
-
-                // create an entry for the camper for this order of the week
-                buildSchedule(masterSchedule, schedule, camperData);
-                setScheduleInfo(masterSchedule);
-              }
-            ).catch(err => {
-              console.log(err)
-            });
-
-          }).catch(err => {
-            console.log(err)
-          })
-        });
-        orders.push(schedule)
-        setAllOrders(orders);
-
-    });
-  }}
-
-
-
-
-  const params = {
-    orders: orderInfo,
-    fetchedOrders: fetchedOrders.current,
-    refetchOrders: () => build()
-  }
-
+  const params = props.params
   const displayTable = () => {
-    if (display === 0 && orderInfo){
+    if (display === 0){
       return <InfoTable {...params}/>
     }
-    else return <Schedule schedule = {scheduleInfo}/>
+    else return <Schedule schedule = {params.schedule}/>
   } 
 
   // display 0 is the list of orders (default)
@@ -133,15 +25,13 @@ export default function Table(props) {
       <Box>
         <CircularButton onClick = {() => {
           console.log('clicked')
-          props.enterSettings(true)}}>Account Settings</CircularButton>
-        <CircularButton onClick = {() => props.setPage(1)}>Start New Registration</CircularButton>
-      </Box>
-
-      <div style={{margin: "auto"}}>
-        <div style={{display: "flex", justifyContent: "space-between"}}>
-          {/* <Button 
-            onClick = {() => build()}>Refresh</Button> */}
-          <ChangeView
+          params.setDisplay(1)}
+          
+        }>
+          Account Settings
+        </CircularButton>
+        <CircularButton onClick = {() => params.setPage(1)}>New Registration</CircularButton>
+        <CircularButton
           onClick={() =>
             setDisplay((display) => {
               return (display ^= 1);
@@ -149,9 +39,10 @@ export default function Table(props) {
           }
           > 
             Change View
-          </ChangeView>
-        </div>
-        
+          </CircularButton>
+      </Box>
+
+      <div style={{margin: "auto"}}>        
         <TableContainer>
           {displayTable()}
         </TableContainer>
@@ -164,27 +55,17 @@ const TableContainer = styled.div`
   display: flex;
   justify-content: center;
 `
-const ChangeView = styled.a`
-  background-color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-left: auto;
-  text-decoration: none;
-  &:focus, &:visited, &:link, &:active {
-    text-decoration: none;
-  }
-  @media ${devices.tablet}{
-    width: 13vw;
-    height: 4vw;
-    border-radius: 25px;
-    margin-bottom: 10px;
-  }
-`
+
 const Box = styled.div`
   position: relative;
   display: flex;
+
+  @media ${devices.mobile}{
+    margin: auto;
+    padding: 10px 0px;
+  }
   @media ${devices.tablet}{
+    margin: 0px;
     left: 25px;
     padding: 25px 0px;
   }
@@ -193,14 +74,7 @@ const Box = styled.div`
     padding: 25px 0px;
   }
 `;
-const Button = styled.div`
-  background-color: white;
-  text-align: center;
-  width: 100px;
-  margin-left: auto;
-  margin-right: auto;
-  border-style: solid;
-`;
+
 const Container = styled.div`
   width: 100vw;
   display: flex;
@@ -226,9 +100,10 @@ const CircularButton = styled.a`
     background-color: #edd662;
   }
   @media ${devices.mobile} {
-    width: 150px;
-    font-size: 5vw;
+    width: 120px;
+    font-size: 3vw;
     height: 50px;
+    margin-right: 10px;
   }
 
   @media ${devices.tablet} {

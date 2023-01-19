@@ -6,6 +6,8 @@ import { request } from "../../../data/fetch";
 
 export default function AccountSettings(props) {
 
+  const params = props.params;
+
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -66,7 +68,7 @@ export default function AccountSettings(props) {
   useEffect(() => {
     async function data() {
       await request("/parents/getparent", "post", {
-        parentid: props.parentid
+        parentid: params.parentid
       }).then((res) => {
         const parent = res;
         console.log(res)
@@ -155,7 +157,7 @@ export default function AccountSettings(props) {
         <Section>
           <LanguageContainer>
             <Title>Language</Title>
-            <div style={{display: "flex"}}>
+            <div style={{display: "flex", justifyContent: "space-between"}}>
             <MiniButton active = {language === 0}  onClick = {() => {
                 setLanguage(0);
                 onChangeLanguage(0);
@@ -179,11 +181,9 @@ export default function AccountSettings(props) {
         <Section>
           <Title>Change Password</Title>
           {displayPasswordFields()}
-          <div style={{display: "flex", justifyContent: "right"}}>
-            <button onClick = {() => toggleVisibility()} style={{fontSize: "20px"}}>
-              Toggle Visibility
-            </button>
-          </div>
+          <ToggleVisibility onClick = {() => toggleVisibility()} style={{fontSize: "20px"}}>
+            Toggle Visibility
+          </ToggleVisibility>
         </Section>
         <Section>
           <Title>
@@ -205,7 +205,7 @@ export default function AccountSettings(props) {
 
           <Block>
             <Button
-              onClick = {() => props.enterSettings(false)} 
+              onClick = {() => params.setDisplay(0)} 
             >Back</Button>
             <Button
               onClick = {() => onSubmit()}
@@ -218,6 +218,16 @@ export default function AccountSettings(props) {
   );
 }
 
+const ToggleVisibility = styled.button`
+  float: right;
+
+  @media ${devices.mobile}{
+    margin-top: 10px;
+  }
+  @media ${devices.tablet}{
+    font-size: 20px;  
+  }
+`
 const Block = styled.div`
   display: flex;
   justify-content: space-between;
@@ -287,6 +297,7 @@ const Message = styled.div`
 `;
 
 const Section = styled.div`
+  align-items: center;
   @media ${devices.mobile}{
     padding: 10px 0px 20px;
 
@@ -312,18 +323,21 @@ const MiniButton = styled.div`
   &:visited { text-decoration: none; }
   &:hover { text-decoration: none; }
   &:active { text-decoration: none; }
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   @media ${devices.mobile}{
-    display: block;
-    width: 80px;
+    margin: auto;
+    width: 30vw;
+    height: 10vw;
     margin-right: 25px;
+    margin-top: 2vh;
 
   }
   @media ${devices.tablet}{
-    display: flex;
-    align-items: center;
-    justify-content: center;
     width: 12vw;
+    height: 5vw;
     margin-left: 15px;
     margin-right: 0px;
 
@@ -331,6 +345,7 @@ const MiniButton = styled.div`
   }
   @media ${devices.laptop}{
     width: 10vw;
+    height: 4vw;
     margin-left: 20px;
     font-size: 1.25vw;
 
