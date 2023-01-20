@@ -137,6 +137,21 @@ export default function AccountSettings(props) {
             setMessage("Changes saved!")
           }
         })
+        if (password1 !== "" && password2 !== ""){
+          await request("/parents/edit/password", "post", {
+            authkey: sessionStorage.getItem("authkey"),
+            previous: curPassword,
+            new: password1
+          }).then((res) => {
+            console.log(res)
+            if (res[0]["error"]){
+              setMessage("Unable to save")
+            }
+            else{
+              setMessage("Changes saved!")
+            }
+          })
+        }
       }
       post();
       
