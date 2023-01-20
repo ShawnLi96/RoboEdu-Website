@@ -7,10 +7,11 @@ table {
   position: relative;
   margin-top: auto;
   outline: 1px solid black;
+  table-layout: fixed;
 }
   
 table td {
-  border: 1px solid #000000;
+  outline: 1px solid #000000;
   padding: 8px;
 }
 
@@ -22,5 +23,4 @@ table th {
   background-color: #E0E5E9;
   color: white;
   width: 1%;
-  white-space: nowrap;
 }

@@ -11,7 +11,14 @@ export default function InfoTable(props) {
   function deleteOrder (id){
     request("/orders/delete", "post", {orderid: id}).then(res => {
       console.log(res)
-      props.refetchOrders()
+      if (res[0]["error"]){
+        console.log(res[0]["error"])
+      }
+      else{
+        console.log('success')
+        props.refetchOrders()
+        console.log(props.refresh)
+      }
     })
   }
 

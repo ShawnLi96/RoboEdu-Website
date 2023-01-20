@@ -135,7 +135,6 @@ export default function MyProfile(props) {
 
   const displayProfile = () => {
     if (display === 0 && orderInfo){
-        window.scrollTo(0, 0);
         return <Table params = {params} />
     }
     else return <AccountSettings params = {params2}/>

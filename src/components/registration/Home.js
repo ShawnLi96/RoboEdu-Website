@@ -74,6 +74,17 @@ const Container = styled.div`
   width: 100vw;
   position: relative;
   background-image: url(${bg});
+  @media ${devices.mobile}{
+
+  }
+
+  @media ${devices.tablet}{
+    padding: 0 0 50px ;
+  }
+
+  @media ${devices.laptop}{
+    padding: 0 0 50px;
+  }
 `;
 
 const Box = styled.div`

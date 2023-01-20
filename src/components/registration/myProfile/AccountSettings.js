@@ -220,7 +220,11 @@ export default function AccountSettings(props) {
 
           <Block>
             <Button
-              onClick = {() => params.setDisplay(0)} 
+              
+              onClick = {() => {
+                window.scrollTo(0, 0)
+                params.setDisplay(0)}
+              } 
             >Back</Button>
             <Button
               onClick = {() => onSubmit()}

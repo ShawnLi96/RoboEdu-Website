@@ -1,5 +1,4 @@
 import React from "react";
-import { COLUMNS } from "../../../data/columns";
 import "../../../css/table.css";
 import styled from 'styled-components'
 import check from "../../../images/check.png";
@@ -8,14 +7,19 @@ import { devices } from "../../../data/devices"
 
 export default function Schedule(props) {
   
+
   return (
     <Container>
-      <table>
-        <thead>
-          <tr>
-            {COLUMNS.map((column) => {
-              return <Header key={column}>{column}</Header>;
-            })}
+      <table style={{width: "100%"}}>
+        <thead style={{width: "100%"}}>
+          <tr style={{width: "100%"}}>
+            <Header width = {0}> Camp Date </Header>
+            <Header width = {1}> Student </Header>
+            <Header width = {2}> Program </Header>
+            <Header width = {3}>Lunch </Header>
+            <Header width = {3}>Beforecare </Header>
+            <Header width = {3}>Aftercare </Header>
+            <Header width = {1}> Subtotal </Header>
           </tr>
         </thead>
         {
@@ -51,13 +55,56 @@ export default function Schedule(props) {
         }
       </table>
     </Container>
-  );
-          
+  );         
+}
+
+// these percentages denote how much space a certain cell is going to take
+// index 0 - size of camp date
+// index 1 - size of student & subtotal
+// index 2 - size of program
+// index 3 - size of lunch, beforeext, afterext
+
+const laptopSizes = ["10%", "15%", "30%", "10%"]
+const tabletSizes = ["15%", "15%", "30%", "10%"]
+const mobileSizes = ["15%", "10%", "30%", "10%"]
+function selectWidth(device, width) {
+  if (device === "laptop"){
+    return laptopSizes[width];
+  }
+  else if (device === "tablet"){
+    return tabletSizes[width];
+  }
+  else if (device === "mobile"){
+    return mobileSizes[width];
+  }
 }
 const Container = styled.div`
+  @media ${devices.mobile}{
+    width: 95vw;
+  }
+`
+const Header = styled.th`
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: center;
+  background-color: #04AA6D;
+  color: white;
+
+  @media ${devices.mobile}{
+    width: ${(props) => selectWidth("mobile", props.width)}
+
+  }
 
   @media ${devices.tablet}{
-    width: 95vw;
+    font-size: 15px;
+    width: ${(props) => selectWidth("tablet", props.width)}
+
+  }
+
+  @media ${devices.laptop}{
+    font-size: 18px;
+    width: ${(props) => selectWidth("laptop", props.width)}
+
   }
 `
 
@@ -67,19 +114,21 @@ const Student = styled.td`
 
   }
   @media ${devices.tablet}{
-    width: 15%;
+    font-size: 15px;
   }
   
 `
 
 const Date = styled.td`
-  outline: 1px solid black;
 
   @media ${devices.mobile}{
 
   }
   @media ${devices.tablet}{
-    width: 10%;
+    font-size: 13px;
+  }
+  @media ${devices.laptop}{
+    font-size: 15px;
   }
 `
 const Subtotal = styled.td`
@@ -98,25 +147,7 @@ const Subtotal = styled.td`
     font-size: 20px;
   }
 `
-const Header = styled.th`
-  padding-top: 12px;
-  padding-bottom: 12px;
-  text-align: center;
-  background-color: #04AA6D;
-  color: white;
 
-  @media ${devices.mobile}{
-
-  }
-
-  @media ${devices.tablet}{
-    font-size: 15px;
-  }
-
-  @media ${devices.laptop}{
-    font-size: 18px;
-  }
-`
 const Program = styled.td`
   outline: 1px solid black;
   @media ${devices.tablet}{
@@ -136,7 +167,6 @@ const Program = styled.td`
 
 `
 const IconTD = styled.td`
-  outline: 1px solid black;
   
   // CHANGE TO PERCENTAGES
   @media ${devices.tablet}{

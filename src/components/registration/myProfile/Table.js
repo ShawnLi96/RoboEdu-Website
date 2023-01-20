@@ -7,7 +7,11 @@ import { devices } from '../../../data/devices'
 
 export default function Table(props) {
   
-
+  const [refresh, setRefresh] = useState(false);
+  console.log(refresh)
+  useEffect(() => {
+    setRefresh(!false)
+  }, [])
 
   const params = props.params
   const displayTable = () => {
