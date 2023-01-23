@@ -223,6 +223,7 @@ export default function AccountSettings(props) {
               
               onClick = {() => {
                 window.scrollTo(0, 0)
+                params.setTitle(0)
                 params.setDisplay(0)}
               } 
             >Back</Button>

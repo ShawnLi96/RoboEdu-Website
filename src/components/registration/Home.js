@@ -20,12 +20,14 @@ export default function Home(props) {
   // page 0 is account settings page
   const [refresh, setRefresh] = useState(false);
   const [curPage, setPage] = useState(0);
+  const [title, setTitle] = useState(0);
   const [focus, setFocus] = useState(props.focus);
   const [selectedStudents, setStudents] = useState([]);
   
   const params = {
     parentid: parentid,
     setPage: setPage,
+    setTitle: setTitle,
     setStudents: setStudents,
     selectedStudents: selectedStudents,
     setRefresh: setRefresh,
@@ -54,7 +56,7 @@ export default function Home(props) {
     "Select a time",
     "Select Program",
     "Waiver and Policy",
-    
+    "Account Settings"
   ];
   console.log(curPage)
 
@@ -64,7 +66,7 @@ export default function Home(props) {
       <Nav focus={focus} setFocus={setFocus} />
       <ProgressBar curPage={curPage}/>
       <Box>
-        <Title>{titles[curPage]}</Title>
+        <Title>{titles[title]}</Title>
       </Box>
       {components[curPage]}
     </Container>

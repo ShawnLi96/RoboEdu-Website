@@ -131,6 +131,7 @@ export default function StudentInfoTable(props) {
 
   const sendStudents = () => {
     props.setPage(2)
+    props.setTitle(2);
   };
 
   return (

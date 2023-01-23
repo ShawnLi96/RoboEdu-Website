@@ -123,12 +123,14 @@ export default function MyProfile(props) {
     schedule: scheduleInfo,
     refetchOrders: () => build(),
     setDisplay: setDisplay,
-    setPage: props.setPage
+    setPage: props.setPage,
+    setTitle: props.setTitle
   }
 
   const params2 = {
     parentid: props.parentid,
     setDisplay: setDisplay,
+    setTitle: props.setTitle
   }
 
   console.log(params)
@@ -137,7 +139,10 @@ export default function MyProfile(props) {
     if (display === 0 && orderInfo){
         return <Table params = {params} />
     }
-    else return <AccountSettings params = {params2}/>
+    else {
+      props.setTitle(5);
+      return <AccountSettings params = {params2}/>
+    }
   } 
 
 

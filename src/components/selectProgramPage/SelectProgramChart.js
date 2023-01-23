@@ -10,8 +10,12 @@ export default function SelectProgramChart(props){
     return(
         <Container>
             <Box>
-                <Button onClick = {() => props.setPage(2)}>Back</Button>
-                <Button onClick = {() => props.setPage(4)}>Finish</Button>
+                <Button onClick = {() => {
+                  props.setTitle(2)
+                  props.setPage(2)}}>Back</Button>
+                <Button onClick = {() => {
+                  props.setTitle(4);
+                  props.setPage(4)}}>Finish</Button>
             </Box>
         </Container>
     );

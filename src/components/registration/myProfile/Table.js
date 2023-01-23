@@ -29,12 +29,16 @@ export default function Table(props) {
       <Box>
         <CircularButton onClick = {() => {
           console.log('clicked')
+          params.setTitle(5);
           params.setDisplay(1)}
           
         }>
           Account Settings
         </CircularButton>
-        <CircularButton onClick = {() => params.setPage(1)}>New Registration</CircularButton>
+        <CircularButton onClick = {() => {
+          params.setTitle(1)
+          params.setPage(1)}}>
+        New Registration</CircularButton>
         <CircularButton
           onClick={() =>
             setDisplay((display) => {
