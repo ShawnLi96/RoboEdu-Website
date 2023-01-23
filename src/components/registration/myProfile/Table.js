@@ -3,7 +3,7 @@ import InfoTable from "./InfoTable";
 import Schedule from "./Schedule"
 import styled from "styled-components";
 import { devices } from '../../../data/devices'
-
+import "../../../css/index.css"
 
 export default function Table(props) {
   
@@ -95,6 +95,7 @@ const CircularButton = styled.a`
   align-items: center;
   cursor: pointer;
   margin-top: 10px;
+  font-family: "roboFont";
   text-decoration: none;
   &:focus, &:visited, &:link, &:active {
     text-decoration: none;

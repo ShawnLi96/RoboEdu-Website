@@ -9,6 +9,7 @@ import { devices } from "../../data/devices";
 import StudentInfoTable from "../studentInfoPage/StudentInfoTable"
 import SelectTimeTable from "../selectTimePage/SelectTimeTable"
 import SelectProgramChart from "../selectProgramPage/SelectProgramChart"
+import "../../css/index.css"
 
 export default function Home(props) {
   const { state } = useLocation();
@@ -103,6 +104,7 @@ const Box = styled.div`
 
 const Title = styled.div`
   color: white;
+  font-family: "roboFont";
   @media ${devices.mobile}{
     font-size: 20px;
     margin-left: 40px;

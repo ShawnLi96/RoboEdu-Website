@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import { devices } from '../data/devices';
+import "../css/index.css";
+
 
 export default function Nav(props) {
   const titles = [
@@ -91,7 +93,7 @@ const Container = styled.div`
 const Button = styled.a`
   color: ${(props) => (props.state ? "#EDD662" : "#FFFFFF")};
   cursor: pointer;
-
+  font-family: "roboFont";
   text-decoration: none;
   &:focus, &:visited, &:link, &:active {
     text-decoration: none;

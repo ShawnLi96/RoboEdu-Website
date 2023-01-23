@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { devices } from '../../data/devices';
 import button1 from '../../images/title_blok_1.png'
 import button2 from '../../images/title_blok_2.png'
+import "../../css/index.css";
 
 
 export default function MenuButtons(props){
@@ -46,6 +47,7 @@ const Button = styled.a`
     &:focus, &:visited, &:link, &:active {
       text-decoration: none;
     }
+    font-family: "roboFont";
     @media ${devices.mobile}{
         font-size: 15px;
         font-weight: bold;

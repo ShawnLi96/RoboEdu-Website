@@ -19,13 +19,8 @@ export default function LoginPage(props){
 
     const [selection, setSelection] = useState(0)
     const [loginOption, setLoginOption] = useState(0)
-    const [auth, setAuth] = useState();
 
 
-    function onSubmit(){
-
-        // post
-    }
 
     const elements = []
     const display = () => {
@@ -60,8 +55,19 @@ export default function LoginPage(props){
 const Container = styled.div`
     background-image: url(${bg});
     width: 100vw;
-    height: ${(props) => props.selection === 0? "100vh" : "auto"};
     position: relative;
+
+    @media ${devices.mobile}{
+        height: ${(props) => props.selection === 0? "100vh" : "auto"};
+    }
+
+    @media ${devices.tablet}{
+        height: 100vh;
+    }
+
+    @media ${devices.laptop}{
+        padding: ${(props) => props.selection === 0 ? "0px 0px 100px" : "0px 0px 1000px"}; 
+    }
 `
 const BodyContainer = styled.div`
     position: relative;

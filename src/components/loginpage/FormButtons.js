@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import { devices } from '../../data/devices';
+import "../../css/index.css";
+
 
 
 export default function MenuButtons(props){
@@ -37,6 +39,7 @@ const Button = styled.a`
     &:focus, &:visited, &:link, &:active {
       text-decoration: none;
     }
+    font-family: "roboFont";
     width: 20vw;
     background-color: ${(props) => props.active ? "#475F6F": "#7999A8"};
     color: ${(props) => props.active ? "#EDD662" : "#FFFFFF"};

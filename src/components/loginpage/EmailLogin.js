@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { devices } from "../../data/devices";
 import { request } from "../../data/fetch";
 import { useNavigate } from 'react-router-dom'
+import "../../css/index.css";
 
 export default function EmailLogin() {
   const [email, setEmail] = useState("");
@@ -77,7 +78,7 @@ export default function EmailLogin() {
             onSubmit();
           }}
         >
-          Submit
+          Login
         </Submit>
         <Message success = {success}> {(success !== "") ? (success) ? "Success": "Invalid Credentials": ""} </Message>
       </div>
@@ -87,7 +88,7 @@ export default function EmailLogin() {
   );
 }
 const Message = styled.div`
-
+  font-family: "roboFont";
   position: relative;
   margin-left: auto;
   text-align: center;
@@ -116,6 +117,7 @@ const Submit = styled.a`
   margin-top: 3vh;
   cursor: pointer;
   type: "submit";
+  font-family: "roboFont";
   text-decoration: none;
   &:focus, &:visited, &:link, &:active {
     text-decoration: none;
@@ -225,7 +227,7 @@ const Input = styled.input`
 const Label = styled.div`
   font-weight: bold;
   color: white;
-
+  font-family: "roboFont";
   @media ${devices.mobile} {
     font-size: 20px;
   }

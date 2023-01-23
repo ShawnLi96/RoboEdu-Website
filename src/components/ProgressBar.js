@@ -6,9 +6,10 @@ import title2 from "../images/title2.png"
 import title3 from "../images/title3.png"
 import title4 from "../images/title4.png"
 import title5 from "../images/title5.png"
+import "../css/index.css";
+
 const titles = [title1, title2, title3, title4, title5];
 const text = ["My Profile", "Student Info", "Select Time", "Select Program", "Confirmation"]
-
 
 export default function ProgressBar(props) {
 
@@ -40,6 +41,7 @@ const Arrow = styled.div`
     justify-content: center;
     align-items: center;
     display: flex;
+    font-family: "roboFont";
     color: ${(props) => {
         if (props.page === props.curPage){
             return "#EDD662";

@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
-import  { devices }from '../../data/devices'
+import  { devices } from '../../data/devices'
+import "../../css/index.css";
 
 
 
@@ -31,7 +32,7 @@ const Container = styled.div`
 
 const Text = styled.div`
     color: white;
-    
+    font-family: "roboFont";
     @media ${devices.mobile}{
         font-size: 20px;
         width: 100px;

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { devices } from "../../data/devices";
 import {request} from "../../data/fetch"
+import "../../css/index.css";
 
 export default function NewUserForm(props) {
   const [firstName, setFirstName] = useState("");
@@ -159,6 +160,7 @@ export default function NewUserForm(props) {
 const Mismatch = styled.div`
   color: red;
   text-align: center;
+  font-family: "roboFont";
   @media ${devices.mobile} {
     font-size: 15px;
   }
@@ -209,6 +211,7 @@ const Submit = styled.a`
   align-items: center;
   cursor: pointer;
   margin-top: 2vh;
+  font-family: "roboFont";
   text-decoration: none;
   &:focus, &:visited, &:link, &:active {
     text-decoration: none;
@@ -259,6 +262,7 @@ const Label = styled.div`
   margin-top: 2vw;
   color: white;
   position: relative;
+  font-family: "roboFont";
   @media ${devices.mobile} {
     font-size: 15px;
   }
@@ -281,7 +285,7 @@ const Label = styled.div`
 const Title = styled.div`
   font-weight: 900;
   text-align: center;
-
+  family-font: "roboFont";
   @media ${devices.mobile} {
     font-size: 30px;
   }
@@ -382,6 +386,7 @@ const Link = styled.a`
     color: white;
     transition: 0.5s;
   }
+  font-family: "roboFont";
   text-decoration: none;
   &:focus, &:visited, &:link, &:active {
     text-decoration: none;
