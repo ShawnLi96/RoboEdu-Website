@@ -13,8 +13,6 @@ const text = ["My Profile", "Student Info", "Select Time", "Select Program", "Co
 
 export default function ProgressBar(props) {
 
-    // tbh i couldve used a for-loop to do this but 
-    // tried it in the first place and didnt get it to work
     const curPage = props.curPage;
     const display = () => {
         // fifth arrow must be rendered first
@@ -65,10 +63,19 @@ const Arrow = styled.div`
     }
     @media ${devices.laptop}{
         width: 305px;
+        height: 50px;
+        font-size: 1.25vw;
+        font-weight: bold;
+        right: ${(props) => (props.page * 50) + "px"};
+    }
+
+    @media ${devices.laptopL}{
+        width: 305px;
         height: 67.5px;
         font-size: 1.25vw;
         font-weight: bold;
         right: ${(props) => (props.page * 50) + "px"};
+
     }
 `
 const Container = styled.div`

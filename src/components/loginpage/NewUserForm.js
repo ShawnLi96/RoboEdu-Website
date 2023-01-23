@@ -29,9 +29,14 @@ export default function NewUserForm(props) {
         phonenum: phoneNumber,
         pswd: password1,
         email: email,
-        address: "s",
+        address: "",
         location: 3
-      }).then((res) => console.log(res))
+      }).then((res) => {
+        alert(res)
+        if (res[0]["error"]){
+          setMessage(res[0]["error"]);
+        }
+      })
 
 
     } else {

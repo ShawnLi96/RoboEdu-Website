@@ -7,11 +7,6 @@ import "../../../css/index.css"
 
 export default function Table(props) {
   
-  const [refresh, setRefresh] = useState(false);
-  console.log(refresh)
-  useEffect(() => {
-    setRefresh(!false)
-  }, [])
 
   const params = props.params
   const displayTable = () => {

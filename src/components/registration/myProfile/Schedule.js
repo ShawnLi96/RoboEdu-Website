@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import "../../../css/table.css";
 import styled from 'styled-components'
 import check from "../../../images/check.png";
@@ -6,7 +6,11 @@ import cross from "../../../images/cross.png";
 import { devices } from "../../../data/devices"
 
 export default function Schedule(props) {
-  
+  const [refresh, setRefresh] = useState(false);
+  console.log(refresh)
+  useEffect(() => {
+    setRefresh(true)
+  }, [])
 
   return (
     <Container>

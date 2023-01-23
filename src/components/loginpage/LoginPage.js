@@ -20,7 +20,7 @@ export default function LoginPage(props){
     const [selection, setSelection] = useState(0)
     const [loginOption, setLoginOption] = useState(0)
 
-
+    console.log(window.innerWidth)
 
     const elements = []
     const display = () => {
@@ -66,7 +66,8 @@ const Container = styled.div`
     }
 
     @media ${devices.laptop}{
-        padding: ${(props) => props.selection === 0 ? "0px 0px 100px" : "0px 0px 1000px"}; 
+        height: auto;
+        padding: 0px 0px 50px;
     }
 `
 const BodyContainer = styled.div`
