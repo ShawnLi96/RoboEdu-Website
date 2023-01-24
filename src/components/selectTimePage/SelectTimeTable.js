@@ -22,7 +22,6 @@ export default function SelectTimeTable(props) {
     width: "78%"
   };
 
-  const [info, setInfo] = useState([]);
   const [weeks, setWeeks] = useState([]);
   const auth = sessionStorage.getItem("authkey");
 
@@ -63,10 +62,12 @@ export default function SelectTimeTable(props) {
           </tr>
 
           {data.map(row =>
-            <Row
-            program1 = {row.program1}
-            program2 = {row.program2}
-            program3 = {row.program3}/>
+            {if(row !== null){
+              <Row
+              id = {row.ID}
+              week = {row.Week}
+              program = {row.Program}/>
+            }}
           )}
         </tbody>
       </table>
@@ -74,40 +75,25 @@ export default function SelectTimeTable(props) {
   };
 
   const Row = (props) => {
-    const {id, i, program1, program2, program3} = props
-
+    const {id, week, program} = props
+    
     return(
       <React.Fragment>
         <tr>
-          <td rowSpan={3}>Week {i}</td>
-          <td>Program 1: {program1}</td>
+          <td height={30}>Week {week}</td>
+          <td height={30}>Program: {program}</td>
           <td rowSpan={3}>
           <div class="form-check" style={{display: 'flex', alignItems: 'center', justifyContent: 'center',}}>
             <input class="form-check-input" type="checkbox" value="" id={id} onClick={(c) => updateWeeks(c.target)}/>
           </div>
           </td>
         </tr>
-        <tr>
-          <td>Program 2: {program2}</td>
-        </tr>
-        <tr>
-          <td>Program 3: {program3}</td>
-        </tr>
       </React.Fragment>
     );
   };
 
   const updateWeeks = (w) => {
-    var temp = weeks;
-    if(w.checked === true) temp.push(w.id);
-    else{
-      for(var i = 0; i < temp.length; i++){
-        if(temp[i] === w.id) temp.splice(i, 1);
-      }
-    };
-
-    setWeeks(temp);
-    console.log({weeks});
+    
   };
 
   const sendWeeks = () => {
@@ -157,7 +143,7 @@ export default function SelectTimeTable(props) {
         </tr>
       </table> */}
 
-      <Table data = {info}/>
+      <Table data = {weeks}/>
 
       <Box>
         <Button onClick = {() => {
