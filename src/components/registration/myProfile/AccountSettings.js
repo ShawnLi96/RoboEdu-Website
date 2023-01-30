@@ -44,7 +44,7 @@ export default function AccountSettings(props) {
   const [password1, setPassword1] = useState("");
   const [password2, setPassword2] = useState("");
   function displayPasswordFields()  {
-    const labels = ["New Pasword", "Confirm Password"]
+    const labels = ["New Password", "Confirm"]
     const states = [password1, password2]
     const update = [setPassword1, setPassword2]
     var arr = []

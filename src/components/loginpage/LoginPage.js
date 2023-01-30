@@ -17,10 +17,16 @@ import bg from '../../images/background.png'
 
 export default function LoginPage(props){
 
+    // selection is Current User / New User page
+    // 0 means we are trying to login
+    // 1 means we are trying to make a new account
     const [selection, setSelection] = useState(0)
-    const [loginOption, setLoginOption] = useState(0)
 
-    console.log(window.innerWidth)
+
+    // loginOption is choosing which tab to login with
+    // 0 is email login
+    // 1 is WeChat login
+    const [loginOption, setLoginOption] = useState(0)
 
     const elements = []
     const display = () => {
@@ -58,7 +64,7 @@ const Container = styled.div`
     position: relative;
 
     @media ${devices.mobile}{
-        height: ${(props) => props.selection === 0? "100vh" : "auto"};
+        height: 100vh;
     }
 
     @media ${devices.tablet}{
@@ -68,6 +74,10 @@ const Container = styled.div`
     @media ${devices.laptop}{
         height: auto;
         padding: 0px 0px 50px;
+    }
+    @media ${devices.laptop}{
+        height: ${(props) => props.selection === 0? "100vh" : "auto"};
+
     }
 `
 const BodyContainer = styled.div`

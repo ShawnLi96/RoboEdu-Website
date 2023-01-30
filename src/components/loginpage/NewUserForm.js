@@ -11,8 +11,15 @@ export default function NewUserForm(props) {
   const [email, setEmail] = useState("");
   const [password1, setPassword1] = useState("");
   const [password2, setPassword2] = useState("");
+
+  // message is state used to tell the user if anything went wrong when logging in
+  // it will initially be rendered as an empty string, and then return whatever needs to be said
   const [message, setMessage] = useState("");
+
+  // success changes the color of the message prompt after submitting the form
+  // successful = green, error = red
   const [success, setSuccess] = useState(false);
+
 
 
   function onSubmit() {
@@ -20,9 +27,6 @@ export default function NewUserForm(props) {
       setMessage("Please fill in all the fields!")
     }
     else if (password1 === password2) {
-      setMessage("");
-      setSuccess(true);
-      console.log("match");
       request("/parents/newuser", "post", {
         firstname: firstName,
         lastname: lastName,
@@ -32,9 +36,14 @@ export default function NewUserForm(props) {
         address: "",
         location: 3
       }).then((res) => {
-        alert(res)
+        console.log(res);
         if (res[0]["error"]){
+          setSuccess(false);
           setMessage(res[0]["error"]);
+        }
+        else{
+          setSuccess(true);
+          setMessage("Account created")
         }
       })
 
@@ -48,6 +57,8 @@ export default function NewUserForm(props) {
   // must be in a column, not in a row
   const displayNameBoxes = () => {
     var width = Math.max(window.screen.width, window.innerWidth);
+
+    // tablet and bigger view
     if (width > 500) {
       return (
         <Box>
@@ -69,6 +80,8 @@ export default function NewUserForm(props) {
         </Box>
       );
     } else {
+
+      // mobile view
       return (
         <>
           <Box>
@@ -137,15 +150,13 @@ export default function NewUserForm(props) {
             }}
           />
         </Box>
-        <Mismatch>{message}</Mismatch>
+        <Message success = {success}>{message}</Message>
 
         <Submit
           onClick={() => {
             onSubmit();
-            return false;
           }}
-          // eslint-disable-next-line no-script-url
-          href = {(success) ? "/": "javascript:void(0);"}
+
         >
           Submit
         </Submit>
@@ -162,8 +173,8 @@ export default function NewUserForm(props) {
   );
 }
 
-const Mismatch = styled.div`
-  color: red;
+const Message = styled.div`
+  color: ${(props) => props.success ? "green": "red"};
   text-align: center;
   font-family: "roboFont";
   @media ${devices.mobile} {
