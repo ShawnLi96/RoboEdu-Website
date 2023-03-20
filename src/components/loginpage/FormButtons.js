@@ -40,7 +40,7 @@ const Button = styled.a`
       text-decoration: none;
     }
     font-family: "roboFont";
-    width: 20vw;
+    width: 100vw;
     background-color: ${(props) => props.active ? "#475F6F": "#7999A8"};
     color: ${(props) => props.active ? "#EDD662" : "#FFFFFF"};
 
