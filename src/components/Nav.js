@@ -7,17 +7,16 @@ import "../css/index.css";
 export default function Nav(props) {
   const titles = [
     "Home",
-    "Summer Camps",
-    "March Camps",
-    "Winter Camps",
-    "PA Day Camps",
-    "Register Now",
+    "Future Camp",
+    "STEM Camp",
+    "Registration",
   ];
 
   const titlesMobile = [
-    "Home", 
-    "Camps", 
-    "Register Now"
+    "Home",
+    "Future Camp",
+    "STEM Camp",
+    "Registration",
   ];
   var components = [];
   function createButtons() {

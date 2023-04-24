@@ -11,10 +11,10 @@ export default function Header(){
     return (
         <Container>
             <div> {/* this div should have a bottom border */}
-                <h1> *** 2022 Summer Camp *** </h1>
+                <h1> *** 2023 Summer Camp *** </h1>
                 <h2>线下夏令营</h2>
             </div>
-            <p>2022 On-site Summer Camp</p>
+            <p>2023 On-site Summer Camp</p>
         </Container>
     );    
 }

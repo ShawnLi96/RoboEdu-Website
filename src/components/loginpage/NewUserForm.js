@@ -62,7 +62,7 @@ export default function NewUserForm(props) {
     if (width > 500) {
       return (
         <Box>
-          <Label> First Name 名</Label>
+          <Label> First Name </Label>
           <ShortInput
             value={firstName}
             onChange={(e) => {
@@ -70,7 +70,7 @@ export default function NewUserForm(props) {
             }}
           />
 
-          <Label> Last Name 姓</Label>
+          <Label> Last Name </Label>
           <ShortInput
             value={lastName}
             onChange={(e) => {
@@ -85,7 +85,7 @@ export default function NewUserForm(props) {
       return (
         <>
           <Box>
-            <Label> First Name 名</Label>
+            <Label> First Name </Label>
             <Input
               value={firstName}
               onChange={(e) => {
@@ -94,7 +94,7 @@ export default function NewUserForm(props) {
             />
           </Box>
           <Box>
-            <Label> Last Name 姓</Label>
+            <Label> Last Name </Label>
             <Input
               value={lastName}
               onChange={(e) => {
@@ -113,7 +113,7 @@ export default function NewUserForm(props) {
         <Title>Parent Sign up</Title>
         {displayNameBoxes()}
         <Box>
-          <Label> Email 邮件</Label>
+          <Label> Email</Label>
           <Input
             value={email}
             onChange={(e) => {
@@ -122,7 +122,7 @@ export default function NewUserForm(props) {
           />
         </Box>
         <Box>
-          <Label> Phone 联系电话</Label>
+          <Label> Phone</Label>
           <Input
             value={phoneNumber}
             onChange={(e) => {

@@ -169,7 +169,7 @@ export default function AccountSettings(props) {
           {displayParentFields()}
         </Section>
 
-        <Section>
+        {/* <Section>
           <LanguageContainer>
             <Title>Language</Title>
             <div style={{display: "flex", justifyContent: "space-between"}}>
@@ -193,17 +193,18 @@ export default function AccountSettings(props) {
             </div>
             </LanguageContainer>
         </Section>
+   */}
         <Section>
           <Title>Change Password</Title>
           {displayPasswordFields()}
           <ToggleVisibility onClick = {() => toggleVisibility()} style={{fontSize: "20px"}}>
-            Toggle Visibility
+            Show/Hide Password
           </ToggleVisibility>
         </Section>
         <Section>
           <Title>
             Save Changes
-          </Title>
+          </Title> 
           <Box key = {2}>
             <Label> Current Password </Label>
             <Input
