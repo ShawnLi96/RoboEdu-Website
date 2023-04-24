@@ -110,7 +110,7 @@ export default function NewUserForm(props) {
   return (
     <Container>
       <Pad>
-        <Title>Parent Sign up</Title>
+        <Title>Parent Sign Up</Title>
         {displayNameBoxes()}
         <Box>
           <Label> Email</Label>
@@ -131,7 +131,7 @@ export default function NewUserForm(props) {
           />
         </Box>
         <Box>
-          <Label> Set up Password </Label>
+          <Label> Set Up Password </Label>
           <Input
             type="password"
             value={password1}
